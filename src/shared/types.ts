@@ -25,3 +25,41 @@ export type Player = {
   managers: Manager[];
   jerseys: Jersey[];
 };
+
+export type GameMode = 'guess-player' | 'predict-transfers';
+
+export type GuessPlayerState = {
+  mode: 'guess-player';
+  playerId: string;
+  /** Indices of clubs revealed so far (chronological) */
+  revealedClubIndices: number[];
+  totalClubs: number;
+  score: number;
+  wrongGuesses: number;
+  solved: boolean;
+};
+
+export type PredictTransfersState = {
+  mode: 'predict-transfers';
+  playerId: string;
+  playerName: string;
+  /** Indices of clubs shown from the start */
+  shownClubIndices: number[];
+  /** Indices of clubs the user must guess */
+  hiddenClubIndices: number[];
+  /** Indices of hidden clubs the user has correctly guessed */
+  guessedClubIndices: number[];
+  totalClubs: number;
+  score: number;
+  wrongGuesses: number;
+  solved: boolean;
+};
+
+export type GameState = GuessPlayerState | PredictTransfersState;
+
+export type LeaderboardEntry = {
+  username: string;
+  score: number;
+  mode: GameMode;
+  solvedAt: number;
+};
