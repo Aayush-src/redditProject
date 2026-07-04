@@ -1,0 +1,2437 @@
+import type { Player } from '../../shared/types';
+
+export const players: Player[] = [
+  // 1
+  {
+    id: 'cristiano-ronaldo',
+    name: 'Cristiano Ronaldo',
+    nationality: 'Portugal',
+    clubs: [
+      { name: 'Sporting CP', logo: 'sporting-cp.png', primaryColor: '#006847', secondaryColor: '#FFFFFF' },
+      { name: 'Manchester United', logo: 'man-utd.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Real Madrid', logo: 'real-madrid.png', primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+      { name: 'Juventus', logo: 'juventus.png', primaryColor: '#000000', secondaryColor: '#FFFFFF' },
+      { name: 'Manchester United', logo: 'man-utd.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Al-Nassr', logo: 'al-nassr.png', primaryColor: '#FFCD00', secondaryColor: '#003399' },
+    ],
+    managers: [
+      { name: 'László Bölöni', photo: '' },
+      { name: 'Sir Alex Ferguson', photo: '' },
+      { name: 'José Mourinho', photo: '' },
+      { name: 'Carlo Ancelotti', photo: '' },
+      { name: 'Zinedine Zidane', photo: '' },
+      { name: 'Massimiliano Allegri', photo: '' },
+      { name: 'Ole Gunnar Solskjær', photo: '' },
+    ],
+    jerseys: [
+      { number: 28, primaryColor: '#006847', secondaryColor: '#FFFFFF' },
+      { number: 7, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 9, primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+      { number: 7, primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+      { number: 7, primaryColor: '#000000', secondaryColor: '#FFFFFF' },
+      { number: 7, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 7, primaryColor: '#FFCD00', secondaryColor: '#003399' },
+    ],
+  },
+  // 2
+  {
+    id: 'lionel-messi',
+    name: 'Lionel Messi',
+    nationality: 'Argentina',
+    clubs: [
+      { name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { name: 'Paris Saint-Germain', logo: 'psg.png', primaryColor: '#004170', secondaryColor: '#DA291C' },
+      { name: 'Inter Miami', logo: 'inter-miami.png', primaryColor: '#F7B5CD', secondaryColor: '#231F20' },
+    ],
+    managers: [
+      { name: 'Frank Rijkaard', photo: '' },
+      { name: 'Pep Guardiola', photo: '' },
+      { name: 'Luis Enrique', photo: '' },
+      { name: 'Ernesto Valverde', photo: '' },
+      { name: 'Ronald Koeman', photo: '' },
+      { name: 'Mauricio Pochettino', photo: '' },
+      { name: 'Gerardo Martino', photo: '' },
+    ],
+    jerseys: [
+      { number: 30, primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { number: 19, primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { number: 10, primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { number: 30, primaryColor: '#004170', secondaryColor: '#DA291C' },
+      { number: 10, primaryColor: '#F7B5CD', secondaryColor: '#231F20' },
+    ],
+  },
+  // 3
+  {
+    id: 'kylian-mbappe',
+    name: 'Kylian Mbappé',
+    nationality: 'France',
+    clubs: [
+      { name: 'Monaco', logo: 'monaco.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Paris Saint-Germain', logo: 'psg.png', primaryColor: '#004170', secondaryColor: '#DA291C' },
+      { name: 'Real Madrid', logo: 'real-madrid.png', primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+    ],
+    managers: [
+      { name: 'Leonardo Jardim', photo: '' },
+      { name: 'Thomas Tuchel', photo: '' },
+      { name: 'Mauricio Pochettino', photo: '' },
+      { name: 'Luis Enrique', photo: '' },
+      { name: 'Carlo Ancelotti', photo: '' },
+    ],
+    jerseys: [
+      { number: 29, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 7, primaryColor: '#004170', secondaryColor: '#DA291C' },
+      { number: 9, primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+    ],
+  },
+  // 4
+  {
+    id: 'neymar-jr',
+    name: 'Neymar Jr',
+    nationality: 'Brazil',
+    clubs: [
+      { name: 'Santos', logo: 'santos.png', primaryColor: '#FFFFFF', secondaryColor: '#000000' },
+      { name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { name: 'Paris Saint-Germain', logo: 'psg.png', primaryColor: '#004170', secondaryColor: '#DA291C' },
+      { name: 'Al-Hilal', logo: 'al-hilal.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+      { name: 'Santos', logo: 'santos.png', primaryColor: '#FFFFFF', secondaryColor: '#000000' },
+    ],
+    managers: [
+      { name: 'Dorival Júnior', photo: '' },
+      { name: 'Luis Enrique', photo: '' },
+      { name: 'Thomas Tuchel', photo: '' },
+      { name: 'Mauricio Pochettino', photo: '' },
+      { name: 'Jorge Jesus', photo: '' },
+    ],
+    jerseys: [
+      { number: 11, primaryColor: '#FFFFFF', secondaryColor: '#000000' },
+      { number: 11, primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { number: 10, primaryColor: '#004170', secondaryColor: '#DA291C' },
+      { number: 10, primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 5
+  {
+    id: 'erling-haaland',
+    name: 'Erling Haaland',
+    nationality: 'Norway',
+    clubs: [
+      { name: 'Molde', logo: 'molde.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+      { name: 'RB Salzburg', logo: 'rb-salzburg.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Borussia Dortmund', logo: 'dortmund.png', primaryColor: '#FDE100', secondaryColor: '#000000' },
+      { name: 'Manchester City', logo: 'man-city.png', primaryColor: '#6CABDD', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'Ole Gunnar Solskjær', photo: '' },
+      { name: 'Jesse Marsch', photo: '' },
+      { name: 'Lucien Favre', photo: '' },
+      { name: 'Marco Rose', photo: '' },
+      { name: 'Pep Guardiola', photo: '' },
+    ],
+    jerseys: [
+      { number: 9, primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+      { number: 9, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 9, primaryColor: '#FDE100', secondaryColor: '#000000' },
+      { number: 9, primaryColor: '#6CABDD', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 6
+  {
+    id: 'zlatan-ibrahimovic',
+    name: 'Zlatan Ibrahimović',
+    nationality: 'Sweden',
+    clubs: [
+      { name: 'Malmö FF', logo: 'malmo.png', primaryColor: '#6CBEE6', secondaryColor: '#FFFFFF' },
+      { name: 'Ajax', logo: 'ajax.png', primaryColor: '#D2122E', secondaryColor: '#FFFFFF' },
+      { name: 'Juventus', logo: 'juventus.png', primaryColor: '#000000', secondaryColor: '#FFFFFF' },
+      { name: 'Inter Milan', logo: 'inter-milan.png', primaryColor: '#003DA5', secondaryColor: '#000000' },
+      { name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { name: 'AC Milan', logo: 'ac-milan.png', primaryColor: '#DA291C', secondaryColor: '#000000' },
+      { name: 'Paris Saint-Germain', logo: 'psg.png', primaryColor: '#004170', secondaryColor: '#DA291C' },
+      { name: 'Manchester United', logo: 'man-utd.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'LA Galaxy', logo: 'la-galaxy.png', primaryColor: '#FFFFFF', secondaryColor: '#00245D' },
+      { name: 'AC Milan', logo: 'ac-milan.png', primaryColor: '#DA291C', secondaryColor: '#000000' },
+    ],
+    managers: [
+      { name: 'Ronald Koeman', photo: '' },
+      { name: 'Fabio Capello', photo: '' },
+      { name: 'Roberto Mancini', photo: '' },
+      { name: 'José Mourinho', photo: '' },
+      { name: 'Pep Guardiola', photo: '' },
+      { name: 'Carlo Ancelotti', photo: '' },
+      { name: 'Laurent Blanc', photo: '' },
+      { name: 'José Mourinho', photo: '' },
+      { name: 'Stefano Pioli', photo: '' },
+    ],
+    jerseys: [
+      { number: 9, primaryColor: '#6CBEE6', secondaryColor: '#FFFFFF' },
+      { number: 9, primaryColor: '#D2122E', secondaryColor: '#FFFFFF' },
+      { number: 8, primaryColor: '#000000', secondaryColor: '#FFFFFF' },
+      { number: 8, primaryColor: '#003DA5', secondaryColor: '#000000' },
+      { number: 9, primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { number: 11, primaryColor: '#DA291C', secondaryColor: '#000000' },
+      { number: 10, primaryColor: '#004170', secondaryColor: '#DA291C' },
+      { number: 9, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 9, primaryColor: '#FFFFFF', secondaryColor: '#00245D' },
+      { number: 11, primaryColor: '#DA291C', secondaryColor: '#000000' },
+    ],
+  },
+  // 7
+  {
+    id: 'thierry-henry',
+    name: 'Thierry Henry',
+    nationality: 'France',
+    clubs: [
+      { name: 'Monaco', logo: 'monaco.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Juventus', logo: 'juventus.png', primaryColor: '#000000', secondaryColor: '#FFFFFF' },
+      { name: 'Arsenal', logo: 'arsenal.png', primaryColor: '#EF0107', secondaryColor: '#FFFFFF' },
+      { name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { name: 'New York Red Bulls', logo: 'ny-red-bulls.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'Arsène Wenger', photo: '' },
+      { name: 'Carlo Ancelotti', photo: '' },
+      { name: 'Arsène Wenger', photo: '' },
+      { name: 'Pep Guardiola', photo: '' },
+    ],
+    jerseys: [
+      { number: 15, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 21, primaryColor: '#000000', secondaryColor: '#FFFFFF' },
+      { number: 14, primaryColor: '#EF0107', secondaryColor: '#FFFFFF' },
+      { number: 14, primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { number: 14, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 8
+  {
+    id: 'ronaldinho',
+    name: 'Ronaldinho',
+    nationality: 'Brazil',
+    clubs: [
+      { name: 'Grêmio', logo: 'gremio.png', primaryColor: '#0A5EB6', secondaryColor: '#000000' },
+      { name: 'Paris Saint-Germain', logo: 'psg.png', primaryColor: '#004170', secondaryColor: '#DA291C' },
+      { name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { name: 'AC Milan', logo: 'ac-milan.png', primaryColor: '#DA291C', secondaryColor: '#000000' },
+      { name: 'Flamengo', logo: 'flamengo.png', primaryColor: '#DA291C', secondaryColor: '#000000' },
+      { name: 'Atlético Mineiro', logo: 'atletico-mineiro.png', primaryColor: '#000000', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'Luis Fernandez', photo: '' },
+      { name: 'Frank Rijkaard', photo: '' },
+      { name: 'Carlo Ancelotti', photo: '' },
+    ],
+    jerseys: [
+      { number: 10, primaryColor: '#0A5EB6', secondaryColor: '#000000' },
+      { number: 21, primaryColor: '#004170', secondaryColor: '#DA291C' },
+      { number: 10, primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { number: 80, primaryColor: '#DA291C', secondaryColor: '#000000' },
+      { number: 10, primaryColor: '#DA291C', secondaryColor: '#000000' },
+      { number: 10, primaryColor: '#000000', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 9
+  {
+    id: 'wayne-rooney',
+    name: 'Wayne Rooney',
+    nationality: 'England',
+    clubs: [
+      { name: 'Everton', logo: 'everton.png', primaryColor: '#003399', secondaryColor: '#FFFFFF' },
+      { name: 'Manchester United', logo: 'man-utd.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Everton', logo: 'everton.png', primaryColor: '#003399', secondaryColor: '#FFFFFF' },
+      { name: 'DC United', logo: 'dc-united.png', primaryColor: '#000000', secondaryColor: '#DA291C' },
+      { name: 'Derby County', logo: 'derby-county.png', primaryColor: '#FFFFFF', secondaryColor: '#000000' },
+    ],
+    managers: [
+      { name: 'David Moyes', photo: '' },
+      { name: 'Sir Alex Ferguson', photo: '' },
+      { name: 'Louis van Gaal', photo: '' },
+      { name: 'José Mourinho', photo: '' },
+      { name: 'Ronald Koeman', photo: '' },
+    ],
+    jerseys: [
+      { number: 18, primaryColor: '#003399', secondaryColor: '#FFFFFF' },
+      { number: 8, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 10, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 10, primaryColor: '#003399', secondaryColor: '#FFFFFF' },
+      { number: 9, primaryColor: '#000000', secondaryColor: '#DA291C' },
+      { number: 32, primaryColor: '#FFFFFF', secondaryColor: '#000000' },
+    ],
+  },
+  // 10
+  {
+    id: 'david-beckham',
+    name: 'David Beckham',
+    nationality: 'England',
+    clubs: [
+      { name: 'Manchester United', logo: 'man-utd.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Real Madrid', logo: 'real-madrid.png', primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+      { name: 'LA Galaxy', logo: 'la-galaxy.png', primaryColor: '#FFFFFF', secondaryColor: '#00245D' },
+      { name: 'AC Milan', logo: 'ac-milan.png', primaryColor: '#DA291C', secondaryColor: '#000000' },
+      { name: 'Paris Saint-Germain', logo: 'psg.png', primaryColor: '#004170', secondaryColor: '#DA291C' },
+    ],
+    managers: [
+      { name: 'Sir Alex Ferguson', photo: '' },
+      { name: 'Vicente del Bosque', photo: '' },
+      { name: 'Carlo Ancelotti', photo: '' },
+      { name: 'Leonardo', photo: '' },
+    ],
+    jerseys: [
+      { number: 7, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 23, primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+      { number: 23, primaryColor: '#FFFFFF', secondaryColor: '#00245D' },
+      { number: 32, primaryColor: '#DA291C', secondaryColor: '#000000' },
+      { number: 32, primaryColor: '#004170', secondaryColor: '#DA291C' },
+    ],
+  },
+  // 11
+  {
+    id: 'zinedine-zidane',
+    name: 'Zinedine Zidane',
+    nationality: 'France',
+    clubs: [
+      { name: 'Cannes', logo: 'cannes.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Bordeaux', logo: 'bordeaux.png', primaryColor: '#13284B', secondaryColor: '#FFFFFF' },
+      { name: 'Juventus', logo: 'juventus.png', primaryColor: '#000000', secondaryColor: '#FFFFFF' },
+      { name: 'Real Madrid', logo: 'real-madrid.png', primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+    ],
+    managers: [
+      { name: 'Luis Fernandez', photo: '' },
+      { name: 'Marcello Lippi', photo: '' },
+      { name: 'Carlo Ancelotti', photo: '' },
+      { name: 'Vicente del Bosque', photo: '' },
+    ],
+    jerseys: [
+      { number: 10, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 7, primaryColor: '#13284B', secondaryColor: '#FFFFFF' },
+      { number: 21, primaryColor: '#000000', secondaryColor: '#FFFFFF' },
+      { number: 5, primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+    ],
+  },
+  // 12
+  {
+    id: 'luka-modric',
+    name: 'Luka Modrić',
+    nationality: 'Croatia',
+    clubs: [
+      { name: 'Dinamo Zagreb', logo: 'dinamo-zagreb.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+      { name: 'Tottenham Hotspur', logo: 'tottenham.png', primaryColor: '#FFFFFF', secondaryColor: '#13284B' },
+      { name: 'Real Madrid', logo: 'real-madrid.png', primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+    ],
+    managers: [
+      { name: 'Harry Redknapp', photo: '' },
+      { name: 'André Villas-Boas', photo: '' },
+      { name: 'José Mourinho', photo: '' },
+      { name: 'Carlo Ancelotti', photo: '' },
+      { name: 'Zinedine Zidane', photo: '' },
+    ],
+    jerseys: [
+      { number: 10, primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+      { number: 14, primaryColor: '#FFFFFF', secondaryColor: '#13284B' },
+      { number: 10, primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+    ],
+  },
+  // 13
+  {
+    id: 'robert-lewandowski',
+    name: 'Robert Lewandowski',
+    nationality: 'Poland',
+    clubs: [
+      { name: 'Znicz Pruszków', logo: 'znicz.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Lech Poznań', logo: 'lech-poznan.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+      { name: 'Borussia Dortmund', logo: 'dortmund.png', primaryColor: '#FDE100', secondaryColor: '#000000' },
+      { name: 'Bayern Munich', logo: 'bayern-munich.png', primaryColor: '#DC052D', secondaryColor: '#FFFFFF' },
+      { name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' },
+    ],
+    managers: [
+      { name: 'Jürgen Klopp', photo: '' },
+      { name: 'Pep Guardiola', photo: '' },
+      { name: 'Hansi Flick', photo: '' },
+      { name: 'Julian Nagelsmann', photo: '' },
+      { name: 'Xavi', photo: '' },
+      { name: 'Hansi Flick', photo: '' },
+    ],
+    jerseys: [
+      { number: 7, primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+      { number: 9, primaryColor: '#FDE100', secondaryColor: '#000000' },
+      { number: 9, primaryColor: '#DC052D', secondaryColor: '#FFFFFF' },
+      { number: 9, primaryColor: '#A50044', secondaryColor: '#004D98' },
+    ],
+  },
+  // 14
+  {
+    id: 'mohamed-salah',
+    name: 'Mohamed Salah',
+    nationality: 'Egypt',
+    clubs: [
+      { name: 'El Mokawloon', logo: 'el-mokawloon.png', primaryColor: '#FF8C00', secondaryColor: '#000000' },
+      { name: 'Basel', logo: 'basel.png', primaryColor: '#DA291C', secondaryColor: '#003DA5' },
+      { name: 'Chelsea', logo: 'chelsea.png', primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+      { name: 'Fiorentina', logo: 'fiorentina.png', primaryColor: '#6B3FA0', secondaryColor: '#FFFFFF' },
+      { name: 'Roma', logo: 'roma.png', primaryColor: '#8E1F2F', secondaryColor: '#F7A600' },
+      { name: 'Liverpool', logo: 'liverpool.png', primaryColor: '#C8102E', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'José Mourinho', photo: '' },
+      { name: 'Vincenzo Montella', photo: '' },
+      { name: 'Luciano Spalletti', photo: '' },
+      { name: 'Jürgen Klopp', photo: '' },
+      { name: 'Arne Slot', photo: '' },
+    ],
+    jerseys: [
+      { number: 22, primaryColor: '#DA291C', secondaryColor: '#003DA5' },
+      { number: 11, primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+      { number: 7, primaryColor: '#6B3FA0', secondaryColor: '#FFFFFF' },
+      { number: 11, primaryColor: '#8E1F2F', secondaryColor: '#F7A600' },
+      { number: 11, primaryColor: '#C8102E', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 15
+  {
+    id: 'kevin-de-bruyne',
+    name: 'Kevin De Bruyne',
+    nationality: 'Belgium',
+    clubs: [
+      { name: 'Genk', logo: 'genk.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+      { name: 'Chelsea', logo: 'chelsea.png', primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+      { name: 'Werder Bremen', logo: 'werder-bremen.png', primaryColor: '#1D9053', secondaryColor: '#FFFFFF' },
+      { name: 'VfL Wolfsburg', logo: 'wolfsburg.png', primaryColor: '#65B32E', secondaryColor: '#FFFFFF' },
+      { name: 'Manchester City', logo: 'man-city.png', primaryColor: '#6CABDD', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'José Mourinho', photo: '' },
+      { name: 'Dieter Hecking', photo: '' },
+      { name: 'Pep Guardiola', photo: '' },
+    ],
+    jerseys: [
+      { number: 14, primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+      { number: 14, primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+      { number: 6, primaryColor: '#1D9053', secondaryColor: '#FFFFFF' },
+      { number: 10, primaryColor: '#65B32E', secondaryColor: '#FFFFFF' },
+      { number: 17, primaryColor: '#6CABDD', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 16
+  {
+    id: 'eden-hazard',
+    name: 'Eden Hazard',
+    nationality: 'Belgium',
+    clubs: [
+      { name: 'Lille', logo: 'lille.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Chelsea', logo: 'chelsea.png', primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+      { name: 'Real Madrid', logo: 'real-madrid.png', primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+    ],
+    managers: [
+      { name: 'Rudi Garcia', photo: '' },
+      { name: 'José Mourinho', photo: '' },
+      { name: 'Antonio Conte', photo: '' },
+      { name: 'Maurizio Sarri', photo: '' },
+      { name: 'Zinedine Zidane', photo: '' },
+      { name: 'Carlo Ancelotti', photo: '' },
+    ],
+    jerseys: [
+      { number: 10, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 17, primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+      { number: 10, primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+      { number: 7, primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+    ],
+  },
+  // 17
+  {
+    id: 'paul-pogba',
+    name: 'Paul Pogba',
+    nationality: 'France',
+    clubs: [
+      { name: 'Manchester United', logo: 'man-utd.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Juventus', logo: 'juventus.png', primaryColor: '#000000', secondaryColor: '#FFFFFF' },
+      { name: 'Manchester United', logo: 'man-utd.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'Sir Alex Ferguson', photo: '' },
+      { name: 'Antonio Conte', photo: '' },
+      { name: 'Massimiliano Allegri', photo: '' },
+      { name: 'José Mourinho', photo: '' },
+      { name: 'Ole Gunnar Solskjær', photo: '' },
+    ],
+    jerseys: [
+      { number: 42, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 6, primaryColor: '#000000', secondaryColor: '#FFFFFF' },
+      { number: 6, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 18
+  {
+    id: 'gareth-bale',
+    name: 'Gareth Bale',
+    nationality: 'Wales',
+    clubs: [
+      { name: 'Southampton', logo: 'southampton.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Tottenham Hotspur', logo: 'tottenham.png', primaryColor: '#FFFFFF', secondaryColor: '#13284B' },
+      { name: 'Real Madrid', logo: 'real-madrid.png', primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+      { name: 'Tottenham Hotspur', logo: 'tottenham.png', primaryColor: '#FFFFFF', secondaryColor: '#13284B' },
+      { name: 'Los Angeles FC', logo: 'lafc.png', primaryColor: '#000000', secondaryColor: '#C39E6D' },
+    ],
+    managers: [
+      { name: 'George Burley', photo: '' },
+      { name: 'Harry Redknapp', photo: '' },
+      { name: 'André Villas-Boas', photo: '' },
+      { name: 'Carlo Ancelotti', photo: '' },
+      { name: 'Zinedine Zidane', photo: '' },
+      { name: 'José Mourinho', photo: '' },
+    ],
+    jerseys: [
+      { number: 3, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 3, primaryColor: '#FFFFFF', secondaryColor: '#13284B' },
+      { number: 11, primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+      { number: 9, primaryColor: '#FFFFFF', secondaryColor: '#13284B' },
+    ],
+  },
+  // 19
+  {
+    id: 'luis-suarez',
+    name: 'Luis Suárez',
+    nationality: 'Uruguay',
+    clubs: [
+      { name: 'Nacional', logo: 'nacional.png', primaryColor: '#003DA5', secondaryColor: '#DA291C' },
+      { name: 'Groningen', logo: 'groningen.png', primaryColor: '#1D9053', secondaryColor: '#FFFFFF' },
+      { name: 'Ajax', logo: 'ajax.png', primaryColor: '#D2122E', secondaryColor: '#FFFFFF' },
+      { name: 'Liverpool', logo: 'liverpool.png', primaryColor: '#C8102E', secondaryColor: '#FFFFFF' },
+      { name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { name: 'Atlético Madrid', logo: 'atletico-madrid.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Grêmio', logo: 'gremio.png', primaryColor: '#0A5EB6', secondaryColor: '#000000' },
+      { name: 'Inter Miami', logo: 'inter-miami.png', primaryColor: '#F7B5CD', secondaryColor: '#231F20' },
+    ],
+    managers: [
+      { name: 'Martin Jol', photo: '' },
+      { name: 'Kenny Dalglish', photo: '' },
+      { name: 'Brendan Rodgers', photo: '' },
+      { name: 'Luis Enrique', photo: '' },
+      { name: 'Ernesto Valverde', photo: '' },
+      { name: 'Diego Simeone', photo: '' },
+    ],
+    jerseys: [
+      { number: 9, primaryColor: '#D2122E', secondaryColor: '#FFFFFF' },
+      { number: 7, primaryColor: '#C8102E', secondaryColor: '#FFFFFF' },
+      { number: 9, primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { number: 9, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 20
+  {
+    id: 'karim-benzema',
+    name: 'Karim Benzema',
+    nationality: 'France',
+    clubs: [
+      { name: 'Lyon', logo: 'lyon.png', primaryColor: '#FFFFFF', secondaryColor: '#003DA5' },
+      { name: 'Real Madrid', logo: 'real-madrid.png', primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+      { name: 'Al-Ittihad', logo: 'al-ittihad.png', primaryColor: '#FFCD00', secondaryColor: '#000000' },
+    ],
+    managers: [
+      { name: 'Gérard Houllier', photo: '' },
+      { name: 'Manuel Pellegrini', photo: '' },
+      { name: 'José Mourinho', photo: '' },
+      { name: 'Carlo Ancelotti', photo: '' },
+      { name: 'Zinedine Zidane', photo: '' },
+    ],
+    jerseys: [
+      { number: 10, primaryColor: '#FFFFFF', secondaryColor: '#003DA5' },
+      { number: 9, primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+      { number: 9, primaryColor: '#FFCD00', secondaryColor: '#000000' },
+    ],
+  },
+  // 21
+  {
+    id: 'virgil-van-dijk',
+    name: 'Virgil van Dijk',
+    nationality: 'Netherlands',
+    clubs: [
+      { name: 'Groningen', logo: 'groningen.png', primaryColor: '#1D9053', secondaryColor: '#FFFFFF' },
+      { name: 'Celtic', logo: 'celtic.png', primaryColor: '#1D9053', secondaryColor: '#FFFFFF' },
+      { name: 'Southampton', logo: 'southampton.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Liverpool', logo: 'liverpool.png', primaryColor: '#C8102E', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'Ronny Deila', photo: '' },
+      { name: 'Ronald Koeman', photo: '' },
+      { name: 'Mauricio Pellegrino', photo: '' },
+      { name: 'Jürgen Klopp', photo: '' },
+      { name: 'Arne Slot', photo: '' },
+    ],
+    jerseys: [
+      { number: 4, primaryColor: '#1D9053', secondaryColor: '#FFFFFF' },
+      { number: 4, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 4, primaryColor: '#C8102E', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 22
+  {
+    id: 'toni-kroos',
+    name: 'Toni Kroos',
+    nationality: 'Germany',
+    clubs: [
+      { name: 'Bayern Munich', logo: 'bayern-munich.png', primaryColor: '#DC052D', secondaryColor: '#FFFFFF' },
+      { name: 'Bayer Leverkusen', logo: 'leverkusen.png', primaryColor: '#DA291C', secondaryColor: '#000000' },
+      { name: 'Bayern Munich', logo: 'bayern-munich.png', primaryColor: '#DC052D', secondaryColor: '#FFFFFF' },
+      { name: 'Real Madrid', logo: 'real-madrid.png', primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+    ],
+    managers: [
+      { name: 'Jupp Heynckes', photo: '' },
+      { name: 'Pep Guardiola', photo: '' },
+      { name: 'Carlo Ancelotti', photo: '' },
+      { name: 'Zinedine Zidane', photo: '' },
+    ],
+    jerseys: [
+      { number: 39, primaryColor: '#DC052D', secondaryColor: '#FFFFFF' },
+      { number: 29, primaryColor: '#DA291C', secondaryColor: '#000000' },
+      { number: 8, primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+    ],
+  },
+  // 23
+  {
+    id: 'sergio-ramos',
+    name: 'Sergio Ramos',
+    nationality: 'Spain',
+    clubs: [
+      { name: 'Sevilla', logo: 'sevilla.png', primaryColor: '#FFFFFF', secondaryColor: '#DA291C' },
+      { name: 'Real Madrid', logo: 'real-madrid.png', primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+      { name: 'Paris Saint-Germain', logo: 'psg.png', primaryColor: '#004170', secondaryColor: '#DA291C' },
+      { name: 'Sevilla', logo: 'sevilla.png', primaryColor: '#FFFFFF', secondaryColor: '#DA291C' },
+    ],
+    managers: [
+      { name: 'Joaquín Caparrós', photo: '' },
+      { name: 'Fabio Capello', photo: '' },
+      { name: 'José Mourinho', photo: '' },
+      { name: 'Carlo Ancelotti', photo: '' },
+      { name: 'Zinedine Zidane', photo: '' },
+      { name: 'Mauricio Pochettino', photo: '' },
+    ],
+    jerseys: [
+      { number: 36, primaryColor: '#FFFFFF', secondaryColor: '#DA291C' },
+      { number: 4, primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+      { number: 4, primaryColor: '#004170', secondaryColor: '#DA291C' },
+      { number: 4, primaryColor: '#FFFFFF', secondaryColor: '#DA291C' },
+    ],
+  },
+  // 24
+  {
+    id: 'sadio-mane',
+    name: 'Sadio Mané',
+    nationality: 'Senegal',
+    clubs: [
+      { name: 'Metz', logo: 'metz.png', primaryColor: '#800020', secondaryColor: '#FFFFFF' },
+      { name: 'RB Salzburg', logo: 'rb-salzburg.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Southampton', logo: 'southampton.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Liverpool', logo: 'liverpool.png', primaryColor: '#C8102E', secondaryColor: '#FFFFFF' },
+      { name: 'Bayern Munich', logo: 'bayern-munich.png', primaryColor: '#DC052D', secondaryColor: '#FFFFFF' },
+      { name: 'Al-Nassr', logo: 'al-nassr.png', primaryColor: '#FFCD00', secondaryColor: '#003399' },
+    ],
+    managers: [
+      { name: 'Roger Schmidt', photo: '' },
+      { name: 'Ronald Koeman', photo: '' },
+      { name: 'Jürgen Klopp', photo: '' },
+      { name: 'Julian Nagelsmann', photo: '' },
+    ],
+    jerseys: [
+      { number: 19, primaryColor: '#800020', secondaryColor: '#FFFFFF' },
+      { number: 10, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 10, primaryColor: '#C8102E', secondaryColor: '#FFFFFF' },
+      { number: 17, primaryColor: '#DC052D', secondaryColor: '#FFFFFF' },
+      { number: 10, primaryColor: '#FFCD00', secondaryColor: '#003399' },
+    ],
+  },
+  // 25
+  {
+    id: 'andres-iniesta',
+    name: 'Andrés Iniesta',
+    nationality: 'Spain',
+    clubs: [
+      { name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { name: 'Vissel Kobe', logo: 'vissel-kobe.png', primaryColor: '#8B0000', secondaryColor: '#FFFFFF' },
+      { name: 'Emirates Club', logo: 'emirates-club.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'Frank Rijkaard', photo: '' },
+      { name: 'Pep Guardiola', photo: '' },
+      { name: 'Luis Enrique', photo: '' },
+      { name: 'Ernesto Valverde', photo: '' },
+    ],
+    jerseys: [
+      { number: 24, primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { number: 8, primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { number: 8, primaryColor: '#8B0000', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 26
+  {
+    id: 'xavi-hernandez',
+    name: 'Xavi Hernández',
+    nationality: 'Spain',
+    clubs: [
+      { name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { name: 'Al-Sadd', logo: 'al-sadd.png', primaryColor: '#FFFFFF', secondaryColor: '#000000' },
+    ],
+    managers: [
+      { name: 'Louis van Gaal', photo: '' },
+      { name: 'Frank Rijkaard', photo: '' },
+      { name: 'Pep Guardiola', photo: '' },
+      { name: 'Tito Vilanova', photo: '' },
+      { name: 'Luis Enrique', photo: '' },
+    ],
+    jerseys: [
+      { number: 6, primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { number: 6, primaryColor: '#FFFFFF', secondaryColor: '#000000' },
+    ],
+  },
+  // 27
+  {
+    id: 'samuel-etoo',
+    name: "Samuel Eto'o",
+    nationality: 'Cameroon',
+    clubs: [
+      { name: 'Real Madrid', logo: 'real-madrid.png', primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+      { name: 'Leganés', logo: 'leganes.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+      { name: 'Espanyol', logo: 'espanyol.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+      { name: 'Mallorca', logo: 'mallorca.png', primaryColor: '#DA291C', secondaryColor: '#000000' },
+      { name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { name: 'Inter Milan', logo: 'inter-milan.png', primaryColor: '#003DA5', secondaryColor: '#000000' },
+      { name: 'Anzhi Makhachkala', logo: 'anzhi.png', primaryColor: '#FDE100', secondaryColor: '#1D9053' },
+      { name: 'Chelsea', logo: 'chelsea.png', primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+      { name: 'Everton', logo: 'everton.png', primaryColor: '#003399', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'Vicente del Bosque', photo: '' },
+      { name: 'Frank Rijkaard', photo: '' },
+      { name: 'Pep Guardiola', photo: '' },
+      { name: 'José Mourinho', photo: '' },
+    ],
+    jerseys: [
+      { number: 9, primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { number: 9, primaryColor: '#003DA5', secondaryColor: '#000000' },
+      { number: 9, primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+      { number: 5, primaryColor: '#003399', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 28
+  {
+    id: 'didier-drogba',
+    name: 'Didier Drogba',
+    nationality: 'Ivory Coast',
+    clubs: [
+      { name: 'Le Mans', logo: 'le-mans.png', primaryColor: '#DA291C', secondaryColor: '#FFCD00' },
+      { name: 'Guingamp', logo: 'guingamp.png', primaryColor: '#DA291C', secondaryColor: '#000000' },
+      { name: 'Marseille', logo: 'marseille.png', primaryColor: '#FFFFFF', secondaryColor: '#2FAEE0' },
+      { name: 'Chelsea', logo: 'chelsea.png', primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+      { name: 'Shanghai Shenhua', logo: 'shanghai-shenhua.png', primaryColor: '#DA291C', secondaryColor: '#003DA5' },
+      { name: 'Galatasaray', logo: 'galatasaray.png', primaryColor: '#DA291C', secondaryColor: '#FFCD00' },
+      { name: 'Chelsea', logo: 'chelsea.png', primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+      { name: 'Montreal Impact', logo: 'montreal-impact.png', primaryColor: '#003DA5', secondaryColor: '#000000' },
+    ],
+    managers: [
+      { name: 'José Mourinho', photo: '' },
+      { name: 'Guus Hiddink', photo: '' },
+      { name: 'Carlo Ancelotti', photo: '' },
+      { name: 'André Villas-Boas', photo: '' },
+      { name: 'Roberto Di Matteo', photo: '' },
+    ],
+    jerseys: [
+      { number: 11, primaryColor: '#FFFFFF', secondaryColor: '#2FAEE0' },
+      { number: 11, primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+      { number: 11, primaryColor: '#DA291C', secondaryColor: '#FFCD00' },
+      { number: 15, primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 29
+  {
+    id: 'frank-lampard',
+    name: 'Frank Lampard',
+    nationality: 'England',
+    clubs: [
+      { name: 'West Ham United', logo: 'west-ham.png', primaryColor: '#7A263A', secondaryColor: '#1BB1E7' },
+      { name: 'Chelsea', logo: 'chelsea.png', primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+      { name: 'Manchester City', logo: 'man-city.png', primaryColor: '#6CABDD', secondaryColor: '#FFFFFF' },
+      { name: 'New York City FC', logo: 'nycfc.png', primaryColor: '#6CABDD', secondaryColor: '#F77F00' },
+    ],
+    managers: [
+      { name: 'Harry Redknapp', photo: '' },
+      { name: 'Claudio Ranieri', photo: '' },
+      { name: 'José Mourinho', photo: '' },
+      { name: 'Carlo Ancelotti', photo: '' },
+      { name: 'André Villas-Boas', photo: '' },
+      { name: 'Manuel Pellegrini', photo: '' },
+    ],
+    jerseys: [
+      { number: 18, primaryColor: '#7A263A', secondaryColor: '#1BB1E7' },
+      { number: 8, primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+      { number: 18, primaryColor: '#6CABDD', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 30
+  {
+    id: 'steven-gerrard',
+    name: 'Steven Gerrard',
+    nationality: 'England',
+    clubs: [
+      { name: 'Liverpool', logo: 'liverpool.png', primaryColor: '#C8102E', secondaryColor: '#FFFFFF' },
+      { name: 'LA Galaxy', logo: 'la-galaxy.png', primaryColor: '#FFFFFF', secondaryColor: '#00245D' },
+    ],
+    managers: [
+      { name: 'Gérard Houllier', photo: '' },
+      { name: 'Rafael Benítez', photo: '' },
+      { name: 'Brendan Rodgers', photo: '' },
+    ],
+    jerseys: [
+      { number: 28, primaryColor: '#C8102E', secondaryColor: '#FFFFFF' },
+      { number: 8, primaryColor: '#C8102E', secondaryColor: '#FFFFFF' },
+      { number: 8, primaryColor: '#FFFFFF', secondaryColor: '#00245D' },
+    ],
+  },
+  // 31
+  {
+    id: 'andrea-pirlo',
+    name: 'Andrea Pirlo',
+    nationality: 'Italy',
+    clubs: [
+      { name: 'Brescia', logo: 'brescia.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+      { name: 'Inter Milan', logo: 'inter-milan.png', primaryColor: '#003DA5', secondaryColor: '#000000' },
+      { name: 'Brescia', logo: 'brescia.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+      { name: 'AC Milan', logo: 'ac-milan.png', primaryColor: '#DA291C', secondaryColor: '#000000' },
+      { name: 'Juventus', logo: 'juventus.png', primaryColor: '#000000', secondaryColor: '#FFFFFF' },
+      { name: 'New York City FC', logo: 'nycfc.png', primaryColor: '#6CABDD', secondaryColor: '#F77F00' },
+    ],
+    managers: [
+      { name: 'Carlo Mazzone', photo: '' },
+      { name: 'Carlo Ancelotti', photo: '' },
+      { name: 'Antonio Conte', photo: '' },
+      { name: 'Massimiliano Allegri', photo: '' },
+    ],
+    jerseys: [
+      { number: 21, primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+      { number: 21, primaryColor: '#DA291C', secondaryColor: '#000000' },
+      { number: 21, primaryColor: '#000000', secondaryColor: '#FFFFFF' },
+      { number: 21, primaryColor: '#6CABDD', secondaryColor: '#F77F00' },
+    ],
+  },
+  // 32
+  {
+    id: 'gianluigi-buffon',
+    name: 'Gianluigi Buffon',
+    nationality: 'Italy',
+    clubs: [
+      { name: 'Parma', logo: 'parma.png', primaryColor: '#FFCD00', secondaryColor: '#003DA5' },
+      { name: 'Juventus', logo: 'juventus.png', primaryColor: '#000000', secondaryColor: '#FFFFFF' },
+      { name: 'Paris Saint-Germain', logo: 'psg.png', primaryColor: '#004170', secondaryColor: '#DA291C' },
+      { name: 'Juventus', logo: 'juventus.png', primaryColor: '#000000', secondaryColor: '#FFFFFF' },
+      { name: 'Parma', logo: 'parma.png', primaryColor: '#FFCD00', secondaryColor: '#003DA5' },
+    ],
+    managers: [
+      { name: 'Carlo Ancelotti', photo: '' },
+      { name: 'Fabio Capello', photo: '' },
+      { name: 'Marcello Lippi', photo: '' },
+      { name: 'Antonio Conte', photo: '' },
+      { name: 'Massimiliano Allegri', photo: '' },
+      { name: 'Thomas Tuchel', photo: '' },
+    ],
+    jerseys: [
+      { number: 1, primaryColor: '#FFCD00', secondaryColor: '#003DA5' },
+      { number: 1, primaryColor: '#000000', secondaryColor: '#FFFFFF' },
+      { number: 1, primaryColor: '#004170', secondaryColor: '#DA291C' },
+      { number: 77, primaryColor: '#000000', secondaryColor: '#FFFFFF' },
+      { number: 1, primaryColor: '#FFCD00', secondaryColor: '#003DA5' },
+    ],
+  },
+  // 33
+  {
+    id: 'paolo-maldini',
+    name: 'Paolo Maldini',
+    nationality: 'Italy',
+    clubs: [{ name: 'AC Milan', logo: 'ac-milan.png', primaryColor: '#DA291C', secondaryColor: '#000000' }],
+    managers: [
+      { name: 'Arrigo Sacchi', photo: '' },
+      { name: 'Fabio Capello', photo: '' },
+      { name: 'Carlo Ancelotti', photo: '' },
+    ],
+    jerseys: [{ number: 3, primaryColor: '#DA291C', secondaryColor: '#000000' }],
+  },
+  // 34
+  {
+    id: 'ronaldo-nazario',
+    name: 'Ronaldo Nazário',
+    nationality: 'Brazil',
+    clubs: [
+      { name: 'Cruzeiro', logo: 'cruzeiro.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+      { name: 'PSV', logo: 'psv.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { name: 'Inter Milan', logo: 'inter-milan.png', primaryColor: '#003DA5', secondaryColor: '#000000' },
+      { name: 'Real Madrid', logo: 'real-madrid.png', primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+      { name: 'AC Milan', logo: 'ac-milan.png', primaryColor: '#DA291C', secondaryColor: '#000000' },
+      { name: 'Corinthians', logo: 'corinthians.png', primaryColor: '#000000', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'Bobby Robson', photo: '' },
+      { name: 'Luigi Simoni', photo: '' },
+      { name: 'Vicente del Bosque', photo: '' },
+      { name: 'Carlo Ancelotti', photo: '' },
+    ],
+    jerseys: [
+      { number: 9, primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+      { number: 9, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 9, primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { number: 9, primaryColor: '#003DA5', secondaryColor: '#000000' },
+      { number: 9, primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+      { number: 99, primaryColor: '#DA291C', secondaryColor: '#000000' },
+    ],
+  },
+  // 35
+  {
+    id: 'rio-ferdinand',
+    name: 'Rio Ferdinand',
+    nationality: 'England',
+    clubs: [
+      { name: 'West Ham United', logo: 'west-ham.png', primaryColor: '#7A263A', secondaryColor: '#1BB1E7' },
+      { name: 'Leeds United', logo: 'leeds.png', primaryColor: '#FFFFFF', secondaryColor: '#1D428A' },
+      { name: 'Manchester United', logo: 'man-utd.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Queens Park Rangers', logo: 'qpr.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'Harry Redknapp', photo: '' },
+      { name: "David O'Leary", photo: '' },
+      { name: 'Sir Alex Ferguson', photo: '' },
+    ],
+    jerseys: [
+      { number: 15, primaryColor: '#7A263A', secondaryColor: '#1BB1E7' },
+      { number: 29, primaryColor: '#FFFFFF', secondaryColor: '#1D428A' },
+      { number: 5, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 5, primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 36
+  {
+    id: 'patrick-vieira',
+    name: 'Patrick Vieira',
+    nationality: 'France',
+    clubs: [
+      { name: 'Cannes', logo: 'cannes.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'AC Milan', logo: 'ac-milan.png', primaryColor: '#DA291C', secondaryColor: '#000000' },
+      { name: 'Arsenal', logo: 'arsenal.png', primaryColor: '#EF0107', secondaryColor: '#FFFFFF' },
+      { name: 'Juventus', logo: 'juventus.png', primaryColor: '#000000', secondaryColor: '#FFFFFF' },
+      { name: 'Inter Milan', logo: 'inter-milan.png', primaryColor: '#003DA5', secondaryColor: '#000000' },
+      { name: 'Manchester City', logo: 'man-city.png', primaryColor: '#6CABDD', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'Arsène Wenger', photo: '' },
+      { name: 'Fabio Capello', photo: '' },
+      { name: 'Roberto Mancini', photo: '' },
+    ],
+    jerseys: [
+      { number: 4, primaryColor: '#EF0107', secondaryColor: '#FFFFFF' },
+      { number: 4, primaryColor: '#000000', secondaryColor: '#FFFFFF' },
+      { number: 4, primaryColor: '#003DA5', secondaryColor: '#000000' },
+      { number: 24, primaryColor: '#6CABDD', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 37
+  {
+    id: 'dennis-bergkamp',
+    name: 'Dennis Bergkamp',
+    nationality: 'Netherlands',
+    clubs: [
+      { name: 'Ajax', logo: 'ajax.png', primaryColor: '#D2122E', secondaryColor: '#FFFFFF' },
+      { name: 'Inter Milan', logo: 'inter-milan.png', primaryColor: '#003DA5', secondaryColor: '#000000' },
+      { name: 'Arsenal', logo: 'arsenal.png', primaryColor: '#EF0107', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'Louis van Gaal', photo: '' },
+      { name: 'Arsène Wenger', photo: '' },
+    ],
+    jerseys: [
+      { number: 10, primaryColor: '#D2122E', secondaryColor: '#FFFFFF' },
+      { number: 10, primaryColor: '#003DA5', secondaryColor: '#000000' },
+      { number: 10, primaryColor: '#EF0107', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 38
+  {
+    id: 'jadon-sancho',
+    name: 'Jadon Sancho',
+    nationality: 'England',
+    clubs: [
+      { name: 'Manchester City', logo: 'man-city.png', primaryColor: '#6CABDD', secondaryColor: '#FFFFFF' },
+      { name: 'Borussia Dortmund', logo: 'dortmund.png', primaryColor: '#FDE100', secondaryColor: '#000000' },
+      { name: 'Manchester United', logo: 'man-utd.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Borussia Dortmund', logo: 'dortmund.png', primaryColor: '#FDE100', secondaryColor: '#000000' },
+      { name: 'Chelsea', logo: 'chelsea.png', primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'Lucien Favre', photo: '' },
+      { name: 'Marco Rose', photo: '' },
+      { name: 'Ole Gunnar Solskjær', photo: '' },
+      { name: 'Erik ten Hag', photo: '' },
+      { name: 'Edin Terzić', photo: '' },
+    ],
+    jerseys: [
+      { number: 7, primaryColor: '#FDE100', secondaryColor: '#000000' },
+      { number: 25, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 7, primaryColor: '#FDE100', secondaryColor: '#000000' },
+      { number: 17, primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 39
+  {
+    id: 'romelu-lukaku',
+    name: 'Romelu Lukaku',
+    nationality: 'Belgium',
+    clubs: [
+      { name: 'Anderlecht', logo: 'anderlecht.png', primaryColor: '#6B3FA0', secondaryColor: '#FFFFFF' },
+      { name: 'Chelsea', logo: 'chelsea.png', primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+      { name: 'West Bromwich Albion', logo: 'west-brom.png', primaryColor: '#13284B', secondaryColor: '#FFFFFF' },
+      { name: 'Everton', logo: 'everton.png', primaryColor: '#003399', secondaryColor: '#FFFFFF' },
+      { name: 'Manchester United', logo: 'man-utd.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Inter Milan', logo: 'inter-milan.png', primaryColor: '#003DA5', secondaryColor: '#000000' },
+      { name: 'Chelsea', logo: 'chelsea.png', primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+      { name: 'Inter Milan', logo: 'inter-milan.png', primaryColor: '#003DA5', secondaryColor: '#000000' },
+      { name: 'Roma', logo: 'roma.png', primaryColor: '#8E1F2F', secondaryColor: '#F7A600' },
+      { name: 'Napoli', logo: 'napoli.png', primaryColor: '#12A0D7', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'André Villas-Boas', photo: '' },
+      { name: 'Roberto Martínez', photo: '' },
+      { name: 'José Mourinho', photo: '' },
+      { name: 'Antonio Conte', photo: '' },
+      { name: 'Thomas Tuchel', photo: '' },
+      { name: 'Simone Inzaghi', photo: '' },
+      { name: 'José Mourinho', photo: '' },
+      { name: 'Antonio Conte', photo: '' },
+    ],
+    jerseys: [
+      { number: 10, primaryColor: '#6B3FA0', secondaryColor: '#FFFFFF' },
+      { number: 18, primaryColor: '#13284B', secondaryColor: '#FFFFFF' },
+      { number: 10, primaryColor: '#003399', secondaryColor: '#FFFFFF' },
+      { number: 9, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 9, primaryColor: '#003DA5', secondaryColor: '#000000' },
+      { number: 9, primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+      { number: 90, primaryColor: '#003DA5', secondaryColor: '#000000' },
+      { number: 11, primaryColor: '#12A0D7', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 40
+  {
+    id: 'raheem-sterling',
+    name: 'Raheem Sterling',
+    nationality: 'England',
+    clubs: [
+      { name: 'Liverpool', logo: 'liverpool.png', primaryColor: '#C8102E', secondaryColor: '#FFFFFF' },
+      { name: 'Manchester City', logo: 'man-city.png', primaryColor: '#6CABDD', secondaryColor: '#FFFFFF' },
+      { name: 'Chelsea', logo: 'chelsea.png', primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+      { name: 'Arsenal', logo: 'arsenal.png', primaryColor: '#EF0107', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'Brendan Rodgers', photo: '' },
+      { name: 'Pep Guardiola', photo: '' },
+      { name: 'Thomas Tuchel', photo: '' },
+      { name: 'Mikel Arteta', photo: '' },
+    ],
+    jerseys: [
+      { number: 31, primaryColor: '#C8102E', secondaryColor: '#FFFFFF' },
+      { number: 7, primaryColor: '#6CABDD', secondaryColor: '#FFFFFF' },
+      { number: 17, primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+      { number: 7, primaryColor: '#EF0107', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 41
+  {
+    id: 'antoine-griezmann',
+    name: 'Antoine Griezmann',
+    nationality: 'France',
+    clubs: [
+      { name: 'Real Sociedad', logo: 'real-sociedad.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+      { name: 'Atlético Madrid', logo: 'atletico-madrid.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { name: 'Atlético Madrid', logo: 'atletico-madrid.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'Philippe Montanier', photo: '' },
+      { name: 'Diego Simeone', photo: '' },
+      { name: 'Ernesto Valverde', photo: '' },
+      { name: 'Ronald Koeman', photo: '' },
+      { name: 'Diego Simeone', photo: '' },
+    ],
+    jerseys: [
+      { number: 7, primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+      { number: 7, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 17, primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { number: 8, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 42
+  {
+    id: 'angel-di-maria',
+    name: 'Ángel Di María',
+    nationality: 'Argentina',
+    clubs: [
+      { name: 'Rosario Central', logo: 'rosario-central.png', primaryColor: '#003DA5', secondaryColor: '#FFCD00' },
+      { name: 'Benfica', logo: 'benfica.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Real Madrid', logo: 'real-madrid.png', primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+      { name: 'Manchester United', logo: 'man-utd.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Paris Saint-Germain', logo: 'psg.png', primaryColor: '#004170', secondaryColor: '#DA291C' },
+      { name: 'Juventus', logo: 'juventus.png', primaryColor: '#000000', secondaryColor: '#FFFFFF' },
+      { name: 'Benfica', logo: 'benfica.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'Jorge Jesus', photo: '' },
+      { name: 'José Mourinho', photo: '' },
+      { name: 'Carlo Ancelotti', photo: '' },
+      { name: 'Louis van Gaal', photo: '' },
+      { name: 'Laurent Blanc', photo: '' },
+      { name: 'Thomas Tuchel', photo: '' },
+      { name: 'Massimiliano Allegri', photo: '' },
+    ],
+    jerseys: [
+      { number: 22, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 11, primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+      { number: 7, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 11, primaryColor: '#004170', secondaryColor: '#DA291C' },
+      { number: 22, primaryColor: '#000000', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 43
+  {
+    id: 'james-rodriguez',
+    name: 'James Rodríguez',
+    nationality: 'Colombia',
+    clubs: [
+      { name: 'Envigado', logo: 'envigado.png', primaryColor: '#F77F00', secondaryColor: '#FFFFFF' },
+      { name: 'Banfield', logo: 'banfield.png', primaryColor: '#1D9053', secondaryColor: '#FFFFFF' },
+      { name: 'Porto', logo: 'porto.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+      { name: 'Monaco', logo: 'monaco.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Real Madrid', logo: 'real-madrid.png', primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+      { name: 'Bayern Munich', logo: 'bayern-munich.png', primaryColor: '#DC052D', secondaryColor: '#FFFFFF' },
+      { name: 'Real Madrid', logo: 'real-madrid.png', primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+      { name: 'Everton', logo: 'everton.png', primaryColor: '#003399', secondaryColor: '#FFFFFF' },
+      { name: 'Al-Rayyan', logo: 'al-rayyan.png', primaryColor: '#8B0000', secondaryColor: '#FFFFFF' },
+      { name: 'Olympiacos', logo: 'olympiacos.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'São Paulo', logo: 'sao-paulo.png', primaryColor: '#FFFFFF', secondaryColor: '#DA291C' },
+    ],
+    managers: [
+      { name: 'Vitor Pereira', photo: '' },
+      { name: 'Claudio Ranieri', photo: '' },
+      { name: 'Carlo Ancelotti', photo: '' },
+      { name: 'Zinedine Zidane', photo: '' },
+      { name: 'Carlo Ancelotti', photo: '' },
+    ],
+    jerseys: [
+      { number: 10, primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+      { number: 10, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 10, primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+      { number: 11, primaryColor: '#DC052D', secondaryColor: '#FFFFFF' },
+      { number: 19, primaryColor: '#003399', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 44
+  {
+    id: 'cesc-fabregas',
+    name: 'Cesc Fàbregas',
+    nationality: 'Spain',
+    clubs: [
+      { name: 'Arsenal', logo: 'arsenal.png', primaryColor: '#EF0107', secondaryColor: '#FFFFFF' },
+      { name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { name: 'Chelsea', logo: 'chelsea.png', primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+      { name: 'Monaco', logo: 'monaco.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Como', logo: 'como.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'Arsène Wenger', photo: '' },
+      { name: 'Pep Guardiola', photo: '' },
+      { name: 'José Mourinho', photo: '' },
+      { name: 'Antonio Conte', photo: '' },
+    ],
+    jerseys: [
+      { number: 57, primaryColor: '#EF0107', secondaryColor: '#FFFFFF' },
+      { number: 4, primaryColor: '#EF0107', secondaryColor: '#FFFFFF' },
+      { number: 4, primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { number: 4, primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 45
+  {
+    id: 'robin-van-persie',
+    name: 'Robin van Persie',
+    nationality: 'Netherlands',
+    clubs: [
+      { name: 'Feyenoord', logo: 'feyenoord.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Arsenal', logo: 'arsenal.png', primaryColor: '#EF0107', secondaryColor: '#FFFFFF' },
+      { name: 'Manchester United', logo: 'man-utd.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Fenerbahçe', logo: 'fenerbahce.png', primaryColor: '#FFCD00', secondaryColor: '#003DA5' },
+      { name: 'Feyenoord', logo: 'feyenoord.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'Arsène Wenger', photo: '' },
+      { name: 'Sir Alex Ferguson', photo: '' },
+      { name: 'Louis van Gaal', photo: '' },
+      { name: 'Dick Advocaat', photo: '' },
+    ],
+    jerseys: [
+      { number: 32, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 10, primaryColor: '#EF0107', secondaryColor: '#FFFFFF' },
+      { number: 20, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 9, primaryColor: '#FFCD00', secondaryColor: '#003DA5' },
+      { number: 9, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 46
+  {
+    id: 'mesut-ozil',
+    name: 'Mesut Özil',
+    nationality: 'Germany',
+    clubs: [
+      { name: 'Schalke 04', logo: 'schalke.png', primaryColor: '#004D98', secondaryColor: '#FFFFFF' },
+      { name: 'Werder Bremen', logo: 'werder-bremen.png', primaryColor: '#1D9053', secondaryColor: '#FFFFFF' },
+      { name: 'Real Madrid', logo: 'real-madrid.png', primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+      { name: 'Arsenal', logo: 'arsenal.png', primaryColor: '#EF0107', secondaryColor: '#FFFFFF' },
+      { name: 'Fenerbahçe', logo: 'fenerbahce.png', primaryColor: '#FFCD00', secondaryColor: '#003DA5' },
+      { name: 'İstanbul Başakşehir', logo: 'basaksehir.png', primaryColor: '#F77F00', secondaryColor: '#003DA5' },
+    ],
+    managers: [
+      { name: 'Thomas Schaaf', photo: '' },
+      { name: 'José Mourinho', photo: '' },
+      { name: 'Arsène Wenger', photo: '' },
+      { name: 'Unai Emery', photo: '' },
+      { name: 'Mikel Arteta', photo: '' },
+    ],
+    jerseys: [
+      { number: 10, primaryColor: '#1D9053', secondaryColor: '#FFFFFF' },
+      { number: 10, primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+      { number: 11, primaryColor: '#EF0107', secondaryColor: '#FFFFFF' },
+      { number: 10, primaryColor: '#FFCD00', secondaryColor: '#003DA5' },
+    ],
+  },
+  // 47
+  {
+    id: 'pierre-emerick-aubameyang',
+    name: 'Pierre-Emerick Aubameyang',
+    nationality: 'Gabon',
+    clubs: [
+      { name: 'AC Milan', logo: 'ac-milan.png', primaryColor: '#DA291C', secondaryColor: '#000000' },
+      { name: 'Saint-Étienne', logo: 'saint-etienne.png', primaryColor: '#1D9053', secondaryColor: '#FFFFFF' },
+      { name: 'Borussia Dortmund', logo: 'dortmund.png', primaryColor: '#FDE100', secondaryColor: '#000000' },
+      { name: 'Arsenal', logo: 'arsenal.png', primaryColor: '#EF0107', secondaryColor: '#FFFFFF' },
+      { name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { name: 'Chelsea', logo: 'chelsea.png', primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+      { name: 'Marseille', logo: 'marseille.png', primaryColor: '#FFFFFF', secondaryColor: '#2FAEE0' },
+    ],
+    managers: [
+      { name: 'Thomas Tuchel', photo: '' },
+      { name: 'Lucien Favre', photo: '' },
+      { name: 'Unai Emery', photo: '' },
+      { name: 'Mikel Arteta', photo: '' },
+      { name: 'Xavi', photo: '' },
+      { name: 'Thomas Tuchel', photo: '' },
+    ],
+    jerseys: [
+      { number: 17, primaryColor: '#FDE100', secondaryColor: '#000000' },
+      { number: 14, primaryColor: '#EF0107', secondaryColor: '#FFFFFF' },
+      { number: 25, primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { number: 9, primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 48
+  {
+    id: 'alexis-sanchez',
+    name: 'Alexis Sánchez',
+    nationality: 'Chile',
+    clubs: [
+      { name: 'Cobreloa', logo: 'cobreloa.png', primaryColor: '#F77F00', secondaryColor: '#000000' },
+      { name: 'Udinese', logo: 'udinese.png', primaryColor: '#FFFFFF', secondaryColor: '#000000' },
+      { name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { name: 'Arsenal', logo: 'arsenal.png', primaryColor: '#EF0107', secondaryColor: '#FFFFFF' },
+      { name: 'Manchester United', logo: 'man-utd.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Inter Milan', logo: 'inter-milan.png', primaryColor: '#003DA5', secondaryColor: '#000000' },
+      { name: 'Marseille', logo: 'marseille.png', primaryColor: '#FFFFFF', secondaryColor: '#2FAEE0' },
+    ],
+    managers: [
+      { name: 'Pep Guardiola', photo: '' },
+      { name: 'Arsène Wenger', photo: '' },
+      { name: 'José Mourinho', photo: '' },
+      { name: 'Antonio Conte', photo: '' },
+    ],
+    jerseys: [
+      { number: 10, primaryColor: '#FFFFFF', secondaryColor: '#000000' },
+      { number: 9, primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { number: 17, primaryColor: '#EF0107', secondaryColor: '#FFFFFF' },
+      { number: 7, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 7, primaryColor: '#003DA5', secondaryColor: '#000000' },
+    ],
+  },
+  // 49
+  {
+    id: 'david-silva',
+    name: 'David Silva',
+    nationality: 'Spain',
+    clubs: [
+      { name: 'Valencia', logo: 'valencia.png', primaryColor: '#FFFFFF', secondaryColor: '#000000' },
+      { name: 'Manchester City', logo: 'man-city.png', primaryColor: '#6CABDD', secondaryColor: '#FFFFFF' },
+      { name: 'Real Sociedad', logo: 'real-sociedad.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'Quique Sánchez Flores', photo: '' },
+      { name: 'Roberto Mancini', photo: '' },
+      { name: 'Manuel Pellegrini', photo: '' },
+      { name: 'Pep Guardiola', photo: '' },
+    ],
+    jerseys: [
+      { number: 21, primaryColor: '#FFFFFF', secondaryColor: '#000000' },
+      { number: 21, primaryColor: '#6CABDD', secondaryColor: '#FFFFFF' },
+      { number: 21, primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 50
+  {
+    id: 'sergio-aguero',
+    name: 'Sergio Agüero',
+    nationality: 'Argentina',
+    clubs: [
+      { name: 'Independiente', logo: 'independiente.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Atlético Madrid', logo: 'atletico-madrid.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Manchester City', logo: 'man-city.png', primaryColor: '#6CABDD', secondaryColor: '#FFFFFF' },
+      { name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' },
+    ],
+    managers: [
+      { name: 'Diego Simeone', photo: '' },
+      { name: 'Roberto Mancini', photo: '' },
+      { name: 'Manuel Pellegrini', photo: '' },
+      { name: 'Pep Guardiola', photo: '' },
+      { name: 'Ronald Koeman', photo: '' },
+    ],
+    jerseys: [
+      { number: 10, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 16, primaryColor: '#6CABDD', secondaryColor: '#FFFFFF' },
+      { number: 10, primaryColor: '#6CABDD', secondaryColor: '#FFFFFF' },
+      { number: 19, primaryColor: '#A50044', secondaryColor: '#004D98' },
+    ],
+  },
+  // 51
+  {
+    id: 'harry-kane',
+    name: 'Harry Kane',
+    nationality: 'England',
+    clubs: [
+      { name: 'Tottenham Hotspur', logo: 'tottenham.png', primaryColor: '#FFFFFF', secondaryColor: '#13284B' },
+      { name: 'Bayern Munich', logo: 'bayern-munich.png', primaryColor: '#DC052D', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'Tim Sherwood', photo: '' },
+      { name: 'Mauricio Pochettino', photo: '' },
+      { name: 'José Mourinho', photo: '' },
+      { name: 'Antonio Conte', photo: '' },
+      { name: 'Ange Postecoglou', photo: '' },
+      { name: 'Thomas Tuchel', photo: '' },
+      { name: 'Vincent Kompany', photo: '' },
+    ],
+    jerseys: [
+      { number: 18, primaryColor: '#FFFFFF', secondaryColor: '#13284B' },
+      { number: 10, primaryColor: '#FFFFFF', secondaryColor: '#13284B' },
+      { number: 9, primaryColor: '#DC052D', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 52
+  {
+    id: 'dele-alli',
+    name: 'Dele Alli',
+    nationality: 'England',
+    clubs: [
+      { name: 'MK Dons', logo: 'mk-dons.png', primaryColor: '#FFFFFF', secondaryColor: '#000000' },
+      { name: 'Tottenham Hotspur', logo: 'tottenham.png', primaryColor: '#FFFFFF', secondaryColor: '#13284B' },
+      { name: 'Everton', logo: 'everton.png', primaryColor: '#003399', secondaryColor: '#FFFFFF' },
+      { name: 'Beşiktaş', logo: 'besiktas.png', primaryColor: '#000000', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'Mauricio Pochettino', photo: '' },
+      { name: 'José Mourinho', photo: '' },
+      { name: 'Antonio Conte', photo: '' },
+      { name: 'Frank Lampard', photo: '' },
+    ],
+    jerseys: [
+      { number: 20, primaryColor: '#FFFFFF', secondaryColor: '#13284B' },
+      { number: 10, primaryColor: '#003399', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 53
+  {
+    id: 'jack-grealish',
+    name: 'Jack Grealish',
+    nationality: 'England',
+    clubs: [
+      { name: 'Aston Villa', logo: 'aston-villa.png', primaryColor: '#7A263A', secondaryColor: '#95BFE5' },
+      { name: 'Manchester City', logo: 'man-city.png', primaryColor: '#6CABDD', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'Tim Sherwood', photo: '' },
+      { name: 'Dean Smith', photo: '' },
+      { name: 'Pep Guardiola', photo: '' },
+    ],
+    jerseys: [
+      { number: 10, primaryColor: '#7A263A', secondaryColor: '#95BFE5' },
+      { number: 10, primaryColor: '#6CABDD', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 54
+  {
+    id: 'marcus-rashford',
+    name: 'Marcus Rashford',
+    nationality: 'England',
+    clubs: [
+      { name: 'Manchester United', logo: 'man-utd.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Aston Villa', logo: 'aston-villa.png', primaryColor: '#7A263A', secondaryColor: '#95BFE5' },
+    ],
+    managers: [
+      { name: 'Louis van Gaal', photo: '' },
+      { name: 'José Mourinho', photo: '' },
+      { name: 'Ole Gunnar Solskjær', photo: '' },
+      { name: 'Erik ten Hag', photo: '' },
+      { name: 'Rúben Amorim', photo: '' },
+      { name: 'Unai Emery', photo: '' },
+    ],
+    jerseys: [
+      { number: 39, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 10, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 7, primaryColor: '#7A263A', secondaryColor: '#95BFE5' },
+    ],
+  },
+  // 55
+  {
+    id: 'philippe-coutinho',
+    name: 'Philippe Coutinho',
+    nationality: 'Brazil',
+    clubs: [
+      { name: 'Inter Milan', logo: 'inter-milan.png', primaryColor: '#003DA5', secondaryColor: '#000000' },
+      { name: 'Espanyol', logo: 'espanyol.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+      { name: 'Liverpool', logo: 'liverpool.png', primaryColor: '#C8102E', secondaryColor: '#FFFFFF' },
+      { name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { name: 'Bayern Munich', logo: 'bayern-munich.png', primaryColor: '#DC052D', secondaryColor: '#FFFFFF' },
+      { name: 'Aston Villa', logo: 'aston-villa.png', primaryColor: '#7A263A', secondaryColor: '#95BFE5' },
+      { name: 'Al-Duhail', logo: 'al-duhail.png', primaryColor: '#8B0000', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'Brendan Rodgers', photo: '' },
+      { name: 'Jürgen Klopp', photo: '' },
+      { name: 'Ernesto Valverde', photo: '' },
+      { name: 'Hansi Flick', photo: '' },
+      { name: 'Steven Gerrard', photo: '' },
+    ],
+    jerseys: [
+      { number: 10, primaryColor: '#003DA5', secondaryColor: '#000000' },
+      { number: 10, primaryColor: '#C8102E', secondaryColor: '#FFFFFF' },
+      { number: 14, primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { number: 10, primaryColor: '#DC052D', secondaryColor: '#FFFFFF' },
+      { number: 23, primaryColor: '#7A263A', secondaryColor: '#95BFE5' },
+    ],
+  },
+  // 56
+  {
+    id: 'christian-eriksen',
+    name: 'Christian Eriksen',
+    nationality: 'Denmark',
+    clubs: [
+      { name: 'Ajax', logo: 'ajax.png', primaryColor: '#D2122E', secondaryColor: '#FFFFFF' },
+      { name: 'Tottenham Hotspur', logo: 'tottenham.png', primaryColor: '#FFFFFF', secondaryColor: '#13284B' },
+      { name: 'Inter Milan', logo: 'inter-milan.png', primaryColor: '#003DA5', secondaryColor: '#000000' },
+      { name: 'Brentford', logo: 'brentford.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Manchester United', logo: 'man-utd.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'Frank de Boer', photo: '' },
+      { name: 'Mauricio Pochettino', photo: '' },
+      { name: 'José Mourinho', photo: '' },
+      { name: 'Antonio Conte', photo: '' },
+      { name: 'Thomas Frank', photo: '' },
+      { name: 'Erik ten Hag', photo: '' },
+    ],
+    jerseys: [
+      { number: 8, primaryColor: '#D2122E', secondaryColor: '#FFFFFF' },
+      { number: 23, primaryColor: '#FFFFFF', secondaryColor: '#13284B' },
+      { number: 24, primaryColor: '#003DA5', secondaryColor: '#000000' },
+      { number: 21, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 14, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 57
+  {
+    id: 'thibaut-courtois',
+    name: 'Thibaut Courtois',
+    nationality: 'Belgium',
+    clubs: [
+      { name: 'Genk', logo: 'genk.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+      { name: 'Chelsea', logo: 'chelsea.png', primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+      { name: 'Atlético Madrid', logo: 'atletico-madrid.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Chelsea', logo: 'chelsea.png', primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+      { name: 'Real Madrid', logo: 'real-madrid.png', primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+    ],
+    managers: [
+      { name: 'Diego Simeone', photo: '' },
+      { name: 'José Mourinho', photo: '' },
+      { name: 'Antonio Conte', photo: '' },
+      { name: 'Zinedine Zidane', photo: '' },
+      { name: 'Carlo Ancelotti', photo: '' },
+    ],
+    jerseys: [
+      { number: 1, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 13, primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+      { number: 1, primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+    ],
+  },
+  // 58
+  {
+    id: 'manuel-neuer',
+    name: 'Manuel Neuer',
+    nationality: 'Germany',
+    clubs: [
+      { name: 'Schalke 04', logo: 'schalke.png', primaryColor: '#004D98', secondaryColor: '#FFFFFF' },
+      { name: 'Bayern Munich', logo: 'bayern-munich.png', primaryColor: '#DC052D', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'Felix Magath', photo: '' },
+      { name: 'Jupp Heynckes', photo: '' },
+      { name: 'Pep Guardiola', photo: '' },
+      { name: 'Carlo Ancelotti', photo: '' },
+      { name: 'Hansi Flick', photo: '' },
+      { name: 'Thomas Tuchel', photo: '' },
+      { name: 'Vincent Kompany', photo: '' },
+    ],
+    jerseys: [
+      { number: 1, primaryColor: '#004D98', secondaryColor: '#FFFFFF' },
+      { number: 1, primaryColor: '#DC052D', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 59
+  {
+    id: 'jan-oblak',
+    name: 'Jan Oblak',
+    nationality: 'Slovenia',
+    clubs: [
+      { name: 'Olimpija Ljubljana', logo: 'olimpija.png', primaryColor: '#1D9053', secondaryColor: '#FFFFFF' },
+      { name: 'Benfica', logo: 'benfica.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Atlético Madrid', logo: 'atletico-madrid.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'Jorge Jesus', photo: '' },
+      { name: 'Diego Simeone', photo: '' },
+    ],
+    jerseys: [
+      { number: 1, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 13, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 60
+  {
+    id: 'alisson-becker',
+    name: 'Alisson Becker',
+    nationality: 'Brazil',
+    clubs: [
+      { name: 'Internacional', logo: 'internacional.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Roma', logo: 'roma.png', primaryColor: '#8E1F2F', secondaryColor: '#F7A600' },
+      { name: 'Liverpool', logo: 'liverpool.png', primaryColor: '#C8102E', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'Eusebio Di Francesco', photo: '' },
+      { name: 'Jürgen Klopp', photo: '' },
+      { name: 'Arne Slot', photo: '' },
+    ],
+    jerseys: [
+      { number: 1, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 1, primaryColor: '#8E1F2F', secondaryColor: '#F7A600' },
+      { number: 1, primaryColor: '#C8102E', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 61
+  {
+    id: 'marc-andre-ter-stegen',
+    name: 'Marc-André ter Stegen',
+    nationality: 'Germany',
+    clubs: [
+      { name: 'Borussia Mönchengladbach', logo: 'gladbach.png', primaryColor: '#000000', secondaryColor: '#1D9053' },
+      { name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' },
+    ],
+    managers: [
+      { name: 'Lucien Favre', photo: '' },
+      { name: 'Luis Enrique', photo: '' },
+      { name: 'Ernesto Valverde', photo: '' },
+      { name: 'Ronald Koeman', photo: '' },
+      { name: 'Xavi', photo: '' },
+      { name: 'Hansi Flick', photo: '' },
+    ],
+    jerseys: [
+      { number: 1, primaryColor: '#000000', secondaryColor: '#1D9053' },
+      { number: 1, primaryColor: '#A50044', secondaryColor: '#004D98' },
+    ],
+  },
+  // 62
+  {
+    id: 'ederson-moraes',
+    name: 'Ederson',
+    nationality: 'Brazil',
+    clubs: [
+      { name: 'Benfica', logo: 'benfica.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Manchester City', logo: 'man-city.png', primaryColor: '#6CABDD', secondaryColor: '#FFFFFF' },
+      { name: 'Al-Ittihad', logo: 'al-ittihad.png', primaryColor: '#FFCD00', secondaryColor: '#000000' },
+    ],
+    managers: [
+      { name: 'Rui Vitória', photo: '' },
+      { name: 'Pep Guardiola', photo: '' },
+    ],
+    jerseys: [
+      { number: 1, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 31, primaryColor: '#6CABDD', secondaryColor: '#FFFFFF' },
+      { number: 1, primaryColor: '#FFCD00', secondaryColor: '#000000' },
+    ],
+  },
+  // 63
+  {
+    id: 'keylor-navas',
+    name: 'Keylor Navas',
+    nationality: 'Costa Rica',
+    clubs: [
+      { name: 'Saprissa', logo: 'saprissa.png', primaryColor: '#6B3FA0', secondaryColor: '#FFFFFF' },
+      { name: 'Albacete', logo: 'albacete.png', primaryColor: '#FFFFFF', secondaryColor: '#DA291C' },
+      { name: 'Levante', logo: 'levante.png', primaryColor: '#003DA5', secondaryColor: '#DA291C' },
+      { name: 'Real Madrid', logo: 'real-madrid.png', primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+      { name: 'Paris Saint-Germain', logo: 'psg.png', primaryColor: '#004170', secondaryColor: '#DA291C' },
+    ],
+    managers: [
+      { name: 'Carlo Ancelotti', photo: '' },
+      { name: 'Zinedine Zidane', photo: '' },
+      { name: 'Thomas Tuchel', photo: '' },
+      { name: 'Mauricio Pochettino', photo: '' },
+    ],
+    jerseys: [
+      { number: 1, primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+      { number: 1, primaryColor: '#004170', secondaryColor: '#DA291C' },
+    ],
+  },
+  // 64
+  {
+    id: 'dani-alves',
+    name: 'Dani Alves',
+    nationality: 'Brazil',
+    clubs: [
+      { name: 'Bahia', logo: 'bahia.png', primaryColor: '#003DA5', secondaryColor: '#DA291C' },
+      { name: 'Sevilla', logo: 'sevilla.png', primaryColor: '#FFFFFF', secondaryColor: '#DA291C' },
+      { name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { name: 'Juventus', logo: 'juventus.png', primaryColor: '#000000', secondaryColor: '#FFFFFF' },
+      { name: 'Paris Saint-Germain', logo: 'psg.png', primaryColor: '#004170', secondaryColor: '#DA291C' },
+      { name: 'São Paulo', logo: 'sao-paulo.png', primaryColor: '#FFFFFF', secondaryColor: '#DA291C' },
+      { name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' },
+    ],
+    managers: [
+      { name: 'Joaquín Caparrós', photo: '' },
+      { name: 'Frank Rijkaard', photo: '' },
+      { name: 'Pep Guardiola', photo: '' },
+      { name: 'Luis Enrique', photo: '' },
+      { name: 'Massimiliano Allegri', photo: '' },
+      { name: 'Thomas Tuchel', photo: '' },
+      { name: 'Xavi', photo: '' },
+    ],
+    jerseys: [
+      { number: 2, primaryColor: '#FFFFFF', secondaryColor: '#DA291C' },
+      { number: 2, primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { number: 23, primaryColor: '#000000', secondaryColor: '#FFFFFF' },
+      { number: 13, primaryColor: '#004170', secondaryColor: '#DA291C' },
+      { number: 8, primaryColor: '#A50044', secondaryColor: '#004D98' },
+    ],
+  },
+  // 65
+  {
+    id: 'marcelo-vieira',
+    name: 'Marcelo',
+    nationality: 'Brazil',
+    clubs: [
+      { name: 'Fluminense', logo: 'fluminense.png', primaryColor: '#8B0000', secondaryColor: '#1D9053' },
+      { name: 'Real Madrid', logo: 'real-madrid.png', primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+      { name: 'Olympiacos', logo: 'olympiacos.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Fluminense', logo: 'fluminense.png', primaryColor: '#8B0000', secondaryColor: '#1D9053' },
+    ],
+    managers: [
+      { name: 'Bernd Schuster', photo: '' },
+      { name: 'José Mourinho', photo: '' },
+      { name: 'Carlo Ancelotti', photo: '' },
+      { name: 'Zinedine Zidane', photo: '' },
+    ],
+    jerseys: [
+      { number: 12, primaryColor: '#8B0000', secondaryColor: '#1D9053' },
+      { number: 12, primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+    ],
+  },
+  // 66
+  {
+    id: 'david-luiz',
+    name: 'David Luiz',
+    nationality: 'Brazil',
+    clubs: [
+      { name: 'Vitória', logo: 'vitoria.png', primaryColor: '#DA291C', secondaryColor: '#000000' },
+      { name: 'Benfica', logo: 'benfica.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Chelsea', logo: 'chelsea.png', primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+      { name: 'Paris Saint-Germain', logo: 'psg.png', primaryColor: '#004170', secondaryColor: '#DA291C' },
+      { name: 'Chelsea', logo: 'chelsea.png', primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+      { name: 'Arsenal', logo: 'arsenal.png', primaryColor: '#EF0107', secondaryColor: '#FFFFFF' },
+      { name: 'Flamengo', logo: 'flamengo.png', primaryColor: '#DA291C', secondaryColor: '#000000' },
+    ],
+    managers: [
+      { name: 'Jorge Jesus', photo: '' },
+      { name: 'André Villas-Boas', photo: '' },
+      { name: 'Roberto Di Matteo', photo: '' },
+      { name: 'Laurent Blanc', photo: '' },
+      { name: 'Antonio Conte', photo: '' },
+      { name: 'Unai Emery', photo: '' },
+      { name: 'Mikel Arteta', photo: '' },
+    ],
+    jerseys: [
+      { number: 4, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 4, primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+      { number: 32, primaryColor: '#004170', secondaryColor: '#DA291C' },
+      { number: 30, primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+      { number: 23, primaryColor: '#EF0107', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 67
+  {
+    id: 'raphael-varane',
+    name: 'Raphaël Varane',
+    nationality: 'France',
+    clubs: [
+      { name: 'Lens', logo: 'lens.png', primaryColor: '#DA291C', secondaryColor: '#FFCD00' },
+      { name: 'Real Madrid', logo: 'real-madrid.png', primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+      { name: 'Manchester United', logo: 'man-utd.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Como', logo: 'como.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'José Mourinho', photo: '' },
+      { name: 'Carlo Ancelotti', photo: '' },
+      { name: 'Zinedine Zidane', photo: '' },
+      { name: 'Ole Gunnar Solskjær', photo: '' },
+      { name: 'Erik ten Hag', photo: '' },
+      { name: 'Cesc Fàbregas', photo: '' },
+    ],
+    jerseys: [
+      { number: 2, primaryColor: '#DA291C', secondaryColor: '#FFCD00' },
+      { number: 2, primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+      { number: 19, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 68
+  {
+    id: 'thiago-silva',
+    name: 'Thiago Silva',
+    nationality: 'Brazil',
+    clubs: [
+      { name: 'Fluminense', logo: 'fluminense.png', primaryColor: '#8B0000', secondaryColor: '#1D9053' },
+      { name: 'AC Milan', logo: 'ac-milan.png', primaryColor: '#DA291C', secondaryColor: '#000000' },
+      { name: 'Paris Saint-Germain', logo: 'psg.png', primaryColor: '#004170', secondaryColor: '#DA291C' },
+      { name: 'Chelsea', logo: 'chelsea.png', primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+      { name: 'Fluminense', logo: 'fluminense.png', primaryColor: '#8B0000', secondaryColor: '#1D9053' },
+    ],
+    managers: [
+      { name: 'Massimiliano Allegri', photo: '' },
+      { name: 'Carlo Ancelotti', photo: '' },
+      { name: 'Laurent Blanc', photo: '' },
+      { name: 'Thomas Tuchel', photo: '' },
+      { name: 'Frank Lampard', photo: '' },
+      { name: 'Mauricio Pochettino', photo: '' },
+    ],
+    jerseys: [
+      { number: 33, primaryColor: '#DA291C', secondaryColor: '#000000' },
+      { number: 2, primaryColor: '#004170', secondaryColor: '#DA291C' },
+      { number: 6, primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 69
+  {
+    id: 'joshua-kimmich',
+    name: 'Joshua Kimmich',
+    nationality: 'Germany',
+    clubs: [
+      { name: 'RB Leipzig', logo: 'rb-leipzig.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Bayern Munich', logo: 'bayern-munich.png', primaryColor: '#DC052D', secondaryColor: '#FFFFFF' },
+      { name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' },
+    ],
+    managers: [
+      { name: 'Pep Guardiola', photo: '' },
+      { name: 'Carlo Ancelotti', photo: '' },
+      { name: 'Hansi Flick', photo: '' },
+      { name: 'Julian Nagelsmann', photo: '' },
+      { name: 'Thomas Tuchel', photo: '' },
+      { name: 'Vincent Kompany', photo: '' },
+      { name: 'Hansi Flick', photo: '' },
+    ],
+    jerseys: [
+      { number: 32, primaryColor: '#DC052D', secondaryColor: '#FFFFFF' },
+      { number: 6, primaryColor: '#DC052D', secondaryColor: '#FFFFFF' },
+      { number: 6, primaryColor: '#A50044', secondaryColor: '#004D98' },
+    ],
+  },
+  // 70
+  {
+    id: 'n-golo-kante',
+    name: "N'Golo Kanté",
+    nationality: 'France',
+    clubs: [
+      { name: 'Boulogne', logo: 'boulogne.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Caen', logo: 'caen.png', primaryColor: '#003DA5', secondaryColor: '#DA291C' },
+      { name: 'Leicester City', logo: 'leicester.png', primaryColor: '#003DA5', secondaryColor: '#FFCD00' },
+      { name: 'Chelsea', logo: 'chelsea.png', primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+      { name: 'Al-Ittihad', logo: 'al-ittihad.png', primaryColor: '#FFCD00', secondaryColor: '#000000' },
+    ],
+    managers: [
+      { name: 'Claudio Ranieri', photo: '' },
+      { name: 'Antonio Conte', photo: '' },
+      { name: 'Maurizio Sarri', photo: '' },
+      { name: 'Frank Lampard', photo: '' },
+      { name: 'Thomas Tuchel', photo: '' },
+    ],
+    jerseys: [
+      { number: 14, primaryColor: '#003DA5', secondaryColor: '#FFCD00' },
+      { number: 7, primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+      { number: 7, primaryColor: '#FFCD00', secondaryColor: '#000000' },
+    ],
+  },
+  // 71
+  {
+    id: 'vinicius-junior',
+    name: 'Vinícius Júnior',
+    nationality: 'Brazil',
+    clubs: [
+      { name: 'Flamengo', logo: 'flamengo.png', primaryColor: '#DA291C', secondaryColor: '#000000' },
+      { name: 'Real Madrid', logo: 'real-madrid.png', primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+    ],
+    managers: [
+      { name: 'Santiago Solari', photo: '' },
+      { name: 'Zinedine Zidane', photo: '' },
+      { name: 'Carlo Ancelotti', photo: '' },
+    ],
+    jerseys: [
+      { number: 25, primaryColor: '#DA291C', secondaryColor: '#000000' },
+      { number: 20, primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+      { number: 7, primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+    ],
+  },
+  // 72
+  {
+    id: 'jude-bellingham',
+    name: 'Jude Bellingham',
+    nationality: 'England',
+    clubs: [
+      { name: 'Birmingham City', logo: 'birmingham.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+      { name: 'Borussia Dortmund', logo: 'dortmund.png', primaryColor: '#FDE100', secondaryColor: '#000000' },
+      { name: 'Real Madrid', logo: 'real-madrid.png', primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+    ],
+    managers: [
+      { name: 'Pep Clotet', photo: '' },
+      { name: 'Marco Rose', photo: '' },
+      { name: 'Edin Terzić', photo: '' },
+      { name: 'Carlo Ancelotti', photo: '' },
+    ],
+    jerseys: [
+      { number: 22, primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+      { number: 22, primaryColor: '#FDE100', secondaryColor: '#000000' },
+      { number: 5, primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+    ],
+  },
+  // 73
+  {
+    id: 'pedri',
+    name: 'Pedri',
+    nationality: 'Spain',
+    clubs: [
+      { name: 'Las Palmas', logo: 'las-palmas.png', primaryColor: '#FFCD00', secondaryColor: '#003DA5' },
+      { name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' },
+    ],
+    managers: [
+      { name: 'Pepe Mel', photo: '' },
+      { name: 'Ronald Koeman', photo: '' },
+      { name: 'Xavi', photo: '' },
+      { name: 'Hansi Flick', photo: '' },
+    ],
+    jerseys: [
+      { number: 16, primaryColor: '#FFCD00', secondaryColor: '#003DA5' },
+      { number: 16, primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { number: 8, primaryColor: '#A50044', secondaryColor: '#004D98' },
+    ],
+  },
+  // 74
+  {
+    id: 'bukayo-saka',
+    name: 'Bukayo Saka',
+    nationality: 'England',
+    clubs: [{ name: 'Arsenal', logo: 'arsenal.png', primaryColor: '#EF0107', secondaryColor: '#FFFFFF' }],
+    managers: [
+      { name: 'Unai Emery', photo: '' },
+      { name: 'Mikel Arteta', photo: '' },
+    ],
+    jerseys: [
+      { number: 77, primaryColor: '#EF0107', secondaryColor: '#FFFFFF' },
+      { number: 7, primaryColor: '#EF0107', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 75
+  {
+    id: 'phil-foden',
+    name: 'Phil Foden',
+    nationality: 'England',
+    clubs: [{ name: 'Manchester City', logo: 'man-city.png', primaryColor: '#6CABDD', secondaryColor: '#FFFFFF' }],
+    managers: [{ name: 'Pep Guardiola', photo: '' }],
+    jerseys: [
+      { number: 47, primaryColor: '#6CABDD', secondaryColor: '#FFFFFF' },
+      { number: 10, primaryColor: '#6CABDD', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 76
+  {
+    id: 'bruno-fernandes',
+    name: 'Bruno Fernandes',
+    nationality: 'Portugal',
+    clubs: [
+      { name: 'Novara', logo: 'novara.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+      { name: 'Udinese', logo: 'udinese.png', primaryColor: '#FFFFFF', secondaryColor: '#000000' },
+      { name: 'Sampdoria', logo: 'sampdoria.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+      { name: 'Sporting CP', logo: 'sporting-cp.png', primaryColor: '#006847', secondaryColor: '#FFFFFF' },
+      { name: 'Manchester United', logo: 'man-utd.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'Marcel Keizer', photo: '' },
+      { name: 'Ole Gunnar Solskjær', photo: '' },
+      { name: 'Erik ten Hag', photo: '' },
+      { name: 'Rúben Amorim', photo: '' },
+    ],
+    jerseys: [
+      { number: 8, primaryColor: '#006847', secondaryColor: '#FFFFFF' },
+      { number: 18, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 8, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 77
+  {
+    id: 'son-heung-min',
+    name: 'Son Heung-min',
+    nationality: 'South Korea',
+    clubs: [
+      { name: 'Hamburger SV', logo: 'hamburg.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+      { name: 'Bayer Leverkusen', logo: 'leverkusen.png', primaryColor: '#DA291C', secondaryColor: '#000000' },
+      { name: 'Tottenham Hotspur', logo: 'tottenham.png', primaryColor: '#FFFFFF', secondaryColor: '#13284B' },
+    ],
+    managers: [
+      { name: 'Roger Schmidt', photo: '' },
+      { name: 'Mauricio Pochettino', photo: '' },
+      { name: 'José Mourinho', photo: '' },
+      { name: 'Antonio Conte', photo: '' },
+      { name: 'Ange Postecoglou', photo: '' },
+    ],
+    jerseys: [
+      { number: 40, primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+      { number: 7, primaryColor: '#DA291C', secondaryColor: '#000000' },
+      { number: 7, primaryColor: '#FFFFFF', secondaryColor: '#13284B' },
+    ],
+  },
+  // 78
+  {
+    id: 'declan-rice',
+    name: 'Declan Rice',
+    nationality: 'England',
+    clubs: [
+      { name: 'West Ham United', logo: 'west-ham.png', primaryColor: '#7A263A', secondaryColor: '#1BB1E7' },
+      { name: 'Arsenal', logo: 'arsenal.png', primaryColor: '#EF0107', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'Manuel Pellegrini', photo: '' },
+      { name: 'David Moyes', photo: '' },
+      { name: 'Mikel Arteta', photo: '' },
+    ],
+    jerseys: [
+      { number: 41, primaryColor: '#7A263A', secondaryColor: '#1BB1E7' },
+      { number: 41, primaryColor: '#EF0107', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 79
+  {
+    id: 'joao-felix',
+    name: 'João Félix',
+    nationality: 'Portugal',
+    clubs: [
+      { name: 'Benfica', logo: 'benfica.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Atlético Madrid', logo: 'atletico-madrid.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Chelsea', logo: 'chelsea.png', primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+      { name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { name: 'Chelsea', logo: 'chelsea.png', primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'Bruno Lage', photo: '' },
+      { name: 'Diego Simeone', photo: '' },
+      { name: 'Graham Potter', photo: '' },
+      { name: 'Xavi', photo: '' },
+      { name: 'Enzo Maresca', photo: '' },
+    ],
+    jerseys: [
+      { number: 79, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 7, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 11, primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+      { number: 14, primaryColor: '#A50044', secondaryColor: '#004D98' },
+    ],
+  },
+  // 80
+  {
+    id: 'bernardo-silva',
+    name: 'Bernardo Silva',
+    nationality: 'Portugal',
+    clubs: [
+      { name: 'Benfica', logo: 'benfica.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Monaco', logo: 'monaco.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Manchester City', logo: 'man-city.png', primaryColor: '#6CABDD', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'Leonardo Jardim', photo: '' },
+      { name: 'Pep Guardiola', photo: '' },
+    ],
+    jerseys: [
+      { number: 10, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 10, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 20, primaryColor: '#6CABDD', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 81
+  {
+    id: 'ousmane-dembele',
+    name: 'Ousmane Dembélé',
+    nationality: 'France',
+    clubs: [
+      { name: 'Rennes', logo: 'rennes.png', primaryColor: '#DA291C', secondaryColor: '#000000' },
+      { name: 'Borussia Dortmund', logo: 'dortmund.png', primaryColor: '#FDE100', secondaryColor: '#000000' },
+      { name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { name: 'Paris Saint-Germain', logo: 'psg.png', primaryColor: '#004170', secondaryColor: '#DA291C' },
+    ],
+    managers: [
+      { name: 'Thomas Tuchel', photo: '' },
+      { name: 'Ernesto Valverde', photo: '' },
+      { name: 'Ronald Koeman', photo: '' },
+      { name: 'Xavi', photo: '' },
+      { name: 'Luis Enrique', photo: '' },
+    ],
+    jerseys: [
+      { number: 7, primaryColor: '#FDE100', secondaryColor: '#000000' },
+      { number: 11, primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { number: 10, primaryColor: '#004170', secondaryColor: '#DA291C' },
+    ],
+  },
+  // 82
+  {
+    id: 'lamine-yamal',
+    name: 'Lamine Yamal',
+    nationality: 'Spain',
+    clubs: [{ name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' }],
+    managers: [
+      { name: 'Xavi', photo: '' },
+      { name: 'Hansi Flick', photo: '' },
+    ],
+    jerseys: [{ number: 19, primaryColor: '#A50044', secondaryColor: '#004D98' }],
+  },
+  // 83
+  {
+    id: 'florian-wirtz',
+    name: 'Florian Wirtz',
+    nationality: 'Germany',
+    clubs: [{ name: 'Bayer Leverkusen', logo: 'leverkusen.png', primaryColor: '#DA291C', secondaryColor: '#000000' }],
+    managers: [
+      { name: 'Peter Bosz', photo: '' },
+      { name: 'Xabi Alonso', photo: '' },
+    ],
+    jerseys: [{ number: 10, primaryColor: '#DA291C', secondaryColor: '#000000' }],
+  },
+  // 84
+  {
+    id: 'gavi',
+    name: 'Gavi',
+    nationality: 'Spain',
+    clubs: [{ name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' }],
+    managers: [
+      { name: 'Ronald Koeman', photo: '' },
+      { name: 'Xavi', photo: '' },
+      { name: 'Hansi Flick', photo: '' },
+    ],
+    jerseys: [{ number: 6, primaryColor: '#A50044', secondaryColor: '#004D98' }],
+  },
+  // 85
+  {
+    id: 'ruben-dias',
+    name: 'Rúben Dias',
+    nationality: 'Portugal',
+    clubs: [
+      { name: 'Benfica', logo: 'benfica.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Manchester City', logo: 'man-city.png', primaryColor: '#6CABDD', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'Rui Vitória', photo: '' },
+      { name: 'Bruno Lage', photo: '' },
+      { name: 'Pep Guardiola', photo: '' },
+    ],
+    jerseys: [
+      { number: 6, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 3, primaryColor: '#6CABDD', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 86
+  {
+    id: 'rodri',
+    name: 'Rodri',
+    nationality: 'Spain',
+    clubs: [
+      { name: 'Villarreal', logo: 'villarreal.png', primaryColor: '#FFCD00', secondaryColor: '#003DA5' },
+      { name: 'Atlético Madrid', logo: 'atletico-madrid.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Manchester City', logo: 'man-city.png', primaryColor: '#6CABDD', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'Diego Simeone', photo: '' },
+      { name: 'Pep Guardiola', photo: '' },
+    ],
+    jerseys: [
+      { number: 8, primaryColor: '#FFCD00', secondaryColor: '#003DA5' },
+      { number: 16, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 16, primaryColor: '#6CABDD', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 87
+  {
+    id: 'ivan-rakitic',
+    name: 'Ivan Rakitić',
+    nationality: 'Croatia',
+    clubs: [
+      { name: 'Basel', logo: 'basel.png', primaryColor: '#DA291C', secondaryColor: '#003DA5' },
+      { name: 'Schalke 04', logo: 'schalke.png', primaryColor: '#004D98', secondaryColor: '#FFFFFF' },
+      { name: 'Sevilla', logo: 'sevilla.png', primaryColor: '#FFFFFF', secondaryColor: '#DA291C' },
+      { name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { name: 'Sevilla', logo: 'sevilla.png', primaryColor: '#FFFFFF', secondaryColor: '#DA291C' },
+    ],
+    managers: [
+      { name: 'Felix Magath', photo: '' },
+      { name: 'Unai Emery', photo: '' },
+      { name: 'Luis Enrique', photo: '' },
+      { name: 'Ernesto Valverde', photo: '' },
+      { name: 'Julen Lopetegui', photo: '' },
+    ],
+    jerseys: [
+      { number: 7, primaryColor: '#DA291C', secondaryColor: '#003DA5' },
+      { number: 4, primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { number: 10, primaryColor: '#FFFFFF', secondaryColor: '#DA291C' },
+    ],
+  },
+  // 88
+  {
+    id: 'arturo-vidal',
+    name: 'Arturo Vidal',
+    nationality: 'Chile',
+    clubs: [
+      { name: 'Colo-Colo', logo: 'colo-colo.png', primaryColor: '#FFFFFF', secondaryColor: '#000000' },
+      { name: 'Bayer Leverkusen', logo: 'leverkusen.png', primaryColor: '#DA291C', secondaryColor: '#000000' },
+      { name: 'Juventus', logo: 'juventus.png', primaryColor: '#000000', secondaryColor: '#FFFFFF' },
+      { name: 'Bayern Munich', logo: 'bayern-munich.png', primaryColor: '#DC052D', secondaryColor: '#FFFFFF' },
+      { name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { name: 'Inter Milan', logo: 'inter-milan.png', primaryColor: '#003DA5', secondaryColor: '#000000' },
+      { name: 'Flamengo', logo: 'flamengo.png', primaryColor: '#DA291C', secondaryColor: '#000000' },
+    ],
+    managers: [
+      { name: 'Jupp Heynckes', photo: '' },
+      { name: 'Antonio Conte', photo: '' },
+      { name: 'Massimiliano Allegri', photo: '' },
+      { name: 'Pep Guardiola', photo: '' },
+      { name: 'Carlo Ancelotti', photo: '' },
+      { name: 'Ernesto Valverde', photo: '' },
+      { name: 'Antonio Conte', photo: '' },
+    ],
+    jerseys: [
+      { number: 23, primaryColor: '#DA291C', secondaryColor: '#000000' },
+      { number: 23, primaryColor: '#000000', secondaryColor: '#FFFFFF' },
+      { number: 23, primaryColor: '#DC052D', secondaryColor: '#FFFFFF' },
+      { number: 22, primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { number: 22, primaryColor: '#003DA5', secondaryColor: '#000000' },
+    ],
+  },
+  // 89
+  {
+    id: 'pepe',
+    name: 'Pepe',
+    nationality: 'Portugal',
+    clubs: [
+      { name: 'Marítimo', logo: 'maritimo.png', primaryColor: '#1D9053', secondaryColor: '#DA291C' },
+      { name: 'Porto', logo: 'porto.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+      { name: 'Real Madrid', logo: 'real-madrid.png', primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+      { name: 'Beşiktaş', logo: 'besiktas.png', primaryColor: '#000000', secondaryColor: '#FFFFFF' },
+      { name: 'Porto', logo: 'porto.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'Fabio Capello', photo: '' },
+      { name: 'José Mourinho', photo: '' },
+      { name: 'Carlo Ancelotti', photo: '' },
+      { name: 'Zinedine Zidane', photo: '' },
+      { name: 'Sérgio Conceição', photo: '' },
+    ],
+    jerseys: [
+      { number: 3, primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+      { number: 3, primaryColor: '#000000', secondaryColor: '#FFFFFF' },
+      { number: 3, primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 90
+  {
+    id: 'carles-puyol',
+    name: 'Carles Puyol',
+    nationality: 'Spain',
+    clubs: [{ name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' }],
+    managers: [
+      { name: 'Louis van Gaal', photo: '' },
+      { name: 'Frank Rijkaard', photo: '' },
+      { name: 'Pep Guardiola', photo: '' },
+      { name: 'Tito Vilanova', photo: '' },
+    ],
+    jerseys: [{ number: 5, primaryColor: '#A50044', secondaryColor: '#004D98' }],
+  },
+  // 91
+  {
+    id: 'john-terry',
+    name: 'John Terry',
+    nationality: 'England',
+    clubs: [
+      { name: 'Chelsea', logo: 'chelsea.png', primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+      { name: 'Aston Villa', logo: 'aston-villa.png', primaryColor: '#7A263A', secondaryColor: '#95BFE5' },
+    ],
+    managers: [
+      { name: 'Claudio Ranieri', photo: '' },
+      { name: 'José Mourinho', photo: '' },
+      { name: 'Carlo Ancelotti', photo: '' },
+      { name: 'André Villas-Boas', photo: '' },
+      { name: 'Antonio Conte', photo: '' },
+      { name: 'Steve Bruce', photo: '' },
+    ],
+    jerseys: [
+      { number: 26, primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+      { number: 26, primaryColor: '#7A263A', secondaryColor: '#95BFE5' },
+    ],
+  },
+  // 92
+  {
+    id: 'nemanja-vidic',
+    name: 'Nemanja Vidić',
+    nationality: 'Serbia',
+    clubs: [
+      { name: 'Red Star Belgrade', logo: 'red-star.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Spartak Moscow', logo: 'spartak-moscow.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Manchester United', logo: 'man-utd.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Inter Milan', logo: 'inter-milan.png', primaryColor: '#003DA5', secondaryColor: '#000000' },
+    ],
+    managers: [
+      { name: 'Sir Alex Ferguson', photo: '' },
+      { name: 'David Moyes', photo: '' },
+      { name: 'Roberto Mancini', photo: '' },
+    ],
+    jerseys: [
+      { number: 15, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 15, primaryColor: '#003DA5', secondaryColor: '#000000' },
+    ],
+  },
+  // 93
+  {
+    id: 'michael-owen',
+    name: 'Michael Owen',
+    nationality: 'England',
+    clubs: [
+      { name: 'Liverpool', logo: 'liverpool.png', primaryColor: '#C8102E', secondaryColor: '#FFFFFF' },
+      { name: 'Real Madrid', logo: 'real-madrid.png', primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+      { name: 'Newcastle United', logo: 'newcastle.png', primaryColor: '#000000', secondaryColor: '#FFFFFF' },
+      { name: 'Manchester United', logo: 'man-utd.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Stoke City', logo: 'stoke-city.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'Gérard Houllier', photo: '' },
+      { name: 'Vicente del Bosque', photo: '' },
+      { name: 'Graeme Souness', photo: '' },
+      { name: 'Sir Alex Ferguson', photo: '' },
+    ],
+    jerseys: [
+      { number: 10, primaryColor: '#C8102E', secondaryColor: '#FFFFFF' },
+      { number: 11, primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+      { number: 10, primaryColor: '#000000', secondaryColor: '#FFFFFF' },
+      { number: 7, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 94
+  {
+    id: 'alan-shearer',
+    name: 'Alan Shearer',
+    nationality: 'England',
+    clubs: [
+      { name: 'Southampton', logo: 'southampton.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Blackburn Rovers', logo: 'blackburn.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+      { name: 'Newcastle United', logo: 'newcastle.png', primaryColor: '#000000', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'Kenny Dalglish', photo: '' },
+      { name: 'Kevin Keegan', photo: '' },
+      { name: 'Bobby Robson', photo: '' },
+    ],
+    jerseys: [
+      { number: 9, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 9, primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+      { number: 9, primaryColor: '#000000', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 95
+  {
+    id: 'fernando-torres',
+    name: 'Fernando Torres',
+    nationality: 'Spain',
+    clubs: [
+      { name: 'Atlético Madrid', logo: 'atletico-madrid.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Liverpool', logo: 'liverpool.png', primaryColor: '#C8102E', secondaryColor: '#FFFFFF' },
+      { name: 'Chelsea', logo: 'chelsea.png', primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+      { name: 'AC Milan', logo: 'ac-milan.png', primaryColor: '#DA291C', secondaryColor: '#000000' },
+      { name: 'Atlético Madrid', logo: 'atletico-madrid.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Sagan Tosu', logo: 'sagan-tosu.png', primaryColor: '#003DA5', secondaryColor: '#F7B5CD' },
+    ],
+    managers: [
+      { name: 'Diego Simeone', photo: '' },
+      { name: 'Rafael Benítez', photo: '' },
+      { name: 'Carlo Ancelotti', photo: '' },
+      { name: 'André Villas-Boas', photo: '' },
+      { name: 'Roberto Di Matteo', photo: '' },
+      { name: 'José Mourinho', photo: '' },
+    ],
+    jerseys: [
+      { number: 9, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 9, primaryColor: '#C8102E', secondaryColor: '#FFFFFF' },
+      { number: 9, primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+      { number: 9, primaryColor: '#DA291C', secondaryColor: '#000000' },
+    ],
+  },
+  // 96
+  {
+    id: 'michael-ballack',
+    name: 'Michael Ballack',
+    nationality: 'Germany',
+    clubs: [
+      { name: 'Kaiserslautern', logo: 'kaiserslautern.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Bayer Leverkusen', logo: 'leverkusen.png', primaryColor: '#DA291C', secondaryColor: '#000000' },
+      { name: 'Bayern Munich', logo: 'bayern-munich.png', primaryColor: '#DC052D', secondaryColor: '#FFFFFF' },
+      { name: 'Chelsea', logo: 'chelsea.png', primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+      { name: 'Bayer Leverkusen', logo: 'leverkusen.png', primaryColor: '#DA291C', secondaryColor: '#000000' },
+    ],
+    managers: [
+      { name: 'Klaus Toppmöller', photo: '' },
+      { name: 'Ottmar Hitzfeld', photo: '' },
+      { name: 'José Mourinho', photo: '' },
+      { name: 'Carlo Ancelotti', photo: '' },
+    ],
+    jerseys: [
+      { number: 8, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 13, primaryColor: '#DC052D', secondaryColor: '#FFFFFF' },
+      { number: 13, primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 97
+  {
+    id: 'david-villa',
+    name: 'David Villa',
+    nationality: 'Spain',
+    clubs: [
+      { name: 'Sporting Gijón', logo: 'sporting-gijon.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Real Zaragoza', logo: 'zaragoza.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+      { name: 'Valencia', logo: 'valencia.png', primaryColor: '#FFFFFF', secondaryColor: '#000000' },
+      { name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { name: 'Atlético Madrid', logo: 'atletico-madrid.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'New York City FC', logo: 'nycfc.png', primaryColor: '#6CABDD', secondaryColor: '#F77F00' },
+      { name: 'Vissel Kobe', logo: 'vissel-kobe.png', primaryColor: '#8B0000', secondaryColor: '#FFFFFF' },
+    ],
+    managers: [
+      { name: 'Quique Sánchez Flores', photo: '' },
+      { name: 'Pep Guardiola', photo: '' },
+      { name: 'Diego Simeone', photo: '' },
+    ],
+    jerseys: [
+      { number: 9, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 7, primaryColor: '#FFFFFF', secondaryColor: '#000000' },
+      { number: 7, primaryColor: '#A50044', secondaryColor: '#004D98' },
+      { number: 9, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 7, primaryColor: '#6CABDD', secondaryColor: '#F77F00' },
+    ],
+  },
+  // 98
+  {
+    id: 'edinson-cavani',
+    name: 'Edinson Cavani',
+    nationality: 'Uruguay',
+    clubs: [
+      { name: 'Danubio', logo: 'danubio.png', primaryColor: '#FFFFFF', secondaryColor: '#000000' },
+      { name: 'Palermo', logo: 'palermo.png', primaryColor: '#F7B5CD', secondaryColor: '#000000' },
+      { name: 'Napoli', logo: 'napoli.png', primaryColor: '#12A0D7', secondaryColor: '#FFFFFF' },
+      { name: 'Paris Saint-Germain', logo: 'psg.png', primaryColor: '#004170', secondaryColor: '#DA291C' },
+      { name: 'Manchester United', logo: 'man-utd.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Valencia', logo: 'valencia.png', primaryColor: '#FFFFFF', secondaryColor: '#000000' },
+      { name: 'Boca Juniors', logo: 'boca-juniors.png', primaryColor: '#003DA5', secondaryColor: '#FFCD00' },
+    ],
+    managers: [
+      { name: 'Walter Mazzarri', photo: '' },
+      { name: 'Rafael Benítez', photo: '' },
+      { name: 'Laurent Blanc', photo: '' },
+      { name: 'Thomas Tuchel', photo: '' },
+      { name: 'Ole Gunnar Solskjær', photo: '' },
+    ],
+    jerseys: [
+      { number: 7, primaryColor: '#F7B5CD', secondaryColor: '#000000' },
+      { number: 9, primaryColor: '#12A0D7', secondaryColor: '#FFFFFF' },
+      { number: 9, primaryColor: '#004170', secondaryColor: '#DA291C' },
+      { number: 7, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 99
+  {
+    id: 'radamel-falcao',
+    name: 'Radamel Falcao',
+    nationality: 'Colombia',
+    clubs: [
+      { name: 'River Plate', logo: 'river-plate.png', primaryColor: '#FFFFFF', secondaryColor: '#DA291C' },
+      { name: 'Porto', logo: 'porto.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+      { name: 'Atlético Madrid', logo: 'atletico-madrid.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Monaco', logo: 'monaco.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Manchester United', logo: 'man-utd.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Chelsea', logo: 'chelsea.png', primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+      { name: 'Monaco', logo: 'monaco.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { name: 'Galatasaray', logo: 'galatasaray.png', primaryColor: '#DA291C', secondaryColor: '#FFCD00' },
+      { name: 'Rayo Vallecano', logo: 'rayo-vallecano.png', primaryColor: '#FFFFFF', secondaryColor: '#DA291C' },
+    ],
+    managers: [
+      { name: 'Vitor Pereira', photo: '' },
+      { name: 'André Villas-Boas', photo: '' },
+      { name: 'Diego Simeone', photo: '' },
+      { name: 'Claudio Ranieri', photo: '' },
+      { name: 'Louis van Gaal', photo: '' },
+      { name: 'José Mourinho', photo: '' },
+      { name: 'Leonardo Jardim', photo: '' },
+    ],
+    jerseys: [
+      { number: 9, primaryColor: '#FFFFFF', secondaryColor: '#DA291C' },
+      { number: 9, primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+      { number: 9, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 9, primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
+      { number: 9, primaryColor: '#034694', secondaryColor: '#FFFFFF' },
+    ],
+  },
+  // 100
+  {
+    id: 'trent-alexander-arnold',
+    name: 'Trent Alexander-Arnold',
+    nationality: 'England',
+    clubs: [
+      { name: 'Liverpool', logo: 'liverpool.png', primaryColor: '#C8102E', secondaryColor: '#FFFFFF' },
+      { name: 'Real Madrid', logo: 'real-madrid.png', primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+    ],
+    managers: [
+      { name: 'Jürgen Klopp', photo: '' },
+      { name: 'Arne Slot', photo: '' },
+      { name: 'Carlo Ancelotti', photo: '' },
+    ],
+    jerseys: [
+      { number: 66, primaryColor: '#C8102E', secondaryColor: '#FFFFFF' },
+      { number: 14, primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
+    ],
+  },
+];
