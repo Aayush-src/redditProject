@@ -8,15 +8,20 @@ import type {
   Manager,
   PredictTransfersState,
 } from '../../shared/types';
+import type { WagerMultiplier } from '../../shared/scoring';
+import {
+  INITIAL_ROUND_SCORE,
+  JERSEY_HINT_COST,
+  MANAGER_HINT_COST,
+  WRONG_GUESS_PENALTY_GUESS_PLAYER,
+  WRONG_GUESS_PENALTY_PREDICT,
+  isValidWager,
+  scaledPenalty,
+} from '../../shared/scoring';
 import { players } from './players';
 
-const INITIAL_SCORE = 100;
-const WRONG_GUESS_PENALTY_GUESS_PLAYER = 5;
-const WRONG_GUESS_PENALTY_PREDICT = 10;
 const INITIAL_CLUBS_REVEALED = 2;
 const HINT_BUDGET = 80;
-const JERSEY_HINT_COST = 15;
-const MANAGER_HINT_COST = 15;
 
 function hintCost(totalHintableClubs: number): number {
   if (totalHintableClubs <= 0) return 0;
@@ -37,6 +42,19 @@ function postPlayerKey(postId: string) {
 
 function clampScore(score: number): number {
   return Math.max(0, score);
+}
+
+function defaultWagerState() {
+  return { wager: 1 as WagerMultiplier, wagerLocked: false };
+}
+
+function normalizeGameState(state: GameState): GameState {
+  const wager = isValidWager(state.wager) ? state.wager : 1;
+  return {
+    ...state,
+    wager,
+    wagerLocked: state.wagerLocked ?? false,
+  };
 }
 
 function pickRandom<T>(arr: T[]): T {
@@ -76,7 +94,7 @@ export async function getOrCreateGameState(
 ): Promise<GameState> {
   const saved = await redis.get(redisKey(postId, username));
   if (saved) {
-    return JSON.parse(saved) as GameState;
+    return normalizeGameState(JSON.parse(saved) as GameState);
   }
 
   const { mode, playerId } = await initGameForPost(postId);
@@ -95,9 +113,10 @@ export async function getOrCreateGameState(
       revealedJerseyIndices: [],
       revealedManagerIndices: [],
       totalClubs: player.clubs.length,
-      score: INITIAL_SCORE,
+      score: INITIAL_ROUND_SCORE,
       wrongGuesses: 0,
       solved: false,
+      ...defaultWagerState(),
     };
   } else {
     const totalClubs = player.clubs.length;
@@ -114,9 +133,10 @@ export async function getOrCreateGameState(
       hiddenClubIndices,
       guessedClubIndices: [],
       totalClubs,
-      score: INITIAL_SCORE,
+      score: INITIAL_ROUND_SCORE,
       wrongGuesses: 0,
       solved: false,
+      ...defaultWagerState(),
     };
   }
 
@@ -128,11 +148,31 @@ async function saveState(postId: string, username: string, state: GameState) {
   await redis.set(redisKey(postId, username), JSON.stringify(state));
 }
 
+export async function setWager(
+  postId: string,
+  username: string,
+  wager: WagerMultiplier
+): Promise<GameState> {
+  const state = await getOrCreateGameState(postId, username);
+  if (state.solved) throw new Error('Game already solved');
+  if (state.wagerLocked) throw new Error('Wager is locked');
+
+  state.wager = wager;
+  await saveState(postId, username, state);
+  return state;
+}
+
+function applyPenalty(state: GameState, basePenalty: number) {
+  const penalty = scaledPenalty(basePenalty, state.wager);
+  state.score = clampScore(state.score - penalty);
+  return penalty;
+}
+
 export async function guessPlayer(
   postId: string,
   username: string,
   guess: string
-): Promise<{ correct: boolean; state: GuessPlayerState; playerName?: string }> {
+): Promise<{ correct: boolean; state: GuessPlayerState; playerName?: string; penalty?: number }> {
   const state = await getOrCreateGameState(postId, username);
   if (state.mode !== 'guess-player') throw new Error('Wrong game mode');
   if (state.solved) return { correct: true, state, playerName: players.find((p) => p.id === state.playerId)?.name };
@@ -149,14 +189,16 @@ export async function guessPlayer(
 
   if (correct) {
     state.solved = true;
+    state.wagerLocked = true;
     await saveState(postId, username, state);
     return { correct: true, state, playerName: player.name };
   }
 
   state.wrongGuesses += 1;
-  state.score = clampScore(state.score - WRONG_GUESS_PENALTY_GUESS_PLAYER);
+  state.wagerLocked = true;
+  const penalty = applyPenalty(state, WRONG_GUESS_PENALTY_GUESS_PLAYER);
   await saveState(postId, username, state);
-  return { correct: false, state };
+  return { correct: false, state, penalty };
 }
 
 export async function revealClub(
@@ -180,17 +222,17 @@ export async function revealClub(
   const cost = hintCost(Math.max(totalHintable, remaining));
 
   state.revealedClubIndices.push(nextIndex);
-  state.score = clampScore(state.score - cost);
+  const penalty = applyPenalty(state, cost);
   await saveState(postId, username, state);
   const club = player.clubs[nextIndex] ?? null;
-  return { club, cost, state };
+  return { club, cost: penalty, state };
 }
 
 export async function guessTransferClub(
   postId: string,
   username: string,
   clubName: string
-): Promise<{ correct: boolean; matchedIndices: number[]; state: PredictTransfersState }> {
+): Promise<{ correct: boolean; matchedIndices: number[]; state: PredictTransfersState; penalty?: number }> {
   const state = await getOrCreateGameState(postId, username);
   if (state.mode !== 'predict-transfers') throw new Error('Wrong game mode');
   if (state.solved) return { correct: true, matchedIndices: [], state };
@@ -228,15 +270,17 @@ export async function guessTransferClub(
     );
     if (allGuessed) {
       state.solved = true;
+      state.wagerLocked = true;
     }
     await saveState(postId, username, state);
     return { correct: true, matchedIndices, state };
   }
 
   state.wrongGuesses += 1;
-  state.score = clampScore(state.score - WRONG_GUESS_PENALTY_PREDICT);
+  state.wagerLocked = true;
+  const penalty = applyPenalty(state, WRONG_GUESS_PENALTY_PREDICT);
   await saveState(postId, username, state);
-  return { correct: false, matchedIndices: [], state };
+  return { correct: false, matchedIndices: [], state, penalty };
 }
 
 export async function revealTransferHint(
@@ -262,18 +306,19 @@ export async function revealTransferHint(
 
   const revealIndex = unguessed[0] as number;
   state.guessedClubIndices.push(revealIndex);
-  state.score = clampScore(state.score - cost);
+  const penalty = applyPenalty(state, cost);
 
   const allGuessed = state.hiddenClubIndices.every((i) =>
     state.guessedClubIndices.includes(i)
   );
   if (allGuessed) {
     state.solved = true;
+    state.wagerLocked = true;
   }
 
   await saveState(postId, username, state);
   const revealedClub = player.clubs[revealIndex] ?? null;
-  return { revealedIndex: revealIndex, club: revealedClub, cost, state };
+  return { revealedIndex: revealIndex, club: revealedClub, cost: penalty, state };
 }
 
 export function getRevealedClubs(state: GuessPlayerState) {
@@ -330,18 +375,30 @@ export function getHintCost(state: GameState): number {
   const player = players.find((p) => p.id === state.playerId);
   if (!player) return 0;
 
+  let baseCost = 0;
+
   if (state.mode === 'guess-player') {
     const totalHintable = player.clubs.length - INITIAL_CLUBS_REVEALED;
     const remaining = player.clubs.length - state.revealedClubIndices.length;
     if (remaining <= 0) return 0;
-    return hintCost(Math.max(totalHintable, remaining));
+    baseCost = hintCost(Math.max(totalHintable, remaining));
+  } else {
+    const unguessed = state.hiddenClubIndices.filter(
+      (i) => !state.guessedClubIndices.includes(i)
+    );
+    if (unguessed.length === 0) return 0;
+    baseCost = hintCost(state.hiddenClubIndices.length);
   }
 
-  const unguessed = state.hiddenClubIndices.filter(
-    (i) => !state.guessedClubIndices.includes(i)
-  );
-  if (unguessed.length === 0) return 0;
-  return hintCost(state.hiddenClubIndices.length);
+  return scaledPenalty(baseCost, state.wager);
+}
+
+export function getJerseyHintCost(state: GameState): number {
+  return scaledPenalty(JERSEY_HINT_COST, state.wager);
+}
+
+export function getManagerHintCost(state: GameState): number {
+  return scaledPenalty(MANAGER_HINT_COST, state.wager);
 }
 
 export function getFullPlayerClubs(playerId: string): Club[] {
@@ -372,9 +429,9 @@ export async function revealJersey(
 
   if (!state.revealedJerseyIndices) state.revealedJerseyIndices = [];
   state.revealedJerseyIndices.push(nextIndex);
-  state.score = clampScore(state.score - JERSEY_HINT_COST);
+  const penalty = applyPenalty(state, JERSEY_HINT_COST);
   await saveState(postId, username, state);
-  return { jersey: player.jerseys[nextIndex] ?? null, cost: JERSEY_HINT_COST, state };
+  return { jersey: player.jerseys[nextIndex] ?? null, cost: penalty, state };
 }
 
 export async function revealManager(
@@ -394,9 +451,9 @@ export async function revealManager(
 
   if (!state.revealedManagerIndices) state.revealedManagerIndices = [];
   state.revealedManagerIndices.push(nextIndex);
-  state.score = clampScore(state.score - MANAGER_HINT_COST);
+  const penalty = applyPenalty(state, MANAGER_HINT_COST);
   await saveState(postId, username, state);
-  return { manager: player.managers[nextIndex] ?? null, cost: MANAGER_HINT_COST, state };
+  return { manager: player.managers[nextIndex] ?? null, cost: penalty, state };
 }
 
 export function getRevealedJerseys(state: GuessPlayerState): Jersey[] {

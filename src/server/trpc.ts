@@ -18,10 +18,21 @@ import {
   getFullPlayerClubs,
   getPlayerName,
   getHintCost,
+  getJerseyHintCost,
+  getManagerHintCost,
   searchClubs,
   searchPlayers,
+  setWager,
 } from './core/game';
-import { submitScore, getLeaderboard, getUserScore } from './core/leaderboard';
+import {
+  getGlobalLeaderboard,
+  getDailyLeaderboard,
+  getUserGlobalEntry,
+  getUserDailyEntry,
+} from './core/leaderboard';
+import { getOrCreatePlayerProfile } from './core/player';
+import { ensureDailyAllowance, processSolveRewards } from './core/rewards';
+import { isValidWager } from '../shared/scoring';
 
 const t = initTRPC.context<Context>().create({
   transformer,
@@ -47,7 +58,11 @@ export const appRouter = t.router({
     get: publicProcedure.query(async () => {
       const [username, postId] = await Promise.all([getUsername(), getPostId()]);
 
-      const state = await getOrCreateGameState(postId, username);
+      await ensureDailyAllowance(username);
+      const [state, profile] = await Promise.all([
+        getOrCreateGameState(postId, username),
+        getOrCreatePlayerProfile(username),
+      ]);
 
       let clues;
       if (state.mode === 'guess-player') {
@@ -59,6 +74,8 @@ export const appRouter = t.router({
       const fullClubs = state.solved ? getFullPlayerClubs(state.playerId) : null;
       const playerName = getPlayerName(state.playerId);
       const currentHintCost = getHintCost(state);
+      const jerseyHintCost = getJerseyHintCost(state);
+      const managerHintCost = getManagerHintCost(state);
       const revealedJerseys = state.mode === 'guess-player' ? getRevealedJerseys(state) : [];
       const revealedManagers = state.mode === 'guess-player' ? getRevealedManagers(state) : [];
 
@@ -70,13 +87,35 @@ export const appRouter = t.router({
         fullClubs,
         playerName,
         hintCost: currentHintCost,
+        jerseyHintCost,
+        managerHintCost,
         revealedJerseys,
         revealedManagers,
+        profile,
       };
     }),
   }),
 
   game: t.router({
+    setWager: publicProcedure
+      .input(z.object({ wager: z.number() }))
+      .mutation(async ({ input }) => {
+        const username = await getUsername();
+        const postId = getPostId();
+
+        if (!isValidWager(input.wager)) {
+          throw new Error('Invalid wager');
+        }
+
+        const state = await setWager(postId, username, input.wager);
+        return {
+          state,
+          hintCost: getHintCost(state),
+          jerseyHintCost: getJerseyHintCost(state),
+          managerHintCost: getManagerHintCost(state),
+        };
+      }),
+
     guessPlayer: publicProcedure
       .input(z.object({ guess: z.string().min(1) }))
       .mutation(async ({ input }) => {
@@ -85,8 +124,13 @@ export const appRouter = t.router({
 
         const result = await guessPlayer(postId, username, input.guess);
 
-        if (result.correct && result.state.score > 0) {
-          await submitScore(postId, username, result.state.score, 'guess-player');
+        let earnings = null;
+        let profile = await getOrCreatePlayerProfile(username);
+
+        if (result.correct) {
+          const rewards = await processSolveRewards(username, result.state);
+          earnings = rewards.earnings;
+          profile = rewards.profile;
         }
 
         return {
@@ -96,6 +140,11 @@ export const appRouter = t.router({
           clues: getRevealedClubs(result.state),
           fullClubs: result.state.solved ? getFullPlayerClubs(result.state.playerId) : null,
           hintCost: getHintCost(result.state),
+          jerseyHintCost: getJerseyHintCost(result.state),
+          managerHintCost: getManagerHintCost(result.state),
+          penalty: 'penalty' in result ? result.penalty : undefined,
+          earnings,
+          profile,
         };
       }),
 
@@ -104,12 +153,25 @@ export const appRouter = t.router({
       const postId = getPostId();
 
       const result = await revealClub(postId, username);
+      let earnings = null;
+      let profile = await getOrCreatePlayerProfile(username);
+
+      if (result.state.solved) {
+        const rewards = await processSolveRewards(username, result.state);
+        earnings = rewards.earnings;
+        profile = rewards.profile;
+      }
+
       return {
         club: result.club,
         cost: result.cost,
         state: result.state,
         clues: getRevealedClubs(result.state),
         hintCost: getHintCost(result.state),
+        jerseyHintCost: getJerseyHintCost(result.state),
+        managerHintCost: getManagerHintCost(result.state),
+        earnings,
+        profile,
       };
     }),
 
@@ -123,6 +185,8 @@ export const appRouter = t.router({
         state: result.state,
         clues: getRevealedClubs(result.state),
         hintCost: getHintCost(result.state),
+        jerseyHintCost: getJerseyHintCost(result.state),
+        managerHintCost: getManagerHintCost(result.state),
         revealedJerseys: getRevealedJerseys(result.state),
       };
     }),
@@ -137,6 +201,8 @@ export const appRouter = t.router({
         state: result.state,
         clues: getRevealedClubs(result.state),
         hintCost: getHintCost(result.state),
+        jerseyHintCost: getJerseyHintCost(result.state),
+        managerHintCost: getManagerHintCost(result.state),
         revealedManagers: getRevealedManagers(result.state),
       };
     }),
@@ -157,8 +223,13 @@ export const appRouter = t.router({
           input.clubName
         );
 
-        if (result.state.solved && result.state.score > 0) {
-          await submitScore(postId, username, result.state.score, 'predict-transfers');
+        let earnings = null;
+        let profile = await getOrCreatePlayerProfile(username);
+
+        if (result.state.solved) {
+          const rewards = await processSolveRewards(username, result.state);
+          earnings = rewards.earnings;
+          profile = rewards.profile;
         }
 
         return {
@@ -167,6 +238,9 @@ export const appRouter = t.router({
           state: result.state,
           clues: getVisibleTransferRoute(result.state),
           hintCost: getHintCost(result.state),
+          penalty: 'penalty' in result ? result.penalty : undefined,
+          earnings,
+          profile,
         };
       }),
 
@@ -175,6 +249,15 @@ export const appRouter = t.router({
       const postId = getPostId();
 
       const result = await revealTransferHint(postId, username);
+      let earnings = null;
+      let profile = await getOrCreatePlayerProfile(username);
+
+      if (result.state.solved) {
+        const rewards = await processSolveRewards(username, result.state);
+        earnings = rewards.earnings;
+        profile = rewards.profile;
+      }
+
       return {
         revealedIndex: result.revealedIndex,
         club: result.club,
@@ -182,6 +265,8 @@ export const appRouter = t.router({
         state: result.state,
         clues: getVisibleTransferRoute(result.state),
         hintCost: getHintCost(result.state),
+        earnings,
+        profile,
       };
     }),
 
@@ -192,11 +277,13 @@ export const appRouter = t.router({
       const state = await getOrCreateGameState(postId, username);
       state.solved = true;
       state.score = 0;
+      state.wagerLocked = true;
 
       await redis.set(`game:${postId}:${username}`, JSON.stringify(state));
-      await submitScore(postId, username, 0, state.mode);
+      await ensureDailyAllowance(username);
+      const profile = await getOrCreatePlayerProfile(username);
 
-      return { state };
+      return { state, profile };
     }),
 
     reset: publicProcedure.mutation(async () => {
@@ -226,17 +313,26 @@ export const appRouter = t.router({
   }),
 
   leaderboard: t.router({
-    get: publicProcedure
+    global: publicProcedure
       .input(z.object({ limit: z.number().min(1).max(50).optional() }).optional())
       .query(async ({ input }) => {
-        const postId = getPostId();
-        return getLeaderboard(postId, input?.limit ?? 10);
+        return getGlobalLeaderboard(input?.limit ?? 10);
       }),
 
-    myScore: publicProcedure.query(async () => {
+    daily: publicProcedure
+      .input(z.object({ limit: z.number().min(1).max(50).optional() }).optional())
+      .query(async ({ input }) => {
+        return getDailyLeaderboard(input?.limit ?? 10);
+      }),
+
+    me: publicProcedure.query(async () => {
       const username = await getUsername();
-      const postId = getPostId();
-      return getUserScore(postId, username);
+      const [globalEntry, dailyEntry, profile] = await Promise.all([
+        getUserGlobalEntry(username),
+        getUserDailyEntry(username),
+        getOrCreatePlayerProfile(username),
+      ]);
+      return { globalEntry, dailyEntry, profile };
     }),
   }),
 });

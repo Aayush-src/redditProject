@@ -26,9 +26,16 @@ export type Player = {
   jerseys: Jersey[];
 };
 
+import type { WagerMultiplier } from './scoring';
+
 export type GameMode = 'guess-player' | 'predict-transfers';
 
-export type GuessPlayerState = {
+export type WagerState = {
+  wager: WagerMultiplier;
+  wagerLocked: boolean;
+};
+
+export type GuessPlayerState = WagerState & {
   mode: 'guess-player';
   playerId: string;
   /** Indices of clubs revealed so far (chronological) */
@@ -41,7 +48,7 @@ export type GuessPlayerState = {
   solved: boolean;
 };
 
-export type PredictTransfersState = {
+export type PredictTransfersState = WagerState & {
   mode: 'predict-transfers';
   playerId: string;
   playerName: string;
@@ -59,9 +66,24 @@ export type PredictTransfersState = {
 
 export type GameState = GuessPlayerState | PredictTransfersState;
 
+export type PlayerProfile = {
+  totalPoints: number;
+  streak: number;
+  dailyScore: number;
+  dailyAllowanceClaimed: boolean;
+};
+
+export type RoundEarnings = {
+  wagerEarnings: number;
+  streakBonus: number;
+  dailyAllowance: number;
+  totalEarned: number;
+};
+
 export type LeaderboardEntry = {
   username: string;
   score: number;
-  mode: GameMode;
-  solvedAt: number;
+  rank: number;
+  percentage: number;
+  streak?: number;
 };

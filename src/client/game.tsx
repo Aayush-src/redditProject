@@ -5,7 +5,10 @@ import { createRoot } from 'react-dom/client';
 import { trpc } from './trpc';
 import type { inferRouterOutputs } from '@trpc/server';
 import type { AppRouter } from '../server/trpc';
-import type { Club, Jersey, Manager, LeaderboardEntry } from '../shared/types';
+import type { Club, Jersey, Manager, LeaderboardEntry, PlayerProfile, RoundEarnings } from '../shared/types';
+import { WAGER_OPTIONS } from '../shared/scoring';
+import { FootBetsLogo } from './components/FootBetsLogo';
+import { LoadingScreen } from './components/LoadingScreen';
 import { cn } from './utils';
 
 type RouterOutputs = inferRouterOutputs<AppRouter>;
@@ -95,23 +98,10 @@ function Confetti() {
   );
 }
 
-// ─── Scout Mode Logo ─────────────────────────────────────
+// ─── App Logo ────────────────────────────────────────────
 
-function ScoutLogo() {
-  return (
-    <div className="flex items-center gap-3">
-      <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-cyan/20 bg-cyan/10">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-cyan">
-          <circle cx="11" cy="11" r="8" />
-          <path d="m21 21-4.35-4.35" />
-        </svg>
-      </div>
-      <div className="flex items-baseline gap-1.5">
-        <span className="text-2xl font-bold tracking-tight text-cyan">SCOUT</span>
-        <span className="text-2xl font-bold tracking-tight text-gold">MODE</span>
-      </div>
-    </div>
-  );
+function AppLogo() {
+  return <FootBetsLogo size="sm" />;
 }
 
 // ─── Daily Challenge Badge ───────────────────────────────
@@ -261,59 +251,79 @@ function ClueChips({
   );
 }
 
-// ─── Difficulty Selector ─────────────────────────────────
+// ─── Player Stats Bar ────────────────────────────────────
 
-type DifficultyLevel = 'rookie' | 'pro' | 'elite' | 'legend';
+function PlayerStatsBar({ profile }: { profile: PlayerProfile }) {
+  return (
+    <div className="glass-card-sm flex flex-wrap items-center justify-center gap-4 px-4 py-2">
+      <div className="flex flex-col items-center">
+        <span className="text-[9px] font-semibold uppercase tracking-widest text-text-dim">Total</span>
+        <span className="text-sm font-black tabular-nums text-gold">{profile.totalPoints}</span>
+      </div>
+      <div className="h-6 w-px bg-glass-border" />
+      <div className="flex flex-col items-center">
+        <span className="text-[9px] font-semibold uppercase tracking-widest text-text-dim">Today</span>
+        <span className="text-sm font-black tabular-nums text-cyan">{profile.dailyScore}</span>
+      </div>
+      <div className="h-6 w-px bg-glass-border" />
+      <div className="flex flex-col items-center">
+        <span className="text-[9px] font-semibold uppercase tracking-widest text-text-dim">Streak</span>
+        <span className="text-sm font-black tabular-nums text-success">
+          {profile.streak > 0 ? `🔥 ${profile.streak}` : '—'}
+        </span>
+      </div>
+    </div>
+  );
+}
 
-const DIFFICULTIES: {
-  id: DifficultyLevel;
-  label: string;
-  emoji: string;
-  color: string;
-  multiplier: string;
-  desc: string;
-}[] = [
-  { id: 'rookie', label: 'Rookie', emoji: '🟢', color: '#00ff88', multiplier: '×1', desc: 'All clues' },
-  { id: 'pro', label: 'Professional', emoji: '🔵', color: '#00a8ff', multiplier: '×2', desc: 'Standard' },
-  { id: 'elite', label: 'Elite', emoji: '🟣', color: '#a855f7', multiplier: '×5', desc: 'Limited hints' },
-  { id: 'legend', label: 'Legend', emoji: '🟠', color: '#ff8c00', multiplier: '×10', desc: 'No mistakes' },
-];
+// ─── Wager Selector ──────────────────────────────────────
 
-function DifficultySelector({
+function WagerSelector({
   selected,
+  locked,
   onSelect,
+  disabled,
 }: {
-  selected: DifficultyLevel;
-  onSelect: (d: DifficultyLevel) => void;
+  selected: number;
+  locked: boolean;
+  onSelect: (wager: number) => void;
+  disabled?: boolean;
 }) {
   return (
-    <div className="grid w-full grid-cols-4 gap-2">
-      {DIFFICULTIES.map((d) => {
-        const active = selected === d.id;
-        return (
-          <button
-            key={d.id}
-            className={cn(
-              'glass-card-sm flex flex-col items-center gap-1 px-2 py-3 transition-all hover:scale-[1.03]',
-              active && 'scale-[1.03]'
-            )}
-            style={{
-              borderColor: active ? `${d.color}55` : undefined,
-              boxShadow: active ? `0 0 20px ${d.color}22, inset 0 0 20px ${d.color}08` : undefined,
-            }}
-            onClick={() => onSelect(d.id)}
-          >
-            <span className="text-lg">{d.emoji}</span>
-            <span className="text-[11px] font-bold tracking-wide" style={{ color: active ? d.color : '#4a5a7a' }}>
-              {d.label}
-            </span>
-            <span className="text-[10px] font-semibold" style={{ color: d.color }}>
-              {d.multiplier}
-            </span>
-            <span className="text-[9px] text-text-dim">{d.desc}</span>
-          </button>
-        );
-      })}
+    <div className="glass-card w-full p-4">
+      <div className="mb-3 flex items-center justify-between">
+        <span className="text-xs font-bold uppercase tracking-widest text-text-dim">Wager Multiplier</span>
+        {locked ? (
+          <span className="text-[10px] font-semibold text-gold">Locked</span>
+        ) : (
+          <span className="text-[10px] font-medium text-text-dim">Choose before your first guess</span>
+        )}
+      </div>
+      <div className="grid grid-cols-5 gap-2">
+        {WAGER_OPTIONS.map((wager) => {
+          const active = selected === wager;
+          return (
+            <button
+              key={wager}
+              className={cn(
+                'glass-card-sm flex flex-col items-center gap-0.5 px-2 py-2.5 transition-all',
+                active && 'scale-[1.03] border-gold/40',
+                !locked && !disabled && 'hover:scale-[1.03]',
+                (locked || disabled) && !active && 'opacity-40'
+              )}
+              style={{
+                boxShadow: active ? '0 0 16px rgba(255,215,0,0.15)' : undefined,
+              }}
+              onClick={() => onSelect(wager)}
+              disabled={locked || disabled}
+            >
+              <span className={cn('text-sm font-black tabular-nums', active ? 'text-gold' : 'text-text-dim')}>
+                ×{wager}
+              </span>
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 }
@@ -517,28 +527,33 @@ const XIcon = (
 function ScoutRating({
   score,
   wrongGuesses,
+  wager,
   animate,
 }: {
   score: number;
   wrongGuesses: number;
+  wager: number;
   animate: boolean;
 }) {
-  const rating = score * 25;
+  const projected = Math.round(score * wager * 100) / 100;
   const pct = Math.max(0, score);
 
   return (
     <div className="glass-card w-full p-5">
       <div className="mb-3 flex items-center justify-between">
-        <span className="text-xs font-bold uppercase tracking-widest text-text-dim">Scout Rating</span>
-        <span
-          className={cn(
-            'text-3xl font-black tabular-nums tracking-tight',
-            pct > 50 ? 'text-cyan' : pct > 20 ? 'text-gold' : 'text-danger',
-            animate && 'animate-score-pop'
-          )}
-        >
-          {rating}
-        </span>
+        <span className="text-xs font-bold uppercase tracking-widest text-text-dim">Round Score</span>
+        <div className="flex items-baseline gap-2">
+          <span className="text-[10px] font-semibold text-text-dim">×{wager}</span>
+          <span
+            className={cn(
+              'text-3xl font-black tabular-nums tracking-tight',
+              pct > 50 ? 'text-cyan' : pct > 20 ? 'text-gold' : 'text-danger',
+              animate && 'animate-score-pop'
+            )}
+          >
+            {projected}
+          </span>
+        </div>
       </div>
       <div className="mb-4 h-1.5 w-full overflow-hidden rounded-full bg-surface">
         <div
@@ -555,7 +570,7 @@ function ScoutRating({
       </div>
       <div className="grid grid-cols-3 gap-3">
         <div className="flex flex-col items-center rounded-xl bg-surface/50 px-2 py-2">
-          <span className="text-[10px] font-medium text-text-dim">Score</span>
+          <span className="text-[10px] font-medium text-text-dim">Base</span>
           <span className="text-sm font-bold text-text">{score}/100</span>
         </div>
         <div className="flex flex-col items-center rounded-xl bg-surface/50 px-2 py-2">
@@ -563,10 +578,8 @@ function ScoutRating({
           <span className="text-sm font-bold text-text">{wrongGuesses}</span>
         </div>
         <div className="flex flex-col items-center rounded-xl bg-surface/50 px-2 py-2">
-          <span className="text-[10px] font-medium text-text-dim">Accuracy</span>
-          <span className="text-sm font-bold text-success">
-            {wrongGuesses === 0 ? '100%' : `${Math.max(0, 100 - wrongGuesses * 10)}%`}
-          </span>
+          <span className="text-[10px] font-medium text-text-dim">Wager</span>
+          <span className="text-sm font-bold text-gold">×{wager}</span>
         </div>
       </div>
     </div>
@@ -612,16 +625,18 @@ function GuessHistory({
 // ─── Leaderboard ─────────────────────────────────────────
 
 function ScoutLeaderboard({
+  title,
   entries,
   currentUser,
 }: {
+  title: string;
   entries: LeaderboardEntry[];
   currentUser: string;
 }) {
   if (entries.length === 0) {
     return (
       <div className="glass-card w-full p-5 text-center">
-        <span className="text-xs font-semibold text-text-dim">No scouts yet. Be the first!</span>
+        <span className="text-xs font-semibold text-text-dim">No players yet. Be the first!</span>
       </div>
     );
   }
@@ -629,10 +644,10 @@ function ScoutLeaderboard({
   return (
     <div className="glass-card w-full overflow-hidden">
       <div className="flex items-center justify-between border-b border-glass-border px-5 py-3">
-        <span className="text-xs font-bold uppercase tracking-widest text-gold">Leaderboard</span>
-        <span className="text-[10px] font-medium text-text-dim">{entries.length} scouts</span>
+        <span className="text-xs font-bold uppercase tracking-widest text-gold">{title}</span>
+        <span className="text-[10px] font-medium text-text-dim">{entries.length} players</span>
       </div>
-      {entries.map((entry, idx) => (
+      {entries.map((entry) => (
         <div
           key={entry.username}
           className={cn(
@@ -644,27 +659,35 @@ function ScoutLeaderboard({
             <span
               className={cn(
                 'flex h-7 w-7 items-center justify-center rounded-lg text-xs font-black',
-                idx === 0
+                entry.rank === 1
                   ? 'bg-gold/20 text-gold'
-                  : idx === 1
+                  : entry.rank === 2
                     ? 'bg-text-dim/15 text-text'
-                    : idx === 2
+                    : entry.rank === 3
                       ? 'bg-legend/15 text-legend'
                       : 'bg-surface text-text-dim'
               )}
             >
-              {idx + 1}
+              {entry.rank}
             </span>
-            <span
-              className={cn(
-                'text-sm font-semibold',
-                entry.username === currentUser ? 'text-cyan' : 'text-text'
+            <div className="flex flex-col">
+              <span
+                className={cn(
+                  'text-sm font-semibold',
+                  entry.username === currentUser ? 'text-cyan' : 'text-text'
+                )}
+              >
+                {entry.username}
+              </span>
+              {entry.streak !== undefined && entry.streak > 0 && (
+                <span className="text-[10px] text-text-dim">🔥 {entry.streak} day streak</span>
               )}
-            >
-              {entry.username}
-            </span>
+            </div>
           </div>
-          <span className="text-sm font-black tabular-nums text-gold">{entry.score * 25}</span>
+          <div className="flex flex-col items-end">
+            <span className="text-sm font-black tabular-nums text-gold">{entry.score}</span>
+            <span className="text-[10px] font-medium text-text-dim">{entry.percentage}%</span>
+          </div>
         </div>
       ))}
     </div>
@@ -677,7 +700,11 @@ function SolvedScreen({
   playerName,
   clubs,
   score,
-  leaderboard,
+  wager,
+  earnings,
+  profile,
+  globalLeaderboard,
+  dailyLeaderboard,
   currentUser,
   onPlayAgain,
   perfect,
@@ -685,12 +712,16 @@ function SolvedScreen({
   playerName: string;
   clubs: Club[];
   score: number;
-  leaderboard: LeaderboardEntry[];
+  wager: number;
+  earnings: RoundEarnings | null;
+  profile: PlayerProfile;
+  globalLeaderboard: LeaderboardEntry[];
+  dailyLeaderboard: LeaderboardEntry[];
   currentUser: string;
   onPlayAgain?: () => void;
   perfect: boolean;
 }) {
-  const rating = score * 25;
+  const projected = Math.round(score * wager * 100) / 100;
 
   return (
     <div className="relative flex w-full max-w-3xl flex-col items-center gap-6 px-4">
@@ -706,10 +737,12 @@ function SolvedScreen({
             WebkitTextFillColor: 'transparent',
           }}
         >
-          {perfect ? 'PERFECT SCOUT!' : 'PLAYER IDENTIFIED'}
+          {perfect ? 'PERFECT GAME!' : 'PLAYER IDENTIFIED'}
         </h2>
         <p className="text-2xl font-bold text-text">{playerName}</p>
       </div>
+
+      <PlayerStatsBar profile={profile} />
 
       <div className="glass-card glow-success w-full p-6">
         <p className="mb-3 text-[10px] font-bold uppercase tracking-widest text-text-dim">
@@ -734,37 +767,41 @@ function SolvedScreen({
         </div>
       </div>
 
-      <div className="glass-card glow-cyan flex w-full items-center justify-between p-6">
-        <div className="flex flex-col">
-          <span className="text-[10px] font-bold uppercase tracking-widest text-text-dim">
-            Final Scout Rating
-          </span>
-          <span className="text-xs text-text-dim">{score}/100 points</span>
+      <div className="glass-card glow-cyan w-full p-6">
+        <p className="mb-3 text-[10px] font-bold uppercase tracking-widest text-text-dim">
+          Round Earnings
+        </p>
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <div className="flex flex-col items-center rounded-xl bg-surface/50 px-2 py-2">
+            <span className="text-[10px] text-text-dim">Base × Wager</span>
+            <span className="text-sm font-bold text-text">{score} × {wager}</span>
+          </div>
+          <div className="flex flex-col items-center rounded-xl bg-surface/50 px-2 py-2">
+            <span className="text-[10px] text-text-dim">Wager Win</span>
+            <span className="text-sm font-bold text-cyan">{earnings?.wagerEarnings ?? projected}</span>
+          </div>
+          <div className="flex flex-col items-center rounded-xl bg-surface/50 px-2 py-2">
+            <span className="text-[10px] text-text-dim">Streak Bonus</span>
+            <span className="text-sm font-bold text-success">+{earnings?.streakBonus ?? 0}</span>
+          </div>
+          <div className="flex flex-col items-center rounded-xl bg-surface/50 px-2 py-2">
+            <span className="text-[10px] text-text-dim">Total Earned</span>
+            <span className="text-sm font-bold text-gold">+{earnings?.totalEarned ?? projected}</span>
+          </div>
         </div>
-        <span
-          className="animate-count-up text-4xl font-black tabular-nums tracking-tight"
-          style={{
-            background: score > 50
-              ? 'linear-gradient(135deg, #00e5ff, #00ff88)'
-              : score > 20
-                ? 'linear-gradient(135deg, #ffd700, #ff8c00)'
-                : 'linear-gradient(135deg, #ff4757, #ff6b81)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-          }}
-        >
-          {rating}
-        </span>
       </div>
 
-      <ScoutLeaderboard entries={leaderboard} currentUser={currentUser} />
+      <div className="grid w-full gap-4 md:grid-cols-2">
+        <ScoutLeaderboard title="Daily Leaderboard" entries={dailyLeaderboard} currentUser={currentUser} />
+        <ScoutLeaderboard title="Global Leaderboard" entries={globalLeaderboard} currentUser={currentUser} />
+      </div>
 
       {onPlayAgain && (
         <button
           className="glow-cyan w-full rounded-2xl bg-gradient-to-r from-cyan to-[#00ff88] px-8 py-4 text-sm font-black uppercase tracking-wider text-bg transition hover:brightness-110 active:scale-[0.98]"
           onClick={onPlayAgain}
         >
-          Scout Again
+          Play Again
         </button>
       )}
     </div>
@@ -778,20 +815,26 @@ function GuessPlayerMode({
   onSolved,
 }: {
   initData: InitData;
-  onSolved: () => void;
+  onSolved: (earnings: RoundEarnings | null) => void;
 }) {
   const [state, setState] = useState(initData.state);
+  const [profile, setProfile] = useState<PlayerProfile>(initData.profile);
   const [clues, setClues] = useState(initData.clues);
   const [revealedJerseys, setRevealedJerseys] = useState<Jersey[]>(initData.revealedJerseys ?? []);
   const [revealedManagers, setRevealedManagers] = useState<Manager[]>(initData.revealedManagers ?? []);
   const [currentHintCost, setCurrentHintCost] = useState(initData.hintCost);
+  const [jerseyHintCost, setJerseyHintCost] = useState(initData.jerseyHintCost);
+  const [managerHintCost, setManagerHintCost] = useState(initData.managerHintCost);
   const [guesses, setGuesses] = useState<GuessEntry[]>([]);
   const [scoreAnimate, setScoreAnimate] = useState(false);
   const [animateClubIdx, setAnimateClubIdx] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
-  const [difficulty, setDifficulty] = useState<DifficultyLevel>('pro');
 
   if (state.mode !== 'guess-player') return null;
+
+  const wager = state.wager;
+  const wagerLocked = state.wagerLocked;
+  const wrongGuessPenalty = Math.round(5 * wager * 100) / 100;
 
   const clubItems: { index: number; club: Club | null; revealed: boolean }[] =
     (clues as Club[]).map((club, i) => ({ index: i, club, revealed: true }));
@@ -811,15 +854,29 @@ function GuessPlayerMode({
     setTimeout(() => setScoreAnimate(false), 400);
   };
 
+  const handleWagerChange = async (nextWager: number) => {
+    if (wagerLocked || loading) return;
+    setLoading(true);
+    const result = await trpc.game.setWager.mutate({ wager: nextWager });
+    setState(result.state);
+    setCurrentHintCost(result.hintCost);
+    setJerseyHintCost(result.jerseyHintCost);
+    setManagerHintCost(result.managerHintCost);
+    setLoading(false);
+  };
+
   const handleGuess = async (guess: string) => {
     setLoading(true);
     const result = await trpc.game.guessPlayer.mutate({ guess });
     setState(result.state);
     setClues(result.clues);
     setCurrentHintCost(result.hintCost);
+    setJerseyHintCost(result.jerseyHintCost);
+    setManagerHintCost(result.managerHintCost);
+    if (result.profile) setProfile(result.profile);
     setGuesses((prev) => [...prev, { text: guess, correct: result.correct }]);
     if (!result.correct) triggerScoreAnim();
-    if (result.correct) onSolved();
+    if (result.correct) onSolved(result.earnings);
     setLoading(false);
   };
 
@@ -829,10 +886,14 @@ function GuessPlayerMode({
     setState(result.state);
     setClues(result.clues);
     setCurrentHintCost(result.hintCost);
+    setJerseyHintCost(result.jerseyHintCost);
+    setManagerHintCost(result.managerHintCost);
+    if (result.profile) setProfile(result.profile);
     const newIdx = result.state.revealedClubIndices[result.state.revealedClubIndices.length - 1] ?? null;
     setAnimateClubIdx(newIdx);
     triggerScoreAnim();
     setTimeout(() => setAnimateClubIdx(null), 700);
+    if (result.state.solved) onSolved(result.earnings);
     setLoading(false);
   };
 
@@ -842,6 +903,8 @@ function GuessPlayerMode({
     setState(result.state);
     setClues(result.clues);
     setCurrentHintCost(result.hintCost);
+    setJerseyHintCost(result.jerseyHintCost);
+    setManagerHintCost(result.managerHintCost);
     setRevealedJerseys(result.revealedJerseys);
     triggerScoreAnim();
     setLoading(false);
@@ -853,6 +916,8 @@ function GuessPlayerMode({
     setState(result.state);
     setClues(result.clues);
     setCurrentHintCost(result.hintCost);
+    setJerseyHintCost(result.jerseyHintCost);
+    setManagerHintCost(result.managerHintCost);
     setRevealedManagers(result.revealedManagers);
     triggerScoreAnim();
     setLoading(false);
@@ -860,17 +925,21 @@ function GuessPlayerMode({
 
   const handleGiveUp = async () => {
     setLoading(true);
-    await trpc.game.giveUp.mutate();
-    onSolved();
+    const result = await trpc.game.giveUp.mutate();
+    if (result.profile) setProfile(result.profile);
+    onSolved(null);
     setLoading(false);
   };
 
   return (
     <div className="relative z-10 flex w-full flex-col items-center gap-6 px-4 py-8">
       {/* Header */}
-      <div className="flex w-full max-w-4xl items-center justify-between">
-        <ScoutLogo />
-        <DailyBadge />
+      <div className="flex w-full max-w-4xl flex-col items-center gap-3">
+        <div className="flex w-full items-center justify-between">
+          <AppLogo />
+          <DailyBadge />
+        </div>
+        <PlayerStatsBar profile={profile} />
       </div>
 
       {/* Mode Title */}
@@ -889,9 +958,14 @@ function GuessPlayerMode({
       {/* Clue Chips */}
       <ClueChips jerseys={revealedJerseys} managers={revealedManagers} />
 
-      {/* Difficulty */}
+      {/* Wager */}
       <div className="w-full max-w-xl">
-        <DifficultySelector selected={difficulty} onSelect={setDifficulty} />
+        <WagerSelector
+          selected={wager}
+          locked={wagerLocked}
+          onSelect={handleWagerChange}
+          disabled={loading || state.solved}
+        />
       </div>
 
       {/* Guess Input */}
@@ -906,7 +980,7 @@ function GuessPlayerMode({
 
       {/* Guess History */}
       <div className="w-full max-w-xl">
-        <GuessHistory guesses={guesses} />
+        <GuessHistory guesses={guesses} penaltyLabel={`-${wrongGuessPenalty}`} />
       </div>
 
       {/* Action Buttons */}
@@ -921,14 +995,14 @@ function GuessPlayerMode({
         <HintButton
           icon={ShirtIcon}
           label="Jersey Number"
-          cost={15}
+          cost={jerseyHintCost}
           onClick={handleRevealJersey}
           disabled={loading || jerseysLeft <= 0}
         />
         <HintButton
           icon={PersonIcon}
           label="Manager"
-          cost={15}
+          cost={managerHintCost}
           onClick={handleRevealManager}
           disabled={loading || managersLeft <= 0}
         />
@@ -944,7 +1018,12 @@ function GuessPlayerMode({
 
       {/* Scout Rating */}
       <div className="w-full max-w-xl">
-        <ScoutRating score={state.score} wrongGuesses={state.wrongGuesses} animate={scoreAnimate} />
+        <ScoutRating
+          score={state.score}
+          wrongGuesses={state.wrongGuesses}
+          wager={wager}
+          animate={scoreAnimate}
+        />
       </div>
     </div>
   );
@@ -957,9 +1036,10 @@ function PredictTransfersMode({
   onSolved,
 }: {
   initData: InitData;
-  onSolved: () => void;
+  onSolved: (earnings: RoundEarnings | null) => void;
 }) {
   const [state, setState] = useState(initData.state);
+  const [profile, setProfile] = useState<PlayerProfile>(initData.profile);
   const [clues, setClues] = useState(initData.clues);
   const [currentHintCost, setCurrentHintCost] = useState(initData.hintCost);
   const [guesses, setGuesses] = useState<GuessEntry[]>([]);
@@ -968,6 +1048,10 @@ function PredictTransfersMode({
   const [loading, setLoading] = useState(false);
 
   if (state.mode !== 'predict-transfers') return null;
+
+  const wager = state.wager;
+  const wagerLocked = state.wagerLocked;
+  const wrongGuessPenalty = Math.round(10 * wager * 100) / 100;
 
   type ClueItem = { index: number; club: Club | null; revealed: boolean };
   const clubItems = (clues as ClueItem[]).map((item) => ({
@@ -984,12 +1068,23 @@ function PredictTransfersMode({
     setTimeout(() => setScoreAnimate(false), 400);
   };
 
+  const handleWagerChange = async (nextWager: number) => {
+    if (wagerLocked || loading) return;
+    setLoading(true);
+    const result = await trpc.game.setWager.mutate({ wager: nextWager });
+    setState(result.state);
+    setCurrentHintCost(result.hintCost);
+    setLoading(false);
+  };
+
   const handleGuess = async (clubName: string) => {
     setLoading(true);
     const result = await trpc.game.guessTransferClub.mutate({ clubName });
     setState(result.state);
     setClues(result.clues);
     setCurrentHintCost(result.hintCost);
+
+    if (result.profile) setProfile(result.profile);
 
     if (result.correct) {
       setGuesses((prev) => [
@@ -1005,7 +1100,7 @@ function PredictTransfersMode({
       triggerScoreAnim();
     }
 
-    if (result.state.solved) onSolved();
+    if (result.state.solved) onSolved(result.earnings);
     setLoading(false);
   };
 
@@ -1015,28 +1110,33 @@ function PredictTransfersMode({
     setState(result.state);
     setClues(result.clues);
     setCurrentHintCost(result.hintCost);
+    if (result.profile) setProfile(result.profile);
     if (result.revealedIndex !== null) {
       setAnimateClubIdx(result.revealedIndex);
       triggerScoreAnim();
       setTimeout(() => setAnimateClubIdx(null), 700);
     }
-    if (result.state.solved) onSolved();
+    if (result.state.solved) onSolved(result.earnings);
     setLoading(false);
   };
 
   const handleGiveUp = async () => {
     setLoading(true);
-    await trpc.game.giveUp.mutate();
-    onSolved();
+    const result = await trpc.game.giveUp.mutate();
+    if (result.profile) setProfile(result.profile);
+    onSolved(null);
     setLoading(false);
   };
 
   return (
     <div className="relative z-10 flex w-full flex-col items-center gap-6 px-4 py-8">
       {/* Header */}
-      <div className="flex w-full max-w-4xl items-center justify-between">
-        <ScoutLogo />
-        <DailyBadge />
+      <div className="flex w-full max-w-4xl flex-col items-center gap-3">
+        <div className="flex w-full items-center justify-between">
+          <AppLogo />
+          <DailyBadge />
+        </div>
+        <PlayerStatsBar profile={profile} />
       </div>
 
       {/* Mode Title */}
@@ -1062,6 +1162,16 @@ function PredictTransfersMode({
         <TransferTimeline clubs={clubItems} animateIndex={animateClubIdx} />
       </div>
 
+      {/* Wager */}
+      <div className="w-full max-w-xl">
+        <WagerSelector
+          selected={wager}
+          locked={wagerLocked}
+          onSelect={handleWagerChange}
+          disabled={loading || state.solved}
+        />
+      </div>
+
       {/* Guess Input */}
       {unguessedCount > 0 && (
         <div className="w-full max-w-xl">
@@ -1076,7 +1186,7 @@ function PredictTransfersMode({
 
       {/* Guess History */}
       <div className="w-full max-w-xl">
-        <GuessHistory guesses={guesses} penaltyLabel="-10" />
+        <GuessHistory guesses={guesses} penaltyLabel={`-${wrongGuessPenalty}`} />
       </div>
 
       {/* Action Buttons */}
@@ -1100,37 +1210,33 @@ function PredictTransfersMode({
 
       {/* Scout Rating */}
       <div className="w-full max-w-xl">
-        <ScoutRating score={state.score} wrongGuesses={state.wrongGuesses} animate={scoreAnimate} />
+        <ScoutRating
+          score={state.score}
+          wrongGuesses={state.wrongGuesses}
+          wager={wager}
+          animate={scoreAnimate}
+        />
       </div>
     </div>
   );
 }
 
-// ─── Loading Screen ──────────────────────────────────────
-
-function LoadingScreen() {
-  return (
-    <div className="relative z-10 flex min-h-full flex-col items-center justify-center gap-5">
-      <div className="flex items-baseline gap-1.5">
-        <span className="text-3xl font-bold tracking-tight text-cyan">SCOUT</span>
-        <span className="text-3xl font-bold tracking-tight text-gold">MODE</span>
-      </div>
-      <div className="h-9 w-9 animate-spin rounded-full border-2 border-cyan/30 border-t-cyan" />
-      <span className="text-xs font-medium text-text-dim">Preparing your scouting report...</span>
-    </div>
-  );
-}
+// ─── Loading Screen (imported from components) ───────────
 
 // ─── App ─────────────────────────────────────────────────
 
 export const App = () => {
   const [initData, setInitData] = useState<InitData | null>(null);
   const [solved, setSolved] = useState(false);
-  const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
+  const [globalLeaderboard, setGlobalLeaderboard] = useState<LeaderboardEntry[]>([]);
+  const [dailyLeaderboard, setDailyLeaderboard] = useState<LeaderboardEntry[]>([]);
   const [solvedData, setSolvedData] = useState<{
     playerName: string;
     clubs: Club[];
     score: number;
+    wager: number;
+    earnings: RoundEarnings | null;
+    profile: PlayerProfile;
   } | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -1141,7 +1247,7 @@ export const App = () => {
         setInitData(data);
         if (data.state.solved) {
           setSolved(true);
-          await loadSolvedData();
+          await loadSolvedData(null, data);
         }
       } catch (e) {
         setError(e instanceof Error ? e.message : 'Failed to load game');
@@ -1150,39 +1256,58 @@ export const App = () => {
     void load();
   }, []);
 
-  const loadSolvedData = async () => {
+  const loadSolvedData = async (earnings: RoundEarnings | null = null, baseData?: InitData) => {
     try {
-      const [freshInit, lb] = await Promise.all([
-        trpc.init.get.query(),
-        trpc.leaderboard.get.query(),
+      const [freshInit, globalLb, dailyLb] = await Promise.all([
+        baseData ? Promise.resolve(baseData) : trpc.init.get.query(),
+        trpc.leaderboard.global.query(),
+        trpc.leaderboard.daily.query(),
       ]);
       setSolvedData({
         playerName: freshInit.playerName,
         clubs: freshInit.fullClubs ?? [],
         score: freshInit.state.score,
+        wager: freshInit.state.wager,
+        earnings,
+        profile: freshInit.profile,
       });
-      setLeaderboard(lb);
+      setGlobalLeaderboard(globalLb);
+      setDailyLeaderboard(dailyLb);
       setInitData(freshInit);
     } catch {
       // leaderboard fetch failed silently
     }
   };
 
-  const handleSolved = () => {
+  const handleSolved = (earnings: RoundEarnings | null) => {
     setSolved(true);
-    void loadSolvedData();
+    void loadSolvedData(earnings);
   };
 
   const handlePlayAgain = async () => {
     await trpc.game.reset.mutate();
     setSolved(false);
     setSolvedData(null);
-    setLeaderboard([]);
+    setGlobalLeaderboard([]);
+    setDailyLeaderboard([]);
     const data = await trpc.init.get.query();
     setInitData(data);
   };
 
   const isPerfect = solvedData?.score === 100;
+
+  if (!initData) {
+    if (error) {
+      return (
+        <div className="relative flex min-h-full items-center justify-center bg-bg px-4">
+          <div className="glass-card p-6 text-center">
+            <p className="text-sm font-medium text-danger">{error}</p>
+          </div>
+        </div>
+      );
+    }
+    return <LoadingScreen />;
+  }
 
   return (
     <div className="relative min-h-full w-full">
@@ -1194,21 +1319,17 @@ export const App = () => {
 
       {/* Content */}
       <div className="relative z-10 flex min-h-full w-full flex-col items-center">
-        {error ? (
-          <div className="flex min-h-full items-center justify-center px-4">
-            <div className="glass-card p-6 text-center">
-              <p className="text-sm font-medium text-danger">{error}</p>
-            </div>
-          </div>
-        ) : !initData ? (
-          <LoadingScreen />
-        ) : solved && solvedData ? (
+        {solved && solvedData ? (
           <div className="flex min-h-full w-full items-center justify-center px-4 py-8">
             <SolvedScreen
               playerName={solvedData.playerName}
               clubs={solvedData.clubs}
               score={solvedData.score}
-              leaderboard={leaderboard}
+              wager={solvedData.wager}
+              earnings={solvedData.earnings}
+              profile={solvedData.profile}
+              globalLeaderboard={globalLeaderboard}
+              dailyLeaderboard={dailyLeaderboard}
               currentUser={initData.username ?? ''}
               onPlayAgain={handlePlayAgain}
               perfect={isPerfect}
