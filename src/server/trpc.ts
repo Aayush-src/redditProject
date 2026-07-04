@@ -7,9 +7,13 @@ import {
   getOrCreateGameState,
   guessPlayer,
   revealClub,
+  revealJersey,
+  revealManager,
   guessTransferClub,
   revealTransferHint,
   getRevealedClubs,
+  getRevealedJerseys,
+  getRevealedManagers,
   getVisibleTransferRoute,
   getFullPlayerClubs,
   getPlayerName,
@@ -55,6 +59,8 @@ export const appRouter = t.router({
       const fullClubs = state.solved ? getFullPlayerClubs(state.playerId) : null;
       const playerName = getPlayerName(state.playerId);
       const currentHintCost = getHintCost(state);
+      const revealedJerseys = state.mode === 'guess-player' ? getRevealedJerseys(state) : [];
+      const revealedManagers = state.mode === 'guess-player' ? getRevealedManagers(state) : [];
 
       return {
         postId,
@@ -64,6 +70,8 @@ export const appRouter = t.router({
         fullClubs,
         playerName,
         hintCost: currentHintCost,
+        revealedJerseys,
+        revealedManagers,
       };
     }),
   }),
@@ -102,6 +110,34 @@ export const appRouter = t.router({
         state: result.state,
         clues: getRevealedClubs(result.state),
         hintCost: getHintCost(result.state),
+      };
+    }),
+
+    revealJersey: publicProcedure.mutation(async () => {
+      const username = await getUsername();
+      const postId = getPostId();
+      const result = await revealJersey(postId, username);
+      return {
+        jersey: result.jersey,
+        cost: result.cost,
+        state: result.state,
+        clues: getRevealedClubs(result.state),
+        hintCost: getHintCost(result.state),
+        revealedJerseys: getRevealedJerseys(result.state),
+      };
+    }),
+
+    revealManager: publicProcedure.mutation(async () => {
+      const username = await getUsername();
+      const postId = getPostId();
+      const result = await revealManager(postId, username);
+      return {
+        manager: result.manager,
+        cost: result.cost,
+        state: result.state,
+        clues: getRevealedClubs(result.state),
+        hintCost: getHintCost(result.state),
+        revealedManagers: getRevealedManagers(result.state),
       };
     }),
 

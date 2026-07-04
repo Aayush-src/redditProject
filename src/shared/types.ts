@@ -33,6 +33,8 @@ export type GuessPlayerState = {
   playerId: string;
   /** Indices of clubs revealed so far (chronological) */
   revealedClubIndices: number[];
+  revealedJerseyIndices: number[];
+  revealedManagerIndices: number[];
   totalClubs: number;
   score: number;
   wrongGuesses: number;
