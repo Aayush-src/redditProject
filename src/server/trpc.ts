@@ -17,6 +17,8 @@ import {
   getVisibleTransferRoute,
   getFullPlayerClubs,
   getPlayerName,
+  getPlayerNationality,
+  getPlayerFlag,
   getHintCost,
   getJerseyHintCost,
   getManagerHintCost,
@@ -73,6 +75,14 @@ export const appRouter = t.router({
 
       const fullClubs = state.solved ? getFullPlayerClubs(state.playerId) : null;
       const playerName = getPlayerName(state.playerId);
+      const playerNationality =
+        state.mode === 'predict-transfers' || state.solved
+          ? getPlayerNationality(state.playerId)
+          : null;
+      const playerFlag =
+        state.mode === 'predict-transfers' || state.solved
+          ? getPlayerFlag(state.playerId)
+          : null;
       const currentHintCost = getHintCost(state);
       const jerseyHintCost = getJerseyHintCost(state);
       const managerHintCost = getManagerHintCost(state);
@@ -86,6 +96,8 @@ export const appRouter = t.router({
         clues,
         fullClubs,
         playerName,
+        playerNationality,
+        playerFlag,
         hintCost: currentHintCost,
         jerseyHintCost,
         managerHintCost,

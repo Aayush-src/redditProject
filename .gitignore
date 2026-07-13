@@ -1,11 +1,26 @@
+# Dependencies
 node_modules
 .yarn
+
+# Logs
 logs
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# OS / editor
 .DS_Store
+.idea
+.vscode
+
+# Build / test output
 webroot
 dist
 coverage
+
+# Env files (secrets / local config — never commit)
+.env
+.env.*
+!.env.example
+*.local

@@ -19,7 +19,10 @@ export type Jersey = {
 export type Player = {
   id: string;
   name: string;
+  /** Flag emoji, e.g. 🇧🇪 */
   nationality: string;
+  /** Country name for display, e.g. Belgium */
+  country: string;
   /** Chronological order: first club joined → most recent */
   clubs: Club[];
   managers: Manager[];

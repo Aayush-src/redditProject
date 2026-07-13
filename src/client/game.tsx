@@ -1,14 +1,17 @@
 import './index.css';
 
-import { StrictMode, useEffect, useRef, useState, useCallback, useMemo, Fragment } from 'react';
+import { StrictMode, useEffect, useRef, useState, useCallback, useMemo, type CSSProperties, type ChangeEvent, type KeyboardEvent, type ReactNode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { trpc } from './trpc';
 import type { inferRouterOutputs } from '@trpc/server';
 import type { AppRouter } from '../server/trpc';
 import type { Club, Jersey, Manager, LeaderboardEntry, PlayerProfile, RoundEarnings } from '../shared/types';
-import { WAGER_OPTIONS } from '../shared/scoring';
-import { FootBetsLogo } from './components/FootBetsLogo';
 import { LoadingScreen } from './components/LoadingScreen';
+import { GameBackground } from './components/GameBackground';
+import { GameHeader } from './components/GameHeader';
+import { PlayerCard } from './components/PlayerCard';
+import { TransferRouteHero } from './components/TransferRouteHero';
+import { WagerChips } from './components/WagerChips';
 import { cn } from './utils';
 
 type RouterOutputs = inferRouterOutputs<AppRouter>;
@@ -16,39 +19,70 @@ type InitData = RouterOutputs['init']['get'];
 
 type GuessEntry = { text: string; correct: boolean; count?: number };
 
-// ─── Floating Particles ──────────────────────────────────
+function pseudoRand(seed: number): number {
+  const x = Math.sin(seed * 127.1) * 43758.5453;
+  return x - Math.floor(x);
+}
 
-function Particles() {
-  const dots = useMemo(
-    () =>
-      Array.from({ length: 14 }, (_, i) => ({
-        id: i,
-        left: `${5 + Math.random() * 90}%`,
-        top: `${5 + Math.random() * 90}%`,
-        size: 2 + Math.random() * 2.5,
-        delay: `${Math.random() * 6}s`,
-        dur: `${5 + Math.random() * 7}s`,
-        opacity: 0.15 + Math.random() * 0.2,
-      })),
-    []
-  );
+function ParticleBurst({ active }: { active: boolean }) {
+  const pieces = useMemo(() => {
+    if (!active) return [];
+    return Array.from({ length: 16 }, (_, i) => ({
+      id: i,
+      bx: `${(pseudoRand(i * 2 + 1) - 0.5) * 120}px`,
+      by: `${(pseudoRand(i * 2 + 2) - 0.5) * 120}px`,
+      color: ['#ffffff', '#e0e0e0', '#bdbdbd'][i % 3] as string,
+      left: '50%',
+      top: '45%',
+    }));
+  }, [active]);
+
+  if (!active) return null;
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-[1] overflow-hidden">
-      {dots.map((d) => (
+    <div className="pointer-events-none fixed inset-0 z-50">
+      {pieces.map((p) => (
         <div
-          key={d.id}
-          className="absolute rounded-full bg-cyan"
-          style={{
-            left: d.left,
-            top: d.top,
-            width: d.size,
-            height: d.size,
-            opacity: d.opacity,
-            animation: `float-particle ${d.dur} ease-in-out ${d.delay} infinite`,
-          }}
+          key={p.id}
+          className="particle-burst"
+          style={
+            {
+              left: p.left,
+              top: p.top,
+              backgroundColor: p.color,
+              '--bx': p.bx,
+              '--by': p.by,
+            } as CSSProperties
+          }
         />
       ))}
+    </div>
+  );
+}
+
+function RoundMeter({
+  score,
+  wager,
+  animate,
+}: {
+  score: number;
+  wager: number;
+  animate: boolean;
+}) {
+  const projected = Math.round(score * wager * 100) / 100;
+  const pct = Math.max(0, score);
+
+  return (
+    <div className="round-meter">
+      <div className="round-meter-top">
+        <span className="mode-title">Round</span>
+        <span className={cn('round-meter-score', animate && 'round-meter-score-pop')}>
+          {projected}
+        </span>
+      </div>
+      <div className="round-meter-bar">
+        <div className="round-meter-fill" style={{ width: `${pct}%` }} />
+      </div>
     </div>
   );
 }
@@ -56,21 +90,19 @@ function Particles() {
 // ─── Confetti ────────────────────────────────────────────
 
 function Confetti() {
-  const pieces = useMemo(
-    () =>
-      Array.from({ length: 60 }, (_, i) => {
-        const colors = ['#00e5ff', '#ffd700', '#00ff88', '#a855f7', '#ff8c00'];
-        return {
-          id: i,
-          left: `${Math.random() * 100}%`,
-          color: colors[i % colors.length] as string,
-          size: 4 + Math.random() * 7,
-          delay: `${Math.random() * 2.5}s`,
-          dur: `${2 + Math.random() * 3}s`,
-          rotation: Math.random() * 360,
-        };
-      }),
-    []
+  const [pieces] = useState(() =>
+    Array.from({ length: 60 }, (_, i) => {
+      const colors = ['#ffffff', '#f5f5f5', '#e0e0e0', '#bdbdbd', '#9e9e9e'];
+      return {
+        id: i,
+        left: `${pseudoRand(i + 10) * 100}%`,
+        color: colors[i % colors.length] as string,
+        size: 4 + pseudoRand(i + 20) * 7,
+        delay: `${pseudoRand(i + 30) * 2.5}s`,
+        dur: `${2 + pseudoRand(i + 40) * 3}s`,
+        rotation: pseudoRand(i + 50) * 360,
+      };
+    })
   );
 
   return (
@@ -90,7 +122,7 @@ function Confetti() {
               transform: `rotate(${p.rotation}deg)`,
               '--delay': p.delay,
               '--dur': p.dur,
-            } as React.CSSProperties
+            } as CSSProperties
           }
         />
       ))}
@@ -98,119 +130,7 @@ function Confetti() {
   );
 }
 
-// ─── App Logo ────────────────────────────────────────────
-
-function AppLogo() {
-  return <FootBetsLogo size="sm" />;
-}
-
-// ─── Daily Challenge Badge ───────────────────────────────
-
-function DailyBadge() {
-  const today = new Date();
-  const dayStr = today.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
-  return (
-    <div className="glass-card-sm flex items-center gap-2 px-4 py-2">
-      <div className="h-2 w-2 animate-pulse rounded-full bg-success" />
-      <span className="text-xs font-semibold uppercase tracking-widest text-text-dim">Daily Challenge</span>
-      <span className="text-xs font-medium text-cyan">{dayStr}</span>
-    </div>
-  );
-}
-
-// ─── Timeline Node ───────────────────────────────────────
-
-function TimelineNode({
-  club,
-  hidden,
-  animate,
-}: {
-  club: Club | null;
-  hidden: boolean;
-  animate?: boolean;
-}) {
-  if (hidden) {
-    return (
-      <div className="flex flex-col items-center gap-2">
-        <div
-          className="animate-glow-pulse flex h-[72px] w-[72px] items-center justify-center rounded-2xl border border-cyan/15 bg-surface/80 transition-transform hover:scale-105"
-        >
-          <div className="h-10 w-10 rounded-xl bg-cyan/8 blur-[2px]" />
-        </div>
-        <span className="max-w-[80px] truncate text-center text-[11px] font-medium text-text-dim">
-          ???
-        </span>
-      </div>
-    );
-  }
-
-  return (
-    <div className={cn('flex flex-col items-center gap-2', animate && 'animate-flip-reveal')}>
-      <div
-        className={cn(
-          'flex h-[72px] w-[72px] items-center justify-center rounded-2xl border transition-transform hover:scale-105',
-          animate && 'animate-reveal-glow'
-        )}
-        style={{
-          background: `linear-gradient(135deg, ${club?.primaryColor ?? '#1e293b'}dd, ${club?.secondaryColor ?? '#334155'}aa)`,
-          borderColor: `${club?.secondaryColor ?? '#334155'}66`,
-        }}
-      >
-        <span className="text-lg font-bold text-white/90 drop-shadow-sm">
-          {getClubInitials(club?.name ?? '')}
-        </span>
-      </div>
-      <span
-        className="max-w-[80px] truncate text-center text-[11px] font-medium text-text"
-        title={club?.name}
-      >
-        {club?.name ?? '???'}
-      </span>
-    </div>
-  );
-}
-
-function getClubInitials(name: string): string {
-  if (!name) return '?';
-  const words = name.replace(/FC|CF|AC|AS|SS|SC|RC|CD|UD|SD|SL|BSC|TSG|RB/gi, '').trim().split(/\s+/);
-  if (words.length === 1) return (words[0] ?? '').slice(0, 3).toUpperCase();
-  return words.map((w) => w[0]).join('').slice(0, 3).toUpperCase();
-}
-
-// ─── Timeline Arrow ──────────────────────────────────────
-
-function TimelineArrowEl() {
-  return <div className="timeline-arrow mx-1 self-start mt-[34px]" />;
-}
-
-// ─── Transfer Timeline ──────────────────────────────────
-
-function TransferTimeline({
-  clubs,
-  animateIndex,
-}: {
-  clubs: { index: number; club: Club | null; revealed: boolean }[];
-  animateIndex: number | null;
-}) {
-  return (
-    <div className="glass-card glow-cyan w-full overflow-x-auto px-6 py-8">
-      <div className="flex items-start justify-center gap-1" style={{ minWidth: 'min-content' }}>
-        {clubs.map((item, i) => (
-          <Fragment key={item.index}>
-            <TimelineNode
-              club={item.club}
-              hidden={!item.revealed}
-              animate={animateIndex === item.index}
-            />
-            {i < clubs.length - 1 && <TimelineArrowEl />}
-          </Fragment>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-// ─── Clue Chips (revealed jerseys / managers) ────────────
+// ─── Clue Chips ──────────────────────────────────────────
 
 function ClueChips({
   jerseys,
@@ -226,11 +146,11 @@ function ClueChips({
       {jerseys.map((j, i) => (
         <div
           key={`j-${i}`}
-          className="glass-card-sm animate-slide-in-right flex items-center gap-2 px-3 py-1.5"
+          className="clue-token animate-slide-in-right"
           style={{ animationDelay: `${i * 0.1}s` }}
         >
-          <span className="text-sm">👕</span>
-          <span className="text-xs font-semibold text-gold">#{j.number}</span>
+          <span>👕</span>
+          <span className="text-white">#{j.number}</span>
           <div
             className="h-3 w-3 rounded-full border"
             style={{ backgroundColor: j.primaryColor, borderColor: j.secondaryColor }}
@@ -240,90 +160,13 @@ function ClueChips({
       {managers.map((m, i) => (
         <div
           key={`m-${i}`}
-          className="glass-card-sm animate-slide-in-right flex items-center gap-2 px-3 py-1.5"
+          className="clue-token animate-slide-in-right"
           style={{ animationDelay: `${(jerseys.length + i) * 0.1}s` }}
         >
-          <span className="text-sm">🧑‍💼</span>
-          <span className="text-xs font-semibold text-text">{m.name}</span>
+          <span>🧑‍💼</span>
+          <span>{m.name.split(' ').pop()}</span>
         </div>
       ))}
-    </div>
-  );
-}
-
-// ─── Player Stats Bar ────────────────────────────────────
-
-function PlayerStatsBar({ profile }: { profile: PlayerProfile }) {
-  return (
-    <div className="glass-card-sm flex flex-wrap items-center justify-center gap-4 px-4 py-2">
-      <div className="flex flex-col items-center">
-        <span className="text-[9px] font-semibold uppercase tracking-widest text-text-dim">Total</span>
-        <span className="text-sm font-black tabular-nums text-gold">{profile.totalPoints}</span>
-      </div>
-      <div className="h-6 w-px bg-glass-border" />
-      <div className="flex flex-col items-center">
-        <span className="text-[9px] font-semibold uppercase tracking-widest text-text-dim">Today</span>
-        <span className="text-sm font-black tabular-nums text-cyan">{profile.dailyScore}</span>
-      </div>
-      <div className="h-6 w-px bg-glass-border" />
-      <div className="flex flex-col items-center">
-        <span className="text-[9px] font-semibold uppercase tracking-widest text-text-dim">Streak</span>
-        <span className="text-sm font-black tabular-nums text-success">
-          {profile.streak > 0 ? `🔥 ${profile.streak}` : '—'}
-        </span>
-      </div>
-    </div>
-  );
-}
-
-// ─── Wager Selector ──────────────────────────────────────
-
-function WagerSelector({
-  selected,
-  locked,
-  onSelect,
-  disabled,
-}: {
-  selected: number;
-  locked: boolean;
-  onSelect: (wager: number) => void;
-  disabled?: boolean;
-}) {
-  return (
-    <div className="glass-card w-full p-4">
-      <div className="mb-3 flex items-center justify-between">
-        <span className="text-xs font-bold uppercase tracking-widest text-text-dim">Wager Multiplier</span>
-        {locked ? (
-          <span className="text-[10px] font-semibold text-gold">Locked</span>
-        ) : (
-          <span className="text-[10px] font-medium text-text-dim">Choose before your first guess</span>
-        )}
-      </div>
-      <div className="grid grid-cols-5 gap-2">
-        {WAGER_OPTIONS.map((wager) => {
-          const active = selected === wager;
-          return (
-            <button
-              key={wager}
-              className={cn(
-                'glass-card-sm flex flex-col items-center gap-0.5 px-2 py-2.5 transition-all',
-                active && 'scale-[1.03] border-gold/40',
-                !locked && !disabled && 'hover:scale-[1.03]',
-                (locked || disabled) && !active && 'opacity-40'
-              )}
-              style={{
-                boxShadow: active ? '0 0 16px rgba(255,215,0,0.15)' : undefined,
-              }}
-              onClick={() => onSelect(wager)}
-              disabled={locked || disabled}
-            >
-              <span className={cn('text-sm font-black tabular-nums', active ? 'text-gold' : 'text-text-dim')}>
-                ×{wager}
-              </span>
-            </button>
-          );
-        })}
-      </div>
     </div>
   );
 }
@@ -361,7 +204,7 @@ function GuessInput({
     [searchFn]
   );
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const v = e.target.value;
     setValue(v);
     setShowSuggestions(true);
@@ -376,7 +219,7 @@ function GuessInput({
     onSubmit(name);
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key === 'ArrowDown') {
       e.preventDefault();
       setSelectedIdx((prev) => Math.min(prev + 1, suggestions.length - 1));
@@ -397,14 +240,13 @@ function GuessInput({
 
   return (
     <div className="relative w-full">
-      <div className="glass-card flex items-center gap-3 px-5 py-3 transition-all focus-within:border-cyan/30 focus-within:shadow-[0_0_20px_rgba(0,229,255,0.1)]">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0 text-text-dim">
+      <div className="game-input">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0 text-text-dim">
           <circle cx="11" cy="11" r="8" />
           <path d="m21 21-4.35-4.35" />
         </svg>
         <input
           ref={inputRef}
-          className="w-full bg-transparent text-sm font-medium text-text placeholder:text-text-dim/60 outline-none"
           placeholder={placeholder}
           value={value}
           onChange={handleChange}
@@ -415,7 +257,7 @@ function GuessInput({
         />
         {value.trim() && (
           <button
-            className="flex-shrink-0 rounded-lg bg-cyan px-4 py-1.5 text-xs font-bold text-bg transition hover:brightness-110 active:scale-95"
+            className="game-guess-btn"
             onMouseDown={(e) => {
               e.preventDefault();
               if (selectedIdx >= 0 && suggestions[selectedIdx]) {
@@ -437,7 +279,7 @@ function GuessInput({
               className={cn(
                 'flex w-full items-center gap-3 px-5 py-3 text-left text-sm font-medium transition',
                 idx === selectedIdx
-                  ? 'bg-cyan/10 text-cyan'
+                  ? 'bg-white/10 text-white'
                   : 'text-text hover:bg-white/[0.03]'
               )}
               onMouseDown={() => handleSelect(name)}
@@ -465,7 +307,7 @@ function HintButton({
   disabled,
   variant = 'default',
 }: {
-  icon: React.ReactNode;
+  icon: ReactNode;
   label: string;
   cost: number;
   onClick: () => void;
@@ -475,10 +317,8 @@ function HintButton({
   return (
     <button
       className={cn(
-        'glass-card-sm flex items-center gap-2 px-4 py-2.5 text-xs font-semibold transition-all hover:scale-[1.03] active:scale-95',
-        variant === 'danger'
-          ? 'border-danger/20 text-danger hover:bg-danger/8'
-          : 'border-cyan/10 text-text hover:border-cyan/25 hover:text-cyan',
+        'hint-chip',
+        variant === 'danger' && 'hint-chip-danger',
         disabled && 'pointer-events-none opacity-35'
       )}
       onClick={onClick}
@@ -487,9 +327,7 @@ function HintButton({
       {icon}
       <span>{label}</span>
       {cost > 0 && variant !== 'danger' && (
-        <span className="rounded-md bg-gold/15 px-1.5 py-0.5 text-[10px] font-bold text-gold">
-          -{cost}
-        </span>
+        <span className="hint-chip-cost">-{cost}</span>
       )}
     </button>
   );
@@ -522,102 +360,29 @@ const XIcon = (
   </svg>
 );
 
-// ─── Scout Rating Panel ──────────────────────────────────
-
-function ScoutRating({
-  score,
-  wrongGuesses,
-  wager,
-  animate,
-}: {
-  score: number;
-  wrongGuesses: number;
-  wager: number;
-  animate: boolean;
-}) {
-  const projected = Math.round(score * wager * 100) / 100;
-  const pct = Math.max(0, score);
-
-  return (
-    <div className="glass-card w-full p-5">
-      <div className="mb-3 flex items-center justify-between">
-        <span className="text-xs font-bold uppercase tracking-widest text-text-dim">Round Score</span>
-        <div className="flex items-baseline gap-2">
-          <span className="text-[10px] font-semibold text-text-dim">×{wager}</span>
-          <span
-            className={cn(
-              'text-3xl font-black tabular-nums tracking-tight',
-              pct > 50 ? 'text-cyan' : pct > 20 ? 'text-gold' : 'text-danger',
-              animate && 'animate-score-pop'
-            )}
-          >
-            {projected}
-          </span>
-        </div>
-      </div>
-      <div className="mb-4 h-1.5 w-full overflow-hidden rounded-full bg-surface">
-        <div
-          className="h-full rounded-full transition-all duration-700 ease-out"
-          style={{
-            width: `${pct}%`,
-            background: pct > 50
-              ? 'linear-gradient(90deg, #00e5ff, #00ff88)'
-              : pct > 20
-                ? 'linear-gradient(90deg, #ffd700, #ff8c00)'
-                : 'linear-gradient(90deg, #ff4757, #ff6b81)',
-          }}
-        />
-      </div>
-      <div className="grid grid-cols-3 gap-3">
-        <div className="flex flex-col items-center rounded-xl bg-surface/50 px-2 py-2">
-          <span className="text-[10px] font-medium text-text-dim">Base</span>
-          <span className="text-sm font-bold text-text">{score}/100</span>
-        </div>
-        <div className="flex flex-col items-center rounded-xl bg-surface/50 px-2 py-2">
-          <span className="text-[10px] font-medium text-text-dim">Attempts</span>
-          <span className="text-sm font-bold text-text">{wrongGuesses}</span>
-        </div>
-        <div className="flex flex-col items-center rounded-xl bg-surface/50 px-2 py-2">
-          <span className="text-[10px] font-medium text-text-dim">Wager</span>
-          <span className="text-sm font-bold text-gold">×{wager}</span>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 // ─── Guess History ───────────────────────────────────────
 
 function GuessHistory({
   guesses,
-  penaltyLabel = '-5',
 }: {
   guesses: GuessEntry[];
-  penaltyLabel?: string;
 }) {
-  if (guesses.length === 0) return null;
+  const last = guesses[guesses.length - 1];
+  if (!last) return null;
 
   return (
-    <div className="flex w-full flex-col gap-1.5">
-      {guesses.map((g, i) => (
-        <div
-          key={i}
-          className={cn(
-            'glass-card-sm flex items-center gap-2 px-4 py-2 text-sm',
-            g.correct ? 'border-success/20 text-success' : 'border-danger/15 text-danger',
-            i === guesses.length - 1 && !g.correct && 'animate-shake'
-          )}
-        >
-          <span className="font-bold">{g.correct ? '✓' : '✗'}</span>
-          <span className={cn('font-medium', !g.correct && 'line-through opacity-60')}>{g.text}</span>
-          {g.correct && g.count && g.count > 1 && (
-            <span className="ml-auto text-[10px] font-bold text-success">×{g.count} filled</span>
-          )}
-          {!g.correct && (
-            <span className="ml-auto text-[10px] font-bold text-text-dim">{penaltyLabel}</span>
-          )}
-        </div>
-      ))}
+    <div
+      className={cn(
+        'guess-toast',
+        last.correct ? 'guess-toast-success' : 'guess-toast-error',
+        !last.correct && 'animate-shake'
+      )}
+    >
+      <span className="font-black">{last.correct ? '✓' : '✗'}</span>
+      <span className={cn(!last.correct && 'line-through opacity-70')}>{last.text}</span>
+      {last.correct && last.count && last.count > 1 && (
+        <span className="ml-auto text-[10px] font-bold">×{last.count}</span>
+      )}
     </div>
   );
 }
@@ -644,7 +409,7 @@ function ScoutLeaderboard({
   return (
     <div className="glass-card w-full overflow-hidden">
       <div className="flex items-center justify-between border-b border-glass-border px-5 py-3">
-        <span className="text-xs font-bold uppercase tracking-widest text-gold">{title}</span>
+        <span className="text-xs font-bold uppercase tracking-widest text-white">{title}</span>
         <span className="text-[10px] font-medium text-text-dim">{entries.length} players</span>
       </div>
       {entries.map((entry) => (
@@ -652,7 +417,7 @@ function ScoutLeaderboard({
           key={entry.username}
           className={cn(
             'flex items-center justify-between border-b border-glass-border/50 px-5 py-3 transition',
-            entry.username === currentUser && 'bg-cyan/5'
+            entry.username === currentUser && 'bg-white/5'
           )}
         >
           <div className="flex items-center gap-3">
@@ -660,11 +425,11 @@ function ScoutLeaderboard({
               className={cn(
                 'flex h-7 w-7 items-center justify-center rounded-lg text-xs font-black',
                 entry.rank === 1
-                  ? 'bg-gold/20 text-gold'
+                  ? 'bg-white/20 text-white'
                   : entry.rank === 2
                     ? 'bg-text-dim/15 text-text'
                     : entry.rank === 3
-                      ? 'bg-legend/15 text-legend'
+                      ? 'bg-white/10 text-text-dim'
                       : 'bg-surface text-text-dim'
               )}
             >
@@ -674,7 +439,7 @@ function ScoutLeaderboard({
               <span
                 className={cn(
                   'text-sm font-semibold',
-                  entry.username === currentUser ? 'text-cyan' : 'text-text'
+                  entry.username === currentUser ? 'text-white' : 'text-text'
                 )}
               >
                 {entry.username}
@@ -685,13 +450,20 @@ function ScoutLeaderboard({
             </div>
           </div>
           <div className="flex flex-col items-end">
-            <span className="text-sm font-black tabular-nums text-gold">{entry.score}</span>
+            <span className="text-sm font-black tabular-nums text-white">{entry.score}</span>
             <span className="text-[10px] font-medium text-text-dim">{entry.percentage}%</span>
           </div>
         </div>
       ))}
     </div>
   );
+}
+
+function getClubInitials(name: string): string {
+  if (!name) return '?';
+  const words = name.replace(/FC|CF|AC|AS|SS|SC|RC|CD|UD|SD|SL|BSC|TSG|RB/gi, '').trim().split(/\s+/);
+  if (words.length === 1) return (words[0] ?? '').slice(0, 3).toUpperCase();
+  return words.map((w) => w[0]).join('').slice(0, 3).toUpperCase();
 }
 
 // ─── Solved Screen ───────────────────────────────────────
@@ -724,27 +496,20 @@ function SolvedScreen({
   const projected = Math.round(score * wager * 100) / 100;
 
   return (
-    <div className="relative flex w-full max-w-3xl flex-col items-center gap-6 px-4">
+    <div className="relative flex w-full max-w-[480px] flex-col items-center gap-6">
       {perfect && <Confetti />}
 
       <div className="animate-slide-up flex flex-col items-center gap-2 text-center">
         <span className="text-4xl">{perfect ? '🏆' : '⭐'}</span>
-        <h2
-          className="text-3xl font-black tracking-tight"
-          style={{
-            background: 'linear-gradient(135deg, #00e5ff, #00ff88)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-          }}
-        >
+        <h2 className="text-2xl font-black tracking-tight text-white sm:text-3xl">
           {perfect ? 'PERFECT GAME!' : 'PLAYER IDENTIFIED'}
         </h2>
-        <p className="text-2xl font-bold text-text">{playerName}</p>
+        <p className="text-xl font-bold text-text sm:text-2xl">{playerName}</p>
       </div>
 
-      <PlayerStatsBar profile={profile} />
+      <GameHeader profile={profile} />
 
-      <div className="glass-card glow-success w-full p-6">
+      <div className="route-hero w-full">
         <p className="mb-3 text-[10px] font-bold uppercase tracking-widest text-text-dim">
           Complete Career Path
         </p>
@@ -754,8 +519,8 @@ function SolvedScreen({
               <div
                 className="flex h-10 w-10 items-center justify-center rounded-xl border"
                 style={{
-                  background: `linear-gradient(135deg, ${club.primaryColor}dd, ${club.secondaryColor}aa)`,
-                  borderColor: `${club.secondaryColor}55`,
+                  background: `linear-gradient(145deg, ${club.primaryColor}, ${club.secondaryColor})`,
+                  borderColor: `${club.secondaryColor}88`,
                 }}
               >
                 <span className="text-[10px] font-bold text-white/90">{getClubInitials(club.name)}</span>
@@ -767,7 +532,7 @@ function SolvedScreen({
         </div>
       </div>
 
-      <div className="glass-card glow-cyan w-full p-6">
+      <div className="glass-card w-full p-6">
         <p className="mb-3 text-[10px] font-bold uppercase tracking-widest text-text-dim">
           Round Earnings
         </p>
@@ -778,15 +543,15 @@ function SolvedScreen({
           </div>
           <div className="flex flex-col items-center rounded-xl bg-surface/50 px-2 py-2">
             <span className="text-[10px] text-text-dim">Wager Win</span>
-            <span className="text-sm font-bold text-cyan">{earnings?.wagerEarnings ?? projected}</span>
+            <span className="text-sm font-bold text-white">{earnings?.wagerEarnings ?? projected}</span>
           </div>
           <div className="flex flex-col items-center rounded-xl bg-surface/50 px-2 py-2">
             <span className="text-[10px] text-text-dim">Streak Bonus</span>
-            <span className="text-sm font-bold text-success">+{earnings?.streakBonus ?? 0}</span>
+            <span className="text-sm font-bold text-white">+{earnings?.streakBonus ?? 0}</span>
           </div>
           <div className="flex flex-col items-center rounded-xl bg-surface/50 px-2 py-2">
             <span className="text-[10px] text-text-dim">Total Earned</span>
-            <span className="text-sm font-bold text-gold">+{earnings?.totalEarned ?? projected}</span>
+            <span className="text-sm font-bold text-white">+{earnings?.totalEarned ?? projected}</span>
           </div>
         </div>
       </div>
@@ -798,7 +563,7 @@ function SolvedScreen({
 
       {onPlayAgain && (
         <button
-          className="glow-cyan w-full rounded-2xl bg-gradient-to-r from-cyan to-[#00ff88] px-8 py-4 text-sm font-black uppercase tracking-wider text-bg transition hover:brightness-110 active:scale-[0.98]"
+          className="btn-primary w-full"
           onClick={onPlayAgain}
         >
           Play Again
@@ -829,12 +594,16 @@ function GuessPlayerMode({
   const [scoreAnimate, setScoreAnimate] = useState(false);
   const [animateClubIdx, setAnimateClubIdx] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
+  const [shakeCard, setShakeCard] = useState(false);
+  const [flashIndex, setFlashIndex] = useState<number | null>(null);
+  const [flashType, setFlashType] = useState<'success' | 'error' | null>(null);
+  const [scorePopup, setScorePopup] = useState<{ value: number; index: number } | null>(null);
+  const [burst, setBurst] = useState(false);
 
   if (state.mode !== 'guess-player') return null;
 
   const wager = state.wager;
   const wagerLocked = state.wagerLocked;
-  const wrongGuessPenalty = Math.round(5 * wager * 100) / 100;
 
   const clubItems: { index: number; club: Club | null; revealed: boolean }[] =
     (clues as Club[]).map((club, i) => ({ index: i, club, revealed: true }));
@@ -865,6 +634,36 @@ function GuessPlayerMode({
     setLoading(false);
   };
 
+  const triggerFeedback = (type: 'success' | 'error', index?: number, popup?: number) => {
+    if (type === 'error') {
+      setShakeCard(true);
+      setTimeout(() => setShakeCard(false), 500);
+      if (index !== undefined) {
+        setFlashIndex(index);
+        setFlashType('error');
+        setTimeout(() => {
+          setFlashIndex(null);
+          setFlashType(null);
+        }, 500);
+      }
+    } else {
+      setBurst(true);
+      setTimeout(() => setBurst(false), 700);
+      if (index !== undefined) {
+        setFlashIndex(index);
+        setFlashType('success');
+        setTimeout(() => {
+          setFlashIndex(null);
+          setFlashType(null);
+        }, 800);
+      }
+      if (popup !== undefined && index !== undefined) {
+        setScorePopup({ value: popup, index });
+        setTimeout(() => setScorePopup(null), 1000);
+      }
+    }
+  };
+
   const handleGuess = async (guess: string) => {
     setLoading(true);
     const result = await trpc.game.guessPlayer.mutate({ guess });
@@ -875,7 +674,12 @@ function GuessPlayerMode({
     setManagerHintCost(result.managerHintCost);
     if (result.profile) setProfile(result.profile);
     setGuesses((prev) => [...prev, { text: guess, correct: result.correct }]);
-    if (!result.correct) triggerScoreAnim();
+    if (!result.correct) {
+      triggerScoreAnim();
+      triggerFeedback('error');
+    } else {
+      triggerFeedback('success', undefined, Math.round(result.state.score * wager));
+    }
     if (result.correct) onSolved(result.earnings);
     setLoading(false);
   };
@@ -892,6 +696,9 @@ function GuessPlayerMode({
     const newIdx = result.state.revealedClubIndices[result.state.revealedClubIndices.length - 1] ?? null;
     setAnimateClubIdx(newIdx);
     triggerScoreAnim();
+    if (newIdx !== null) {
+      triggerFeedback('success', newIdx);
+    }
     setTimeout(() => setAnimateClubIdx(null), 700);
     if (result.state.solved) onSolved(result.earnings);
     setLoading(false);
@@ -932,97 +739,81 @@ function GuessPlayerMode({
   };
 
   return (
-    <div className="relative z-10 flex w-full flex-col items-center gap-6 px-4 py-8">
-      {/* Header */}
-      <div className="flex w-full max-w-4xl flex-col items-center gap-3">
-        <div className="flex w-full items-center justify-between">
-          <AppLogo />
-          <DailyBadge />
+    <div className="game-screen relative z-10">
+      <ParticleBurst active={burst} />
+      <GameHeader profile={profile} />
+
+      <div className="game-hero-section">
+        <p className="mode-title">Mystery Player</p>
+
+        <div className={cn(shakeCard && 'animate-shake')}>
+          <PlayerCard mystery />
         </div>
-        <PlayerStatsBar profile={profile} />
+
+        <div className="w-full">
+          <TransferRouteHero
+            clubs={clubItems}
+            animateIndex={animateClubIdx}
+            flashIndex={flashIndex}
+            flashType={flashType}
+            scorePopup={scorePopup}
+          />
+        </div>
+
+        <ClueChips jerseys={revealedJerseys} managers={revealedManagers} />
+
+        <RoundMeter score={state.score} wager={wager} animate={scoreAnimate} />
+
+        <div className="w-full">
+          <GuessInput
+            placeholder="Who is this player?"
+            searchFn={(q) => trpc.search.players.query({ query: q })}
+            onSubmit={handleGuess}
+            disabled={loading || state.solved}
+          />
+        </div>
+
+        <GuessHistory guesses={guesses} />
+
+        <div className="flex flex-wrap items-center justify-center gap-2">
+          <HintButton
+            icon={ShieldIcon}
+            label="Club"
+            cost={currentHintCost}
+            onClick={handleRevealClub}
+            disabled={loading || unrevealed === 0}
+          />
+          <HintButton
+            icon={ShirtIcon}
+            label="Jersey"
+            cost={jerseyHintCost}
+            onClick={handleRevealJersey}
+            disabled={loading || jerseysLeft <= 0}
+          />
+          <HintButton
+            icon={PersonIcon}
+            label="Manager"
+            cost={managerHintCost}
+            onClick={handleRevealManager}
+            disabled={loading || managersLeft <= 0}
+          />
+          <HintButton
+            icon={XIcon}
+            label="Give Up"
+            cost={0}
+            onClick={handleGiveUp}
+            disabled={loading}
+            variant="danger"
+          />
+        </div>
       </div>
 
-      {/* Mode Title */}
-      <div className="text-center">
-        <h2 className="text-xl font-bold tracking-tight text-text">Identify the Mystery Footballer</h2>
-        <p className="mt-1 text-xs font-medium text-text-dim">
-          Analyse the career timeline below and name the player
-        </p>
-      </div>
-
-      {/* Transfer Timeline — Hero */}
-      <div className="w-[95%] max-w-5xl lg:w-[80%]">
-        <TransferTimeline clubs={clubItems} animateIndex={animateClubIdx} />
-      </div>
-
-      {/* Clue Chips */}
-      <ClueChips jerseys={revealedJerseys} managers={revealedManagers} />
-
-      {/* Wager */}
-      <div className="w-full max-w-xl">
-        <WagerSelector
+      <div className="game-bottom-dock">
+        <WagerChips
           selected={wager}
           locked={wagerLocked}
           onSelect={handleWagerChange}
           disabled={loading || state.solved}
-        />
-      </div>
-
-      {/* Guess Input */}
-      <div className="w-full max-w-xl">
-        <GuessInput
-          placeholder="Search for a player..."
-          searchFn={(q) => trpc.search.players.query({ query: q })}
-          onSubmit={handleGuess}
-          disabled={loading || state.solved}
-        />
-      </div>
-
-      {/* Guess History */}
-      <div className="w-full max-w-xl">
-        <GuessHistory guesses={guesses} penaltyLabel={`-${wrongGuessPenalty}`} />
-      </div>
-
-      {/* Action Buttons */}
-      <div className="flex flex-wrap items-center justify-center gap-2">
-        <HintButton
-          icon={ShieldIcon}
-          label="Reveal Club"
-          cost={currentHintCost}
-          onClick={handleRevealClub}
-          disabled={loading || unrevealed === 0}
-        />
-        <HintButton
-          icon={ShirtIcon}
-          label="Jersey Number"
-          cost={jerseyHintCost}
-          onClick={handleRevealJersey}
-          disabled={loading || jerseysLeft <= 0}
-        />
-        <HintButton
-          icon={PersonIcon}
-          label="Manager"
-          cost={managerHintCost}
-          onClick={handleRevealManager}
-          disabled={loading || managersLeft <= 0}
-        />
-        <HintButton
-          icon={XIcon}
-          label="Give Up"
-          cost={0}
-          onClick={handleGiveUp}
-          disabled={loading}
-          variant="danger"
-        />
-      </div>
-
-      {/* Scout Rating */}
-      <div className="w-full max-w-xl">
-        <ScoutRating
-          score={state.score}
-          wrongGuesses={state.wrongGuesses}
-          wager={wager}
-          animate={scoreAnimate}
         />
       </div>
     </div>
@@ -1046,12 +837,18 @@ function PredictTransfersMode({
   const [scoreAnimate, setScoreAnimate] = useState(false);
   const [animateClubIdx, setAnimateClubIdx] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
+  const [flashIndex, setFlashIndex] = useState<number | null>(null);
+  const [flashType, setFlashType] = useState<'success' | 'error' | null>(null);
+  const [shakeIndex, setShakeIndex] = useState<number | null>(null);
+  const [scorePopup, setScorePopup] = useState<{ value: number; index: number } | null>(null);
+  const [burst, setBurst] = useState(false);
 
   if (state.mode !== 'predict-transfers') return null;
 
   const wager = state.wager;
   const wagerLocked = state.wagerLocked;
-  const wrongGuessPenalty = Math.round(10 * wager * 100) / 100;
+  const nationality = initData.playerNationality;
+  const playerFlag = initData.playerFlag;
 
   type ClueItem = { index: number; club: Club | null; revealed: boolean };
   const clubItems = (clues as ClueItem[]).map((item) => ({
@@ -1077,6 +874,38 @@ function PredictTransfersMode({
     setLoading(false);
   };
 
+  const firstHiddenIdx = state.hiddenClubIndices.find(
+    (i) => !state.guessedClubIndices.includes(i)
+  ) ?? null;
+
+  const triggerFeedback = (type: 'success' | 'error', index?: number, popup?: number) => {
+    if (type === 'error' && index !== undefined) {
+      setShakeIndex(index);
+      setFlashIndex(index);
+      setFlashType('error');
+      setTimeout(() => {
+        setShakeIndex(null);
+        setFlashIndex(null);
+        setFlashType(null);
+      }, 500);
+    } else if (type === 'success') {
+      setBurst(true);
+      setTimeout(() => setBurst(false), 700);
+      if (index !== undefined) {
+        setFlashIndex(index);
+        setFlashType('success');
+        setTimeout(() => {
+          setFlashIndex(null);
+          setFlashType(null);
+        }, 800);
+      }
+      if (popup !== undefined && index !== undefined) {
+        setScorePopup({ value: popup, index });
+        setTimeout(() => setScorePopup(null), 1000);
+      }
+    }
+  };
+
   const handleGuess = async (clubName: string) => {
     setLoading(true);
     const result = await trpc.game.guessTransferClub.mutate({ clubName });
@@ -1091,13 +920,16 @@ function PredictTransfersMode({
         ...prev,
         { text: clubName, correct: true, count: result.matchedIndices.length },
       ]);
-      if (result.matchedIndices.length > 0) {
-        setAnimateClubIdx(result.matchedIndices[0] ?? null);
+      const idx = result.matchedIndices[0];
+      if (idx !== undefined) {
+        setAnimateClubIdx(idx);
+        triggerFeedback('success', idx, Math.round(result.state.score * result.state.wager));
         setTimeout(() => setAnimateClubIdx(null), 700);
       }
     } else {
       setGuesses((prev) => [...prev, { text: clubName, correct: false }]);
       triggerScoreAnim();
+      triggerFeedback('error', firstHiddenIdx ?? undefined);
     }
 
     if (result.state.solved) onSolved(result.earnings);
@@ -1113,6 +945,7 @@ function PredictTransfersMode({
     if (result.profile) setProfile(result.profile);
     if (result.revealedIndex !== null) {
       setAnimateClubIdx(result.revealedIndex);
+      triggerFeedback('success', result.revealedIndex);
       triggerScoreAnim();
       setTimeout(() => setAnimateClubIdx(null), 700);
     }
@@ -1129,92 +962,66 @@ function PredictTransfersMode({
   };
 
   return (
-    <div className="relative z-10 flex w-full flex-col items-center gap-6 px-4 py-8">
-      {/* Header */}
-      <div className="flex w-full max-w-4xl flex-col items-center gap-3">
-        <div className="flex w-full items-center justify-between">
-          <AppLogo />
-          <DailyBadge />
+    <div className="game-screen relative z-10">
+      <ParticleBurst active={burst} />
+      <GameHeader profile={profile} />
+
+      <div className="game-hero-section">
+        <p className="mode-title">Transfer Route</p>
+
+        <PlayerCard name={state.playerName} flag={playerFlag} country={nationality} rating={89} />
+
+        <div className="w-full">
+          <TransferRouteHero
+            clubs={clubItems}
+            animateIndex={animateClubIdx}
+            shakeIndex={shakeIndex}
+            flashIndex={flashIndex}
+            flashType={flashType}
+            scorePopup={scorePopup}
+          />
         </div>
-        <PlayerStatsBar profile={profile} />
+
+        <RoundMeter score={state.score} wager={wager} animate={scoreAnimate} />
+
+        {unguessedCount > 0 && (
+          <div className="w-full">
+            <GuessInput
+              placeholder="Name the missing club..."
+              searchFn={(q) => trpc.search.clubs.query({ query: q })}
+              onSubmit={handleGuess}
+              disabled={loading || state.solved}
+            />
+          </div>
+        )}
+
+        <GuessHistory guesses={guesses} />
+
+        <div className="flex flex-wrap items-center justify-center gap-2">
+          <HintButton
+            icon={ShieldIcon}
+            label="Club"
+            cost={currentHintCost}
+            onClick={handleRevealHint}
+            disabled={loading || unguessedCount === 0}
+          />
+          <HintButton
+            icon={XIcon}
+            label="Give Up"
+            cost={0}
+            onClick={handleGiveUp}
+            disabled={loading}
+            variant="danger"
+          />
+        </div>
       </div>
 
-      {/* Mode Title */}
-      <div className="text-center">
-        <h2 className="text-xl font-bold tracking-tight text-text">Complete the Transfer Route</h2>
-        <p
-          className="mt-1 text-lg font-bold"
-          style={{
-            background: 'linear-gradient(90deg, #00e5ff, #ffd700)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-          }}
-        >
-          {state.playerName}
-        </p>
-        <p className="mt-1 text-xs font-medium text-text-dim">
-          Fill in the missing clubs · {unguessedCount} remaining
-        </p>
-      </div>
-
-      {/* Transfer Timeline — Hero */}
-      <div className="w-[95%] max-w-5xl lg:w-[80%]">
-        <TransferTimeline clubs={clubItems} animateIndex={animateClubIdx} />
-      </div>
-
-      {/* Wager */}
-      <div className="w-full max-w-xl">
-        <WagerSelector
+      <div className="game-bottom-dock">
+        <WagerChips
           selected={wager}
           locked={wagerLocked}
           onSelect={handleWagerChange}
           disabled={loading || state.solved}
-        />
-      </div>
-
-      {/* Guess Input */}
-      {unguessedCount > 0 && (
-        <div className="w-full max-w-xl">
-          <GuessInput
-            placeholder="Search for a club..."
-            searchFn={(q) => trpc.search.clubs.query({ query: q })}
-            onSubmit={handleGuess}
-            disabled={loading || state.solved}
-          />
-        </div>
-      )}
-
-      {/* Guess History */}
-      <div className="w-full max-w-xl">
-        <GuessHistory guesses={guesses} penaltyLabel={`-${wrongGuessPenalty}`} />
-      </div>
-
-      {/* Action Buttons */}
-      <div className="flex flex-wrap items-center justify-center gap-2">
-        <HintButton
-          icon={ShieldIcon}
-          label="Reveal Club"
-          cost={currentHintCost}
-          onClick={handleRevealHint}
-          disabled={loading || unguessedCount === 0}
-        />
-        <HintButton
-          icon={XIcon}
-          label="Give Up"
-          cost={0}
-          onClick={handleGiveUp}
-          disabled={loading}
-          variant="danger"
-        />
-      </div>
-
-      {/* Scout Rating */}
-      <div className="w-full max-w-xl">
-        <ScoutRating
-          score={state.score}
-          wrongGuesses={state.wrongGuesses}
-          wager={wager}
-          animate={scoreAnimate}
         />
       </div>
     </div>
@@ -1240,23 +1047,7 @@ export const App = () => {
   } | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const load = async () => {
-      try {
-        const data = await trpc.init.get.query();
-        setInitData(data);
-        if (data.state.solved) {
-          setSolved(true);
-          await loadSolvedData(null, data);
-        }
-      } catch (e) {
-        setError(e instanceof Error ? e.message : 'Failed to load game');
-      }
-    };
-    void load();
-  }, []);
-
-  const loadSolvedData = async (earnings: RoundEarnings | null = null, baseData?: InitData) => {
+  const loadSolvedData = useCallback(async (earnings: RoundEarnings | null = null, baseData?: InitData) => {
     try {
       const [freshInit, globalLb, dailyLb] = await Promise.all([
         baseData ? Promise.resolve(baseData) : trpc.init.get.query(),
@@ -1277,7 +1068,23 @@ export const App = () => {
     } catch {
       // leaderboard fetch failed silently
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const data = await trpc.init.get.query();
+        setInitData(data);
+        if (data.state.solved) {
+          setSolved(true);
+          await loadSolvedData(null, data);
+        }
+      } catch (e) {
+        setError(e instanceof Error ? e.message : 'Failed to load game');
+      }
+    };
+    void load();
+  }, [loadSolvedData]);
 
   const handleSolved = (earnings: RoundEarnings | null) => {
     setSolved(true);
@@ -1311,16 +1118,12 @@ export const App = () => {
 
   return (
     <div className="relative min-h-full w-full">
-      {/* Background layers */}
-      <div className="stadium-bg" />
-      <div className="pitch-lines" />
-      <div className="vignette" />
-      <Particles />
+      <GameBackground />
 
       {/* Content */}
       <div className="relative z-10 flex min-h-full w-full flex-col items-center">
         {solved && solvedData ? (
-          <div className="flex min-h-full w-full items-center justify-center px-4 py-8">
+          <div className="game-screen relative z-10 py-8">
             <SolvedScreen
               playerName={solvedData.playerName}
               clubs={solvedData.clubs}

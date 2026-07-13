@@ -5,7 +5,8 @@ export const players: Player[] = [
   {
     id: 'cristiano-ronaldo',
     name: 'Cristiano Ronaldo',
-    nationality: 'Portugal',
+    nationality: '🇵🇹',
+    country: 'Portugal',
     clubs: [
       { name: 'Sporting CP', logo: 'sporting-cp.png', primaryColor: '#006847', secondaryColor: '#FFFFFF' },
       { name: 'Manchester United', logo: 'man-utd.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
@@ -37,7 +38,8 @@ export const players: Player[] = [
   {
     id: 'lionel-messi',
     name: 'Lionel Messi',
-    nationality: 'Argentina',
+    nationality: '🇦🇷',
+    country: 'Argentina',
     clubs: [
       { name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' },
       { name: 'Paris Saint-Germain', logo: 'psg.png', primaryColor: '#004170', secondaryColor: '#DA291C' },
@@ -64,7 +66,8 @@ export const players: Player[] = [
   {
     id: 'kylian-mbappe',
     name: 'Kylian Mbappé',
-    nationality: 'France',
+    nationality: '🇫🇷',
+    country: 'France',
     clubs: [
       { name: 'Monaco', logo: 'monaco.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
       { name: 'Paris Saint-Germain', logo: 'psg.png', primaryColor: '#004170', secondaryColor: '#DA291C' },
@@ -87,7 +90,8 @@ export const players: Player[] = [
   {
     id: 'neymar-jr',
     name: 'Neymar Jr',
-    nationality: 'Brazil',
+    nationality: '🇧🇷',
+    country: 'Brazil',
     clubs: [
       { name: 'Santos', logo: 'santos.png', primaryColor: '#FFFFFF', secondaryColor: '#000000' },
       { name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' },
@@ -113,7 +117,8 @@ export const players: Player[] = [
   {
     id: 'erling-haaland',
     name: 'Erling Haaland',
-    nationality: 'Norway',
+    nationality: '🇳🇴',
+    country: 'Norway',
     clubs: [
       { name: 'Molde', logo: 'molde.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
       { name: 'RB Salzburg', logo: 'rb-salzburg.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
@@ -138,7 +143,8 @@ export const players: Player[] = [
   {
     id: 'zlatan-ibrahimovic',
     name: 'Zlatan Ibrahimović',
-    nationality: 'Sweden',
+    nationality: '🇸🇪',
+    country: 'Sweden',
     clubs: [
       { name: 'Malmö FF', logo: 'malmo.png', primaryColor: '#6CBEE6', secondaryColor: '#FFFFFF' },
       { name: 'Ajax', logo: 'ajax.png', primaryColor: '#D2122E', secondaryColor: '#FFFFFF' },
@@ -179,7 +185,8 @@ export const players: Player[] = [
   {
     id: 'thierry-henry',
     name: 'Thierry Henry',
-    nationality: 'France',
+    nationality: '🇫🇷',
+    country: 'France',
     clubs: [
       { name: 'Monaco', logo: 'monaco.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
       { name: 'Juventus', logo: 'juventus.png', primaryColor: '#000000', secondaryColor: '#FFFFFF' },
@@ -205,7 +212,8 @@ export const players: Player[] = [
   {
     id: 'ronaldinho',
     name: 'Ronaldinho',
-    nationality: 'Brazil',
+    nationality: '🇧🇷',
+    country: 'Brazil',
     clubs: [
       { name: 'Grêmio', logo: 'gremio.png', primaryColor: '#0A5EB6', secondaryColor: '#000000' },
       { name: 'Paris Saint-Germain', logo: 'psg.png', primaryColor: '#004170', secondaryColor: '#DA291C' },
@@ -232,7 +240,8 @@ export const players: Player[] = [
   {
     id: 'wayne-rooney',
     name: 'Wayne Rooney',
-    nationality: 'England',
+    nationality: '🏴󠁧󠁢󠁥󠁮󠁧󠁿',
+    country: 'England',
     clubs: [
       { name: 'Everton', logo: 'everton.png', primaryColor: '#003399', secondaryColor: '#FFFFFF' },
       { name: 'Manchester United', logo: 'man-utd.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
@@ -260,7 +269,8 @@ export const players: Player[] = [
   {
     id: 'david-beckham',
     name: 'David Beckham',
-    nationality: 'England',
+    nationality: '🏴󠁧󠁢󠁥󠁮󠁧󠁿',
+    country: 'England',
     clubs: [
       { name: 'Manchester United', logo: 'man-utd.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
       { name: 'Real Madrid', logo: 'real-madrid.png', primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
@@ -286,7 +296,8 @@ export const players: Player[] = [
   {
     id: 'zinedine-zidane',
     name: 'Zinedine Zidane',
-    nationality: 'France',
+    nationality: '🇫🇷',
+    country: 'France',
     clubs: [
       { name: 'Cannes', logo: 'cannes.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
       { name: 'Bordeaux', logo: 'bordeaux.png', primaryColor: '#13284B', secondaryColor: '#FFFFFF' },
@@ -310,7 +321,8 @@ export const players: Player[] = [
   {
     id: 'luka-modric',
     name: 'Luka Modrić',
-    nationality: 'Croatia',
+    nationality: '🇭🇷',
+    country: 'Croatia',
     clubs: [
       { name: 'Dinamo Zagreb', logo: 'dinamo-zagreb.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
       { name: 'Tottenham Hotspur', logo: 'tottenham.png', primaryColor: '#FFFFFF', secondaryColor: '#13284B' },
@@ -333,7 +345,8 @@ export const players: Player[] = [
   {
     id: 'robert-lewandowski',
     name: 'Robert Lewandowski',
-    nationality: 'Poland',
+    nationality: '🇵🇱',
+    country: 'Poland',
     clubs: [
       { name: 'Znicz Pruszków', logo: 'znicz.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
       { name: 'Lech Poznań', logo: 'lech-poznan.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
@@ -360,7 +373,8 @@ export const players: Player[] = [
   {
     id: 'mohamed-salah',
     name: 'Mohamed Salah',
-    nationality: 'Egypt',
+    nationality: '🇪🇬',
+    country: 'Egypt',
     clubs: [
       { name: 'El Mokawloon', logo: 'el-mokawloon.png', primaryColor: '#FF8C00', secondaryColor: '#000000' },
       { name: 'Basel', logo: 'basel.png', primaryColor: '#DA291C', secondaryColor: '#003DA5' },
@@ -388,7 +402,8 @@ export const players: Player[] = [
   {
     id: 'kevin-de-bruyne',
     name: 'Kevin De Bruyne',
-    nationality: 'Belgium',
+    nationality: '🇧🇪',
+    country: 'Belgium',
     clubs: [
       { name: 'Genk', logo: 'genk.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
       { name: 'Chelsea', logo: 'chelsea.png', primaryColor: '#034694', secondaryColor: '#FFFFFF' },
@@ -413,7 +428,8 @@ export const players: Player[] = [
   {
     id: 'eden-hazard',
     name: 'Eden Hazard',
-    nationality: 'Belgium',
+    nationality: '🇧🇪',
+    country: 'Belgium',
     clubs: [
       { name: 'Lille', logo: 'lille.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
       { name: 'Chelsea', logo: 'chelsea.png', primaryColor: '#034694', secondaryColor: '#FFFFFF' },
@@ -438,7 +454,8 @@ export const players: Player[] = [
   {
     id: 'paul-pogba',
     name: 'Paul Pogba',
-    nationality: 'France',
+    nationality: '🇫🇷',
+    country: 'France',
     clubs: [
       { name: 'Manchester United', logo: 'man-utd.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
       { name: 'Juventus', logo: 'juventus.png', primaryColor: '#000000', secondaryColor: '#FFFFFF' },
@@ -461,7 +478,8 @@ export const players: Player[] = [
   {
     id: 'gareth-bale',
     name: 'Gareth Bale',
-    nationality: 'Wales',
+    nationality: '🏴󠁧󠁢󠁷󠁬󠁳󠁿',
+    country: 'Wales',
     clubs: [
       { name: 'Southampton', logo: 'southampton.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
       { name: 'Tottenham Hotspur', logo: 'tottenham.png', primaryColor: '#FFFFFF', secondaryColor: '#13284B' },
@@ -488,7 +506,8 @@ export const players: Player[] = [
   {
     id: 'luis-suarez',
     name: 'Luis Suárez',
-    nationality: 'Uruguay',
+    nationality: '🇺🇾',
+    country: 'Uruguay',
     clubs: [
       { name: 'Nacional', logo: 'nacional.png', primaryColor: '#003DA5', secondaryColor: '#DA291C' },
       { name: 'Groningen', logo: 'groningen.png', primaryColor: '#1D9053', secondaryColor: '#FFFFFF' },
@@ -518,7 +537,8 @@ export const players: Player[] = [
   {
     id: 'karim-benzema',
     name: 'Karim Benzema',
-    nationality: 'France',
+    nationality: '🇫🇷',
+    country: 'France',
     clubs: [
       { name: 'Lyon', logo: 'lyon.png', primaryColor: '#FFFFFF', secondaryColor: '#003DA5' },
       { name: 'Real Madrid', logo: 'real-madrid.png', primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
@@ -541,7 +561,8 @@ export const players: Player[] = [
   {
     id: 'virgil-van-dijk',
     name: 'Virgil van Dijk',
-    nationality: 'Netherlands',
+    nationality: '🇳🇱',
+    country: 'Netherlands',
     clubs: [
       { name: 'Groningen', logo: 'groningen.png', primaryColor: '#1D9053', secondaryColor: '#FFFFFF' },
       { name: 'Celtic', logo: 'celtic.png', primaryColor: '#1D9053', secondaryColor: '#FFFFFF' },
@@ -565,7 +586,8 @@ export const players: Player[] = [
   {
     id: 'toni-kroos',
     name: 'Toni Kroos',
-    nationality: 'Germany',
+    nationality: '🇩🇪',
+    country: 'Germany',
     clubs: [
       { name: 'Bayern Munich', logo: 'bayern-munich.png', primaryColor: '#DC052D', secondaryColor: '#FFFFFF' },
       { name: 'Bayer Leverkusen', logo: 'leverkusen.png', primaryColor: '#DA291C', secondaryColor: '#000000' },
@@ -588,7 +610,8 @@ export const players: Player[] = [
   {
     id: 'sergio-ramos',
     name: 'Sergio Ramos',
-    nationality: 'Spain',
+    nationality: '🇪🇸',
+    country: 'Spain',
     clubs: [
       { name: 'Sevilla', logo: 'sevilla.png', primaryColor: '#FFFFFF', secondaryColor: '#DA291C' },
       { name: 'Real Madrid', logo: 'real-madrid.png', primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
@@ -614,7 +637,8 @@ export const players: Player[] = [
   {
     id: 'sadio-mane',
     name: 'Sadio Mané',
-    nationality: 'Senegal',
+    nationality: '🇸🇳',
+    country: 'Senegal',
     clubs: [
       { name: 'Metz', logo: 'metz.png', primaryColor: '#800020', secondaryColor: '#FFFFFF' },
       { name: 'RB Salzburg', logo: 'rb-salzburg.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
@@ -641,7 +665,8 @@ export const players: Player[] = [
   {
     id: 'andres-iniesta',
     name: 'Andrés Iniesta',
-    nationality: 'Spain',
+    nationality: '🇪🇸',
+    country: 'Spain',
     clubs: [
       { name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' },
       { name: 'Vissel Kobe', logo: 'vissel-kobe.png', primaryColor: '#8B0000', secondaryColor: '#FFFFFF' },
@@ -663,7 +688,8 @@ export const players: Player[] = [
   {
     id: 'xavi-hernandez',
     name: 'Xavi Hernández',
-    nationality: 'Spain',
+    nationality: '🇪🇸',
+    country: 'Spain',
     clubs: [
       { name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' },
       { name: 'Al-Sadd', logo: 'al-sadd.png', primaryColor: '#FFFFFF', secondaryColor: '#000000' },
@@ -684,7 +710,8 @@ export const players: Player[] = [
   {
     id: 'samuel-etoo',
     name: "Samuel Eto'o",
-    nationality: 'Cameroon',
+    nationality: '🇨🇲',
+    country: 'Cameroon',
     clubs: [
       { name: 'Real Madrid', logo: 'real-madrid.png', primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
       { name: 'Leganés', logo: 'leganes.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
@@ -713,7 +740,8 @@ export const players: Player[] = [
   {
     id: 'didier-drogba',
     name: 'Didier Drogba',
-    nationality: 'Ivory Coast',
+    nationality: '🇨🇮',
+    country: 'Ivory Coast',
     clubs: [
       { name: 'Le Mans', logo: 'le-mans.png', primaryColor: '#DA291C', secondaryColor: '#FFCD00' },
       { name: 'Guingamp', logo: 'guingamp.png', primaryColor: '#DA291C', secondaryColor: '#000000' },
@@ -742,7 +770,8 @@ export const players: Player[] = [
   {
     id: 'frank-lampard',
     name: 'Frank Lampard',
-    nationality: 'England',
+    nationality: '🏴󠁧󠁢󠁥󠁮󠁧󠁿',
+    country: 'England',
     clubs: [
       { name: 'West Ham United', logo: 'west-ham.png', primaryColor: '#7A263A', secondaryColor: '#1BB1E7' },
       { name: 'Chelsea', logo: 'chelsea.png', primaryColor: '#034694', secondaryColor: '#FFFFFF' },
@@ -767,7 +796,8 @@ export const players: Player[] = [
   {
     id: 'steven-gerrard',
     name: 'Steven Gerrard',
-    nationality: 'England',
+    nationality: '🏴󠁧󠁢󠁥󠁮󠁧󠁿',
+    country: 'England',
     clubs: [
       { name: 'Liverpool', logo: 'liverpool.png', primaryColor: '#C8102E', secondaryColor: '#FFFFFF' },
       { name: 'LA Galaxy', logo: 'la-galaxy.png', primaryColor: '#FFFFFF', secondaryColor: '#00245D' },
@@ -787,7 +817,8 @@ export const players: Player[] = [
   {
     id: 'andrea-pirlo',
     name: 'Andrea Pirlo',
-    nationality: 'Italy',
+    nationality: '🇮🇹',
+    country: 'Italy',
     clubs: [
       { name: 'Brescia', logo: 'brescia.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
       { name: 'Inter Milan', logo: 'inter-milan.png', primaryColor: '#003DA5', secondaryColor: '#000000' },
@@ -813,7 +844,8 @@ export const players: Player[] = [
   {
     id: 'gianluigi-buffon',
     name: 'Gianluigi Buffon',
-    nationality: 'Italy',
+    nationality: '🇮🇹',
+    country: 'Italy',
     clubs: [
       { name: 'Parma', logo: 'parma.png', primaryColor: '#FFCD00', secondaryColor: '#003DA5' },
       { name: 'Juventus', logo: 'juventus.png', primaryColor: '#000000', secondaryColor: '#FFFFFF' },
@@ -841,7 +873,8 @@ export const players: Player[] = [
   {
     id: 'paolo-maldini',
     name: 'Paolo Maldini',
-    nationality: 'Italy',
+    nationality: '🇮🇹',
+    country: 'Italy',
     clubs: [{ name: 'AC Milan', logo: 'ac-milan.png', primaryColor: '#DA291C', secondaryColor: '#000000' }],
     managers: [
       { name: 'Arrigo Sacchi', photo: '' },
@@ -854,7 +887,8 @@ export const players: Player[] = [
   {
     id: 'ronaldo-nazario',
     name: 'Ronaldo Nazário',
-    nationality: 'Brazil',
+    nationality: '🇧🇷',
+    country: 'Brazil',
     clubs: [
       { name: 'Cruzeiro', logo: 'cruzeiro.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
       { name: 'PSV', logo: 'psv.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
@@ -883,7 +917,8 @@ export const players: Player[] = [
   {
     id: 'rio-ferdinand',
     name: 'Rio Ferdinand',
-    nationality: 'England',
+    nationality: '🏴󠁧󠁢󠁥󠁮󠁧󠁿',
+    country: 'England',
     clubs: [
       { name: 'West Ham United', logo: 'west-ham.png', primaryColor: '#7A263A', secondaryColor: '#1BB1E7' },
       { name: 'Leeds United', logo: 'leeds.png', primaryColor: '#FFFFFF', secondaryColor: '#1D428A' },
@@ -906,7 +941,8 @@ export const players: Player[] = [
   {
     id: 'patrick-vieira',
     name: 'Patrick Vieira',
-    nationality: 'France',
+    nationality: '🇫🇷',
+    country: 'France',
     clubs: [
       { name: 'Cannes', logo: 'cannes.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
       { name: 'AC Milan', logo: 'ac-milan.png', primaryColor: '#DA291C', secondaryColor: '#000000' },
@@ -931,7 +967,8 @@ export const players: Player[] = [
   {
     id: 'dennis-bergkamp',
     name: 'Dennis Bergkamp',
-    nationality: 'Netherlands',
+    nationality: '🇳🇱',
+    country: 'Netherlands',
     clubs: [
       { name: 'Ajax', logo: 'ajax.png', primaryColor: '#D2122E', secondaryColor: '#FFFFFF' },
       { name: 'Inter Milan', logo: 'inter-milan.png', primaryColor: '#003DA5', secondaryColor: '#000000' },
@@ -951,7 +988,8 @@ export const players: Player[] = [
   {
     id: 'jadon-sancho',
     name: 'Jadon Sancho',
-    nationality: 'England',
+    nationality: '🏴󠁧󠁢󠁥󠁮󠁧󠁿',
+    country: 'England',
     clubs: [
       { name: 'Manchester City', logo: 'man-city.png', primaryColor: '#6CABDD', secondaryColor: '#FFFFFF' },
       { name: 'Borussia Dortmund', logo: 'dortmund.png', primaryColor: '#FDE100', secondaryColor: '#000000' },
@@ -977,7 +1015,8 @@ export const players: Player[] = [
   {
     id: 'romelu-lukaku',
     name: 'Romelu Lukaku',
-    nationality: 'Belgium',
+    nationality: '🇧🇪',
+    country: 'Belgium',
     clubs: [
       { name: 'Anderlecht', logo: 'anderlecht.png', primaryColor: '#6B3FA0', secondaryColor: '#FFFFFF' },
       { name: 'Chelsea', logo: 'chelsea.png', primaryColor: '#034694', secondaryColor: '#FFFFFF' },
@@ -1015,7 +1054,8 @@ export const players: Player[] = [
   {
     id: 'raheem-sterling',
     name: 'Raheem Sterling',
-    nationality: 'England',
+    nationality: '🏴󠁧󠁢󠁥󠁮󠁧󠁿',
+    country: 'England',
     clubs: [
       { name: 'Liverpool', logo: 'liverpool.png', primaryColor: '#C8102E', secondaryColor: '#FFFFFF' },
       { name: 'Manchester City', logo: 'man-city.png', primaryColor: '#6CABDD', secondaryColor: '#FFFFFF' },
@@ -1039,7 +1079,8 @@ export const players: Player[] = [
   {
     id: 'antoine-griezmann',
     name: 'Antoine Griezmann',
-    nationality: 'France',
+    nationality: '🇫🇷',
+    country: 'France',
     clubs: [
       { name: 'Real Sociedad', logo: 'real-sociedad.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
       { name: 'Atlético Madrid', logo: 'atletico-madrid.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
@@ -1064,7 +1105,8 @@ export const players: Player[] = [
   {
     id: 'angel-di-maria',
     name: 'Ángel Di María',
-    nationality: 'Argentina',
+    nationality: '🇦🇷',
+    country: 'Argentina',
     clubs: [
       { name: 'Rosario Central', logo: 'rosario-central.png', primaryColor: '#003DA5', secondaryColor: '#FFCD00' },
       { name: 'Benfica', logo: 'benfica.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
@@ -1095,7 +1137,8 @@ export const players: Player[] = [
   {
     id: 'james-rodriguez',
     name: 'James Rodríguez',
-    nationality: 'Colombia',
+    nationality: '🇨🇴',
+    country: 'Colombia',
     clubs: [
       { name: 'Envigado', logo: 'envigado.png', primaryColor: '#F77F00', secondaryColor: '#FFFFFF' },
       { name: 'Banfield', logo: 'banfield.png', primaryColor: '#1D9053', secondaryColor: '#FFFFFF' },
@@ -1128,7 +1171,8 @@ export const players: Player[] = [
   {
     id: 'cesc-fabregas',
     name: 'Cesc Fàbregas',
-    nationality: 'Spain',
+    nationality: '🇪🇸',
+    country: 'Spain',
     clubs: [
       { name: 'Arsenal', logo: 'arsenal.png', primaryColor: '#EF0107', secondaryColor: '#FFFFFF' },
       { name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' },
@@ -1153,7 +1197,8 @@ export const players: Player[] = [
   {
     id: 'robin-van-persie',
     name: 'Robin van Persie',
-    nationality: 'Netherlands',
+    nationality: '🇳🇱',
+    country: 'Netherlands',
     clubs: [
       { name: 'Feyenoord', logo: 'feyenoord.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
       { name: 'Arsenal', logo: 'arsenal.png', primaryColor: '#EF0107', secondaryColor: '#FFFFFF' },
@@ -1179,7 +1224,8 @@ export const players: Player[] = [
   {
     id: 'mesut-ozil',
     name: 'Mesut Özil',
-    nationality: 'Germany',
+    nationality: '🇩🇪',
+    country: 'Germany',
     clubs: [
       { name: 'Schalke 04', logo: 'schalke.png', primaryColor: '#004D98', secondaryColor: '#FFFFFF' },
       { name: 'Werder Bremen', logo: 'werder-bremen.png', primaryColor: '#1D9053', secondaryColor: '#FFFFFF' },
@@ -1206,7 +1252,8 @@ export const players: Player[] = [
   {
     id: 'pierre-emerick-aubameyang',
     name: 'Pierre-Emerick Aubameyang',
-    nationality: 'Gabon',
+    nationality: '🇬🇦',
+    country: 'Gabon',
     clubs: [
       { name: 'AC Milan', logo: 'ac-milan.png', primaryColor: '#DA291C', secondaryColor: '#000000' },
       { name: 'Saint-Étienne', logo: 'saint-etienne.png', primaryColor: '#1D9053', secondaryColor: '#FFFFFF' },
@@ -1235,7 +1282,8 @@ export const players: Player[] = [
   {
     id: 'alexis-sanchez',
     name: 'Alexis Sánchez',
-    nationality: 'Chile',
+    nationality: '🇨🇱',
+    country: 'Chile',
     clubs: [
       { name: 'Cobreloa', logo: 'cobreloa.png', primaryColor: '#F77F00', secondaryColor: '#000000' },
       { name: 'Udinese', logo: 'udinese.png', primaryColor: '#FFFFFF', secondaryColor: '#000000' },
@@ -1263,7 +1311,8 @@ export const players: Player[] = [
   {
     id: 'david-silva',
     name: 'David Silva',
-    nationality: 'Spain',
+    nationality: '🇪🇸',
+    country: 'Spain',
     clubs: [
       { name: 'Valencia', logo: 'valencia.png', primaryColor: '#FFFFFF', secondaryColor: '#000000' },
       { name: 'Manchester City', logo: 'man-city.png', primaryColor: '#6CABDD', secondaryColor: '#FFFFFF' },
@@ -1285,7 +1334,8 @@ export const players: Player[] = [
   {
     id: 'sergio-aguero',
     name: 'Sergio Agüero',
-    nationality: 'Argentina',
+    nationality: '🇦🇷',
+    country: 'Argentina',
     clubs: [
       { name: 'Independiente', logo: 'independiente.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
       { name: 'Atlético Madrid', logo: 'atletico-madrid.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
@@ -1310,7 +1360,8 @@ export const players: Player[] = [
   {
     id: 'harry-kane',
     name: 'Harry Kane',
-    nationality: 'England',
+    nationality: '🏴󠁧󠁢󠁥󠁮󠁧󠁿',
+    country: 'England',
     clubs: [
       { name: 'Tottenham Hotspur', logo: 'tottenham.png', primaryColor: '#FFFFFF', secondaryColor: '#13284B' },
       { name: 'Bayern Munich', logo: 'bayern-munich.png', primaryColor: '#DC052D', secondaryColor: '#FFFFFF' },
@@ -1334,7 +1385,8 @@ export const players: Player[] = [
   {
     id: 'dele-alli',
     name: 'Dele Alli',
-    nationality: 'England',
+    nationality: '🏴󠁧󠁢󠁥󠁮󠁧󠁿',
+    country: 'England',
     clubs: [
       { name: 'MK Dons', logo: 'mk-dons.png', primaryColor: '#FFFFFF', secondaryColor: '#000000' },
       { name: 'Tottenham Hotspur', logo: 'tottenham.png', primaryColor: '#FFFFFF', secondaryColor: '#13284B' },
@@ -1356,7 +1408,8 @@ export const players: Player[] = [
   {
     id: 'jack-grealish',
     name: 'Jack Grealish',
-    nationality: 'England',
+    nationality: '🏴󠁧󠁢󠁥󠁮󠁧󠁿',
+    country: 'England',
     clubs: [
       { name: 'Aston Villa', logo: 'aston-villa.png', primaryColor: '#7A263A', secondaryColor: '#95BFE5' },
       { name: 'Manchester City', logo: 'man-city.png', primaryColor: '#6CABDD', secondaryColor: '#FFFFFF' },
@@ -1375,7 +1428,8 @@ export const players: Player[] = [
   {
     id: 'marcus-rashford',
     name: 'Marcus Rashford',
-    nationality: 'England',
+    nationality: '🏴󠁧󠁢󠁥󠁮󠁧󠁿',
+    country: 'England',
     clubs: [
       { name: 'Manchester United', logo: 'man-utd.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
       { name: 'Aston Villa', logo: 'aston-villa.png', primaryColor: '#7A263A', secondaryColor: '#95BFE5' },
@@ -1398,7 +1452,8 @@ export const players: Player[] = [
   {
     id: 'philippe-coutinho',
     name: 'Philippe Coutinho',
-    nationality: 'Brazil',
+    nationality: '🇧🇷',
+    country: 'Brazil',
     clubs: [
       { name: 'Inter Milan', logo: 'inter-milan.png', primaryColor: '#003DA5', secondaryColor: '#000000' },
       { name: 'Espanyol', logo: 'espanyol.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
@@ -1427,7 +1482,8 @@ export const players: Player[] = [
   {
     id: 'christian-eriksen',
     name: 'Christian Eriksen',
-    nationality: 'Denmark',
+    nationality: '🇩🇰',
+    country: 'Denmark',
     clubs: [
       { name: 'Ajax', logo: 'ajax.png', primaryColor: '#D2122E', secondaryColor: '#FFFFFF' },
       { name: 'Tottenham Hotspur', logo: 'tottenham.png', primaryColor: '#FFFFFF', secondaryColor: '#13284B' },
@@ -1455,7 +1511,8 @@ export const players: Player[] = [
   {
     id: 'thibaut-courtois',
     name: 'Thibaut Courtois',
-    nationality: 'Belgium',
+    nationality: '🇧🇪',
+    country: 'Belgium',
     clubs: [
       { name: 'Genk', logo: 'genk.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
       { name: 'Chelsea', logo: 'chelsea.png', primaryColor: '#034694', secondaryColor: '#FFFFFF' },
@@ -1480,7 +1537,8 @@ export const players: Player[] = [
   {
     id: 'manuel-neuer',
     name: 'Manuel Neuer',
-    nationality: 'Germany',
+    nationality: '🇩🇪',
+    country: 'Germany',
     clubs: [
       { name: 'Schalke 04', logo: 'schalke.png', primaryColor: '#004D98', secondaryColor: '#FFFFFF' },
       { name: 'Bayern Munich', logo: 'bayern-munich.png', primaryColor: '#DC052D', secondaryColor: '#FFFFFF' },
@@ -1503,7 +1561,8 @@ export const players: Player[] = [
   {
     id: 'jan-oblak',
     name: 'Jan Oblak',
-    nationality: 'Slovenia',
+    nationality: '🇸🇮',
+    country: 'Slovenia',
     clubs: [
       { name: 'Olimpija Ljubljana', logo: 'olimpija.png', primaryColor: '#1D9053', secondaryColor: '#FFFFFF' },
       { name: 'Benfica', logo: 'benfica.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
@@ -1522,7 +1581,8 @@ export const players: Player[] = [
   {
     id: 'alisson-becker',
     name: 'Alisson Becker',
-    nationality: 'Brazil',
+    nationality: '🇧🇷',
+    country: 'Brazil',
     clubs: [
       { name: 'Internacional', logo: 'internacional.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
       { name: 'Roma', logo: 'roma.png', primaryColor: '#8E1F2F', secondaryColor: '#F7A600' },
@@ -1543,7 +1603,8 @@ export const players: Player[] = [
   {
     id: 'marc-andre-ter-stegen',
     name: 'Marc-André ter Stegen',
-    nationality: 'Germany',
+    nationality: '🇩🇪',
+    country: 'Germany',
     clubs: [
       { name: 'Borussia Mönchengladbach', logo: 'gladbach.png', primaryColor: '#000000', secondaryColor: '#1D9053' },
       { name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' },
@@ -1565,7 +1626,8 @@ export const players: Player[] = [
   {
     id: 'ederson-moraes',
     name: 'Ederson',
-    nationality: 'Brazil',
+    nationality: '🇧🇷',
+    country: 'Brazil',
     clubs: [
       { name: 'Benfica', logo: 'benfica.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
       { name: 'Manchester City', logo: 'man-city.png', primaryColor: '#6CABDD', secondaryColor: '#FFFFFF' },
@@ -1585,7 +1647,8 @@ export const players: Player[] = [
   {
     id: 'keylor-navas',
     name: 'Keylor Navas',
-    nationality: 'Costa Rica',
+    nationality: '🇨🇷',
+    country: 'Costa Rica',
     clubs: [
       { name: 'Saprissa', logo: 'saprissa.png', primaryColor: '#6B3FA0', secondaryColor: '#FFFFFF' },
       { name: 'Albacete', logo: 'albacete.png', primaryColor: '#FFFFFF', secondaryColor: '#DA291C' },
@@ -1608,7 +1671,8 @@ export const players: Player[] = [
   {
     id: 'dani-alves',
     name: 'Dani Alves',
-    nationality: 'Brazil',
+    nationality: '🇧🇷',
+    country: 'Brazil',
     clubs: [
       { name: 'Bahia', logo: 'bahia.png', primaryColor: '#003DA5', secondaryColor: '#DA291C' },
       { name: 'Sevilla', logo: 'sevilla.png', primaryColor: '#FFFFFF', secondaryColor: '#DA291C' },
@@ -1639,7 +1703,8 @@ export const players: Player[] = [
   {
     id: 'marcelo-vieira',
     name: 'Marcelo',
-    nationality: 'Brazil',
+    nationality: '🇧🇷',
+    country: 'Brazil',
     clubs: [
       { name: 'Fluminense', logo: 'fluminense.png', primaryColor: '#8B0000', secondaryColor: '#1D9053' },
       { name: 'Real Madrid', logo: 'real-madrid.png', primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
@@ -1661,7 +1726,8 @@ export const players: Player[] = [
   {
     id: 'david-luiz',
     name: 'David Luiz',
-    nationality: 'Brazil',
+    nationality: '🇧🇷',
+    country: 'Brazil',
     clubs: [
       { name: 'Vitória', logo: 'vitoria.png', primaryColor: '#DA291C', secondaryColor: '#000000' },
       { name: 'Benfica', logo: 'benfica.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
@@ -1692,7 +1758,8 @@ export const players: Player[] = [
   {
     id: 'raphael-varane',
     name: 'Raphaël Varane',
-    nationality: 'France',
+    nationality: '🇫🇷',
+    country: 'France',
     clubs: [
       { name: 'Lens', logo: 'lens.png', primaryColor: '#DA291C', secondaryColor: '#FFCD00' },
       { name: 'Real Madrid', logo: 'real-madrid.png', primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
@@ -1717,7 +1784,8 @@ export const players: Player[] = [
   {
     id: 'thiago-silva',
     name: 'Thiago Silva',
-    nationality: 'Brazil',
+    nationality: '🇧🇷',
+    country: 'Brazil',
     clubs: [
       { name: 'Fluminense', logo: 'fluminense.png', primaryColor: '#8B0000', secondaryColor: '#1D9053' },
       { name: 'AC Milan', logo: 'ac-milan.png', primaryColor: '#DA291C', secondaryColor: '#000000' },
@@ -1743,7 +1811,8 @@ export const players: Player[] = [
   {
     id: 'joshua-kimmich',
     name: 'Joshua Kimmich',
-    nationality: 'Germany',
+    nationality: '🇩🇪',
+    country: 'Germany',
     clubs: [
       { name: 'RB Leipzig', logo: 'rb-leipzig.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
       { name: 'Bayern Munich', logo: 'bayern-munich.png', primaryColor: '#DC052D', secondaryColor: '#FFFFFF' },
@@ -1768,7 +1837,8 @@ export const players: Player[] = [
   {
     id: 'n-golo-kante',
     name: "N'Golo Kanté",
-    nationality: 'France',
+    nationality: '🇫🇷',
+    country: 'France',
     clubs: [
       { name: 'Boulogne', logo: 'boulogne.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
       { name: 'Caen', logo: 'caen.png', primaryColor: '#003DA5', secondaryColor: '#DA291C' },
@@ -1793,7 +1863,8 @@ export const players: Player[] = [
   {
     id: 'vinicius-junior',
     name: 'Vinícius Júnior',
-    nationality: 'Brazil',
+    nationality: '🇧🇷',
+    country: 'Brazil',
     clubs: [
       { name: 'Flamengo', logo: 'flamengo.png', primaryColor: '#DA291C', secondaryColor: '#000000' },
       { name: 'Real Madrid', logo: 'real-madrid.png', primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
@@ -1813,7 +1884,8 @@ export const players: Player[] = [
   {
     id: 'jude-bellingham',
     name: 'Jude Bellingham',
-    nationality: 'England',
+    nationality: '🏴󠁧󠁢󠁥󠁮󠁧󠁿',
+    country: 'England',
     clubs: [
       { name: 'Birmingham City', logo: 'birmingham.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
       { name: 'Borussia Dortmund', logo: 'dortmund.png', primaryColor: '#FDE100', secondaryColor: '#000000' },
@@ -1835,7 +1907,8 @@ export const players: Player[] = [
   {
     id: 'pedri',
     name: 'Pedri',
-    nationality: 'Spain',
+    nationality: '🇪🇸',
+    country: 'Spain',
     clubs: [
       { name: 'Las Palmas', logo: 'las-palmas.png', primaryColor: '#FFCD00', secondaryColor: '#003DA5' },
       { name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' },
@@ -1856,7 +1929,8 @@ export const players: Player[] = [
   {
     id: 'bukayo-saka',
     name: 'Bukayo Saka',
-    nationality: 'England',
+    nationality: '🏴󠁧󠁢󠁥󠁮󠁧󠁿',
+    country: 'England',
     clubs: [{ name: 'Arsenal', logo: 'arsenal.png', primaryColor: '#EF0107', secondaryColor: '#FFFFFF' }],
     managers: [
       { name: 'Unai Emery', photo: '' },
@@ -1871,7 +1945,8 @@ export const players: Player[] = [
   {
     id: 'phil-foden',
     name: 'Phil Foden',
-    nationality: 'England',
+    nationality: '🏴󠁧󠁢󠁥󠁮󠁧󠁿',
+    country: 'England',
     clubs: [{ name: 'Manchester City', logo: 'man-city.png', primaryColor: '#6CABDD', secondaryColor: '#FFFFFF' }],
     managers: [{ name: 'Pep Guardiola', photo: '' }],
     jerseys: [
@@ -1883,7 +1958,8 @@ export const players: Player[] = [
   {
     id: 'bruno-fernandes',
     name: 'Bruno Fernandes',
-    nationality: 'Portugal',
+    nationality: '🇵🇹',
+    country: 'Portugal',
     clubs: [
       { name: 'Novara', logo: 'novara.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
       { name: 'Udinese', logo: 'udinese.png', primaryColor: '#FFFFFF', secondaryColor: '#000000' },
@@ -1907,7 +1983,8 @@ export const players: Player[] = [
   {
     id: 'son-heung-min',
     name: 'Son Heung-min',
-    nationality: 'South Korea',
+    nationality: '🇰🇷',
+    country: 'South Korea',
     clubs: [
       { name: 'Hamburger SV', logo: 'hamburg.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
       { name: 'Bayer Leverkusen', logo: 'leverkusen.png', primaryColor: '#DA291C', secondaryColor: '#000000' },
@@ -1930,7 +2007,8 @@ export const players: Player[] = [
   {
     id: 'declan-rice',
     name: 'Declan Rice',
-    nationality: 'England',
+    nationality: '🏴󠁧󠁢󠁥󠁮󠁧󠁿',
+    country: 'England',
     clubs: [
       { name: 'West Ham United', logo: 'west-ham.png', primaryColor: '#7A263A', secondaryColor: '#1BB1E7' },
       { name: 'Arsenal', logo: 'arsenal.png', primaryColor: '#EF0107', secondaryColor: '#FFFFFF' },
@@ -1949,7 +2027,8 @@ export const players: Player[] = [
   {
     id: 'joao-felix',
     name: 'João Félix',
-    nationality: 'Portugal',
+    nationality: '🇵🇹',
+    country: 'Portugal',
     clubs: [
       { name: 'Benfica', logo: 'benfica.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
       { name: 'Atlético Madrid', logo: 'atletico-madrid.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
@@ -1975,7 +2054,8 @@ export const players: Player[] = [
   {
     id: 'bernardo-silva',
     name: 'Bernardo Silva',
-    nationality: 'Portugal',
+    nationality: '🇵🇹',
+    country: 'Portugal',
     clubs: [
       { name: 'Benfica', logo: 'benfica.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
       { name: 'Monaco', logo: 'monaco.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
@@ -1995,7 +2075,8 @@ export const players: Player[] = [
   {
     id: 'ousmane-dembele',
     name: 'Ousmane Dembélé',
-    nationality: 'France',
+    nationality: '🇫🇷',
+    country: 'France',
     clubs: [
       { name: 'Rennes', logo: 'rennes.png', primaryColor: '#DA291C', secondaryColor: '#000000' },
       { name: 'Borussia Dortmund', logo: 'dortmund.png', primaryColor: '#FDE100', secondaryColor: '#000000' },
@@ -2019,7 +2100,8 @@ export const players: Player[] = [
   {
     id: 'lamine-yamal',
     name: 'Lamine Yamal',
-    nationality: 'Spain',
+    nationality: '🇪🇸',
+    country: 'Spain',
     clubs: [{ name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' }],
     managers: [
       { name: 'Xavi', photo: '' },
@@ -2031,7 +2113,8 @@ export const players: Player[] = [
   {
     id: 'florian-wirtz',
     name: 'Florian Wirtz',
-    nationality: 'Germany',
+    nationality: '🇩🇪',
+    country: 'Germany',
     clubs: [{ name: 'Bayer Leverkusen', logo: 'leverkusen.png', primaryColor: '#DA291C', secondaryColor: '#000000' }],
     managers: [
       { name: 'Peter Bosz', photo: '' },
@@ -2043,7 +2126,8 @@ export const players: Player[] = [
   {
     id: 'gavi',
     name: 'Gavi',
-    nationality: 'Spain',
+    nationality: '🇪🇸',
+    country: 'Spain',
     clubs: [{ name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' }],
     managers: [
       { name: 'Ronald Koeman', photo: '' },
@@ -2056,7 +2140,8 @@ export const players: Player[] = [
   {
     id: 'ruben-dias',
     name: 'Rúben Dias',
-    nationality: 'Portugal',
+    nationality: '🇵🇹',
+    country: 'Portugal',
     clubs: [
       { name: 'Benfica', logo: 'benfica.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
       { name: 'Manchester City', logo: 'man-city.png', primaryColor: '#6CABDD', secondaryColor: '#FFFFFF' },
@@ -2075,7 +2160,8 @@ export const players: Player[] = [
   {
     id: 'rodri',
     name: 'Rodri',
-    nationality: 'Spain',
+    nationality: '🇪🇸',
+    country: 'Spain',
     clubs: [
       { name: 'Villarreal', logo: 'villarreal.png', primaryColor: '#FFCD00', secondaryColor: '#003DA5' },
       { name: 'Atlético Madrid', logo: 'atletico-madrid.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
@@ -2095,7 +2181,8 @@ export const players: Player[] = [
   {
     id: 'ivan-rakitic',
     name: 'Ivan Rakitić',
-    nationality: 'Croatia',
+    nationality: '🇭🇷',
+    country: 'Croatia',
     clubs: [
       { name: 'Basel', logo: 'basel.png', primaryColor: '#DA291C', secondaryColor: '#003DA5' },
       { name: 'Schalke 04', logo: 'schalke.png', primaryColor: '#004D98', secondaryColor: '#FFFFFF' },
@@ -2120,7 +2207,8 @@ export const players: Player[] = [
   {
     id: 'arturo-vidal',
     name: 'Arturo Vidal',
-    nationality: 'Chile',
+    nationality: '🇨🇱',
+    country: 'Chile',
     clubs: [
       { name: 'Colo-Colo', logo: 'colo-colo.png', primaryColor: '#FFFFFF', secondaryColor: '#000000' },
       { name: 'Bayer Leverkusen', logo: 'leverkusen.png', primaryColor: '#DA291C', secondaryColor: '#000000' },
@@ -2151,7 +2239,8 @@ export const players: Player[] = [
   {
     id: 'pepe',
     name: 'Pepe',
-    nationality: 'Portugal',
+    nationality: '🇵🇹',
+    country: 'Portugal',
     clubs: [
       { name: 'Marítimo', logo: 'maritimo.png', primaryColor: '#1D9053', secondaryColor: '#DA291C' },
       { name: 'Porto', logo: 'porto.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
@@ -2176,7 +2265,8 @@ export const players: Player[] = [
   {
     id: 'carles-puyol',
     name: 'Carles Puyol',
-    nationality: 'Spain',
+    nationality: '🇪🇸',
+    country: 'Spain',
     clubs: [{ name: 'Barcelona', logo: 'barcelona.png', primaryColor: '#A50044', secondaryColor: '#004D98' }],
     managers: [
       { name: 'Louis van Gaal', photo: '' },
@@ -2190,7 +2280,8 @@ export const players: Player[] = [
   {
     id: 'john-terry',
     name: 'John Terry',
-    nationality: 'England',
+    nationality: '🏴󠁧󠁢󠁥󠁮󠁧󠁿',
+    country: 'England',
     clubs: [
       { name: 'Chelsea', logo: 'chelsea.png', primaryColor: '#034694', secondaryColor: '#FFFFFF' },
       { name: 'Aston Villa', logo: 'aston-villa.png', primaryColor: '#7A263A', secondaryColor: '#95BFE5' },
@@ -2212,7 +2303,8 @@ export const players: Player[] = [
   {
     id: 'nemanja-vidic',
     name: 'Nemanja Vidić',
-    nationality: 'Serbia',
+    nationality: '🇷🇸',
+    country: 'Serbia',
     clubs: [
       { name: 'Red Star Belgrade', logo: 'red-star.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
       { name: 'Spartak Moscow', logo: 'spartak-moscow.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
@@ -2233,7 +2325,8 @@ export const players: Player[] = [
   {
     id: 'michael-owen',
     name: 'Michael Owen',
-    nationality: 'England',
+    nationality: '🏴󠁧󠁢󠁥󠁮󠁧󠁿',
+    country: 'England',
     clubs: [
       { name: 'Liverpool', logo: 'liverpool.png', primaryColor: '#C8102E', secondaryColor: '#FFFFFF' },
       { name: 'Real Madrid', logo: 'real-madrid.png', primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },
@@ -2258,7 +2351,8 @@ export const players: Player[] = [
   {
     id: 'alan-shearer',
     name: 'Alan Shearer',
-    nationality: 'England',
+    nationality: '🏴󠁧󠁢󠁥󠁮󠁧󠁿',
+    country: 'England',
     clubs: [
       { name: 'Southampton', logo: 'southampton.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
       { name: 'Blackburn Rovers', logo: 'blackburn.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
@@ -2279,7 +2373,8 @@ export const players: Player[] = [
   {
     id: 'fernando-torres',
     name: 'Fernando Torres',
-    nationality: 'Spain',
+    nationality: '🇪🇸',
+    country: 'Spain',
     clubs: [
       { name: 'Atlético Madrid', logo: 'atletico-madrid.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
       { name: 'Liverpool', logo: 'liverpool.png', primaryColor: '#C8102E', secondaryColor: '#FFFFFF' },
@@ -2307,7 +2402,8 @@ export const players: Player[] = [
   {
     id: 'michael-ballack',
     name: 'Michael Ballack',
-    nationality: 'Germany',
+    nationality: '🇩🇪',
+    country: 'Germany',
     clubs: [
       { name: 'Kaiserslautern', logo: 'kaiserslautern.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
       { name: 'Bayer Leverkusen', logo: 'leverkusen.png', primaryColor: '#DA291C', secondaryColor: '#000000' },
@@ -2331,7 +2427,8 @@ export const players: Player[] = [
   {
     id: 'david-villa',
     name: 'David Villa',
-    nationality: 'Spain',
+    nationality: '🇪🇸',
+    country: 'Spain',
     clubs: [
       { name: 'Sporting Gijón', logo: 'sporting-gijon.png', primaryColor: '#DA291C', secondaryColor: '#FFFFFF' },
       { name: 'Real Zaragoza', logo: 'zaragoza.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
@@ -2358,7 +2455,8 @@ export const players: Player[] = [
   {
     id: 'edinson-cavani',
     name: 'Edinson Cavani',
-    nationality: 'Uruguay',
+    nationality: '🇺🇾',
+    country: 'Uruguay',
     clubs: [
       { name: 'Danubio', logo: 'danubio.png', primaryColor: '#FFFFFF', secondaryColor: '#000000' },
       { name: 'Palermo', logo: 'palermo.png', primaryColor: '#F7B5CD', secondaryColor: '#000000' },
@@ -2386,7 +2484,8 @@ export const players: Player[] = [
   {
     id: 'radamel-falcao',
     name: 'Radamel Falcao',
-    nationality: 'Colombia',
+    nationality: '🇨🇴',
+    country: 'Colombia',
     clubs: [
       { name: 'River Plate', logo: 'river-plate.png', primaryColor: '#FFFFFF', secondaryColor: '#DA291C' },
       { name: 'Porto', logo: 'porto.png', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
@@ -2419,7 +2518,8 @@ export const players: Player[] = [
   {
     id: 'trent-alexander-arnold',
     name: 'Trent Alexander-Arnold',
-    nationality: 'England',
+    nationality: '🏴󠁧󠁢󠁥󠁮󠁧󠁿',
+    country: 'England',
     clubs: [
       { name: 'Liverpool', logo: 'liverpool.png', primaryColor: '#C8102E', secondaryColor: '#FFFFFF' },
       { name: 'Real Madrid', logo: 'real-madrid.png', primaryColor: '#FFFFFF', secondaryColor: '#FEBE10' },

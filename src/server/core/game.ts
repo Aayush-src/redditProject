@@ -375,22 +375,18 @@ export function getHintCost(state: GameState): number {
   const player = players.find((p) => p.id === state.playerId);
   if (!player) return 0;
 
-  let baseCost = 0;
-
   if (state.mode === 'guess-player') {
     const totalHintable = player.clubs.length - INITIAL_CLUBS_REVEALED;
     const remaining = player.clubs.length - state.revealedClubIndices.length;
     if (remaining <= 0) return 0;
-    baseCost = hintCost(Math.max(totalHintable, remaining));
-  } else {
-    const unguessed = state.hiddenClubIndices.filter(
-      (i) => !state.guessedClubIndices.includes(i)
-    );
-    if (unguessed.length === 0) return 0;
-    baseCost = hintCost(state.hiddenClubIndices.length);
+    return scaledPenalty(hintCost(Math.max(totalHintable, remaining)), state.wager);
   }
 
-  return scaledPenalty(baseCost, state.wager);
+  const unguessed = state.hiddenClubIndices.filter(
+    (i) => !state.guessedClubIndices.includes(i)
+  );
+  if (unguessed.length === 0) return 0;
+  return scaledPenalty(hintCost(state.hiddenClubIndices.length), state.wager);
 }
 
 export function getJerseyHintCost(state: GameState): number {
@@ -410,6 +406,16 @@ export function getFullPlayerClubs(playerId: string): Club[] {
 export function getPlayerName(playerId: string): string {
   const player = players.find((p) => p.id === playerId);
   return player?.name ?? 'Unknown';
+}
+
+export function getPlayerNationality(playerId: string): string {
+  const player = players.find((p) => p.id === playerId);
+  return player?.country ?? '';
+}
+
+export function getPlayerFlag(playerId: string): string {
+  const player = players.find((p) => p.id === playerId);
+  return player?.nationality ?? '⚽';
 }
 
 export async function revealJersey(
